@@ -1,6 +1,6 @@
 [![](https://jitpack.io/v/M2Mobi/MarkyMark-Android.svg)](https://jitpack.io/#M2Mobi/MarkyMark-Android)
 
-# Marky Mark
+# MarkyMark
 
 Marky Mark is a parser that converts markdown into native views. The way it looks is highly customizable and the supported markdown syntax is easy to extend.
 
