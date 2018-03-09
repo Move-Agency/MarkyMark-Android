@@ -392,17 +392,17 @@ allprojects {
 
 Android MarkyMark with Contentful support
 ```groovy
-compile 'com.github.m2mobi.MarkyMark-Android:markymark-android:0.1.0' 
-compile 'com.github.m2mobi.MarkyMark-Android:markymark-contentful:0.1.0' 
+compile 'com.github.m2mobi.MarkyMark-Android:markymark-android:0.1.2' 
+compile 'com.github.m2mobi.MarkyMark-Android:markymark-contentful:0.1.2' 
 ```
 
 If you want to use MarkyMark outside of a Android project you might be interested in these pure Java modules
 
 ```groovy
 // Base
-compile 'compile 'com.github.m2mobi.markymark-android:markymark-core:0.1.0' 
+compile 'com.github.m2mobi.MarkyMark-Android:markymark-core:0.1.2' 
 // Commons
-compile 'compile 'com.github.m2mobi.markymark-android:markymark-commons:0.1.0' 
+compile 'com.github.m2mobi.MarkyMark-Android:markymark-commons:0.1.2' 
 ```
 
 From which you can create `MarkyMark` like so

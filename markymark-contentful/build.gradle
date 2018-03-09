@@ -1,4 +1,7 @@
 apply plugin: 'java'
+apply plugin: 'maven'
+
+group='com.github.M2Mobi.MarkyMark-Android'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
