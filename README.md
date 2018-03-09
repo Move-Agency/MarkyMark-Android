@@ -294,7 +294,7 @@ public class NewRule implements Rule {
 	public static final Pattern START_PATTERN = Pattern.compile("some regex");
 	
 	/** Pattern used to find the end of your block */
-    public static final Pattern END_PATTERN = Pattern.compile("some regex");
+    	public static final Pattern END_PATTERN = Pattern.compile("some regex");
 
 	/** The amount of lines of the block */
 	private int mLinesConsumed;
@@ -321,7 +321,7 @@ public class NewRule implements Rule {
 
 	@Override
 	public MarkDownItem toMarkDownItem(final List<String> pMarkDownLines) {
-	    // pMarkDownLines is now an List with all the lines in your block
+	   	// pMarkDownLines is now an List with all the lines in your block
 		return new SomeMarkDownItem();
 	}
 }
@@ -392,17 +392,17 @@ allprojects {
 
 Android MarkyMark with Contentful support
 ```groovy
-compile 'com.github.m2mobi.MarkyMark-Android:markymark-android:0.1.4' 
-compile 'com.github.m2mobi.MarkyMark-Android:markymark-contentful:0.1.4' 
+compile 'com.github.m2mobi.MarkyMark-Android:markymark-android:0.2.0' 
+compile 'com.github.m2mobi.MarkyMark-Android:markymark-contentful:0.2.0' 
 ```
 
 If you want to use MarkyMark outside of a Android project you might be interested in these pure Java modules
 
 ```groovy
 // Base
-compile 'com.github.m2mobi.MarkyMark-Android:markymark-core:0.1.4' 
+compile 'com.github.m2mobi.MarkyMark-Android:markymark-core:0.2.0' 
 // Commons
-compile 'com.github.m2mobi.MarkyMark-Android:markymark-commons:0.1.4' 
+compile 'com.github.m2mobi.MarkyMark-Android:markymark-commons:0.2.0' 
 ```
 
 From which you can create `MarkyMark` like so
@@ -415,9 +415,9 @@ InlineConverter<Spanned> inlineConverter = new InlineConverter<>();
 inlineConverter.addMapping(new SomeInlineItem());
 
 final MarkyMark<View> markyMark = new MarkyMark.Builder<View>()
-				                    .addFlavor(new SomeFlavor())
-				                    .setConverter(viewConverter)
-				                    .setInlineConverter(inlineConverter)
+				                .addFlavor(new SomeFlavor())
+				                .setConverter(viewConverter)
+				                .setInlineConverter(inlineConverter)
 			                    	.build();
 ```
 
