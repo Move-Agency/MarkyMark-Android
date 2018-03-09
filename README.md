@@ -185,9 +185,9 @@ Create a `DisplayItem` that can handle your `NewMarkDownItem` and convert it int
 class NewDisplayItem(val context: Context) : DisplayItem<View, NewMarkDownItem, Spanned> {
 
 	override fun create(markDownItem: NewMarkDownItem, inlineConverter: InlineConverter<Spanned>) : View {
-		val textView = TextView(context)
-		textView.text = inlineConverter.convert(markDownItem.content)
-		return textView
+		return TextView(context).apply {
+			text = inlineConverter.convert(markDownItem.content)
+		}
 	}
 }
 ```
@@ -239,7 +239,7 @@ class OtherFlavor : Flavor {
 
 	override fun getInlineRules() : List<InlineRule> {
 		return mutableListOf<InlineRule>().apply {
-		// Add all the rules
+			// Add all the rules
 		}
 	}
 
