@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Theme attribute -->
+    <attr name="MarkyMarkTheme" format="reference" />
+
+    <attr name="MarkDownCodeStyle" format="reference" />
+    <attr name="MarkDownListStyle" format="reference" />
+    <attr name="MarkDownImageStyle" format="reference" />
+    <attr name="MarkDownQuoteStyle" format="reference" />
+    <attr name="MarkDownParagraphStyle" format="reference" />
+    <attr name="MarkDownHorizontalRuleStyle" format="reference" />
+
+    <!-- Header styles -->
+    <attr name="MarkDownHeader1Style" format="reference" />
+    <attr name="MarkDownHeader2Style" format="reference" />
+    <attr name="MarkDownHeader3Style" format="reference" />
+    <attr name="MarkDownHeader4Style" format="reference" />
+    <attr name="MarkDownHeader5Style" format="reference" />
+    <attr name="MarkDownHeader6Style" format="reference" />
+
+</resources>

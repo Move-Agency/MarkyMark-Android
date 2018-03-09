@@ -1,0 +1,23 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="MarkyMarkTheme">@style/MarkdownStyle</item>
+    </style>
+
+    <!-- Theme used by MarkyMark -->
+    <style name="MarkdownStyle" parent="MarkyMarkStyle">
+        <item name="android:lineSpacingExtra">4dp</item>
+        <item name="android:lineSpacingMultiplier">1</item>
+        <item name="MarkDownHeader4Style">@style/header4</item>
+    </style>
+
+    <style name="header4" parent="MarkyMarkHeader4">
+        <item name="android:textColor">#52c222</item>
+    </style>
+</resources>

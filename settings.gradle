@@ -1,0 +1,5 @@
+include ':markymark-sample'
+include ':markymark-core'
+include ':markymark-android'
+include ':markymark-contentful'
+include ':markymark-common'

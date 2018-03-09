@@ -1,0 +1,33 @@
+## Stores user specific settings ##
+.gradle
+.idea/
+.settings/
+.idea
+*.iml
+
+## could be located in different module directories ##
+*.iml
+
+## generated content ##
+bin/
+out/
+gen/
+build/
+
+## local machine properties ##
+local.properties
+
+## folder that contains all test reports ##
+test-reports/
+
+## Test server created by calabash ##
+test_servers/
+
+## Misc ##
+AndroidManifest.out.xml
+com_crashlytics_export_strings.xml
+crashlytics-build.properties
+screenshot_*
+.DS_Store
+Thumbs.db
+desktop.ini

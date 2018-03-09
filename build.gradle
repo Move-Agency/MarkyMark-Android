@@ -1,0 +1,25 @@
+buildscript {
+    ext {
+        min_sdk_version = 14
+        compile_sdk_version = 27
+        build_sdk_version = 27
+        build_tools_version = '26.0.3'
+        gradle_buildtools_version ='3.0.1'
+
+        //Android
+        android_support_version = '27.1.0'
+
+        // JUnit
+        junit_version = '4.12'
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$gradle_buildtools_version"
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        google()
+    }
+}
