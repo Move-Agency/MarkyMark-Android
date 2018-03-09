@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/M2Mobi/MarkyMark-Android.svg)](https://jitpack.io/#M2Mobi/MarkyMark-Android)
+
 # Marky Mark
 
 Marky Mark is a parser that converts markdown into native views. The way it looks is highly customizable and the supported markdown syntax is easy to extend.
@@ -390,8 +392,8 @@ allprojects {
 
 Android MarkyMark with Contentful support
 ```groovy
-compile 'compile 'com.github.m2mobi.markymark-android:markymark-android:0.1.0' 
-compile 'compile 'com.github.m2mobi.markymark-android:markymark-contentful:0.1.0' 
+compile 'com.github.m2mobi.MarkyMark-Android:markymark-android:0.1.0' 
+compile 'com.github.m2mobi.MarkyMark-Android:markymark-contentful:0.1.0' 
 ```
 
 If you want to use MarkyMark outside of a Android project you might be interested in these pure Java modules

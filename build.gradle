@@ -12,6 +12,9 @@ buildscript {
         // JUnit
         junit_version = '4.12'
     }
+    repositories {
+        google()
+    }
     dependencies {
         classpath "com.android.tools.build:gradle:$gradle_buildtools_version"
     }
