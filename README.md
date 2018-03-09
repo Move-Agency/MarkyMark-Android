@@ -2,7 +2,7 @@
 
 # MarkyMark
 
-Marky Mark is a parser that converts markdown into native views. The way it looks is highly customizable and the supported markdown syntax is easy to extend.
+MarkyMark is a parser that converts markdown into native views. The way it looks is highly customizable and the supported markdown syntax is easy to extend.
 
 ## Usage
 
@@ -51,33 +51,33 @@ Override MarkyMark styles where nescessary.
 Next use MarkyMark to parse Markdown and add the resulting
 list of `View`s to a layout.
 
-```java
-LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
-final MarkyMark<View> markyMark = MarkyMarkAndroid.getMarkyMark(this, new ContentfulFlavor());
-List<View> views = markyMark.parseMarkDown("# Header\nParagraph etc");
-for (View view : views) {
-	layout.addView(view);
+```kotlin
+val markyMark = MarkyMarkAndroid.getMarkyMark(this, ContentfulFlavor())
+val views = markyMark.parseMarkDown("# Header\nParagraph etc")
+for (view in views) {
+     layout.addView(view)
 }
 ```
 
 If you want more customization it is also possible to provide your own custom inline/block items, or replace existing ones. More on how you can use these in **Advanced Usage** found below
 
-```java
-ThemedContext themedContext = new ThemedContext(activity);
+```kotlin
+val themedContext = ThemedContext(activity)
 
-List<DisplayItems> displayItems = new ArrayList<>();
-List<InlineDisplayItems> inlineDisplayItems = new ArrayList<>();
 // These are some of the default ones, but you get the point
-displayItems.add(new HeaderDisplayItem(themedContext));
-displayItems.add(new ParagraphDisplayItem(themedContext));
-inlineDisplayItems.add(new BoldInlineDisplayItem());
-
-final MarkyMark<View> markyMark = MarkyMarkAndroid.getMarkyMark(
-        this, 
-        new ContentfulFlavor(), 
-        displayItems, 
-        inlineDisplayItems
-);
+val displayItems = mutableListOf<DisplayItem<*,*,*>>().apply {
+	add(HeaderDisplayItem(themedContext))
+	add(ParagraphDisplayItem(themedContext))
+}
+val inlineDisplayItems = mutableListOf<InlineDisplayItem<*,*>>().apply {
+	add(BoldInlineDisplayItem())
+}
+val markyMark = MarkyMarkAndroid.getMarkyMark(
+                activity,
+                ContentfulFlavor(),
+                displayItems,
+                inlineDisplayItems
+)
 ```
 
 ## Supported tags in Contentful Flavour
@@ -173,40 +173,21 @@ Adding a rule requires these steps
 
 Create a `MarkDownItem` from which you can create a `View` later, so you'll want to have every piece of information needed in order to create said `View`
 
-```java
-public class NewMarkDownItem implements MarkDownItem {
-
-	private String content;
-
-	public NewMarkDownItem(String content) {
-	    this.content = content;
-	}
-
-	public String getContent() {
-		return content;
-	}
-}
+```kotlin
+data class NewMarkDownItem(val content: String) : MarkDownItem
 ```
 
 ### Extend `DisplayItem<View, NewMarkDownItem, Spanned>`
 
 Create a `DisplayItem` that can handle your `NewMarkDownItem` and convert it into a `View`
 
-```java
-public class NewDisplayItem implements DisplayItem<View, NewMarkDownItem, Spanned> {
+```kotlin
+class NewDisplayItem(val context: Context) : DisplayItem<View, NewMarkDownItem, Spanned> {
 
-	/** Context used to create Views */
-	protected final Context mContext;
-
-	public HeaderDisplayItem(final Context pContext) {
-		mContext = pContext;
-	}
-
-	@Override
-	public View create(final NewMarkDownItem pMarkDownItem, final InlineConverter<Spanned> pInlineConverter) {
-		TextView textView = new TextView(mContext);
-		textView.setText(pInlineConverter.convert(pMarkDownItem.getContent());
-		return textView;
+	override fun create(markDownItem: NewMarkDownItem, inlineConverter: InlineConverter<Spanned>) : View {
+		val textView = TextView(context)
+		textView.text = inlineConverter.convert(markDownItem.content)
+		return textView
 	}
 }
 ```
@@ -214,30 +195,24 @@ public class NewDisplayItem implements DisplayItem<View, NewMarkDownItem, Spanne
 Now add this item to your `ViewConverter` before you initialize `MarkyMark` like shown at the top of this `README`
 
 ```java
-viewConverter.addMapping(new NewDisplayItem(themedContext));
+viewConverter.addMapping(NewDisplayItem(themedContext))
 ```
 
 ### Extend `Rule`
 
 Create a `Rule` that recognizes your new item and creates a corresponding `MarkDownItem` for it.
 Most new rules will just be single line, like headers, in that case your new rule can just extend `RegexRule`.
-Return your regular expression `Pattern` in the `getRegex()` method and return your new `MarkDownItem` in the `toMarkDownItem(final List<String> pMarkDownLines)`
+Return your regular expression `Pattern` in the `getRegex()` method and return your new `MarkDownItem` in the `toMarkDownItem(markDownLines: List<String>)`
 
-```java
-public class NewRule extends RegexRule {
+```kotlin
+class NewRule : RegexRule {
 
-	private static final Pattern PATTERN = Pattern.compile("some regex");
-
-	@Override
-	protected Pattern getRegex() {
-		return PATTERN;
-	}
-
-	@Override
-	public MarkDownItem toMarkDownItem(final List<String> pMarkDownLines) {
+	override fun getRegex() : Pattern = Pattern.compile("some regex")
+	
+	override fun toMarkDownItem(markDownLines: List<String>) : MarkDownItem {
 	    // In this case, since it is a single line rule
-	    // pMarkDownLines will always be an array with one String
-	    return NewMarkDownItem(pMarkDownLines.get(0));
+	    // markDownLines will always be an list with one String
+	    return NewMarkDownItem(markDownLines.first())
 	}
 }
 ```
@@ -246,84 +221,71 @@ public class NewRule extends RegexRule {
 
 You can add a new rule to your `MarkyMark` instance like this
 
-```java
+```kotlin
 // adding rule to MarkyMark instance
-markyMark.addRule(new NewRule());
+markyMark.addRule(NewRule())
 ```
 
 Or create a new `Flavor` altogether
 
-```java
-public class OtherFlavor implements Flavor {
+```kotlin
+class OtherFlavor : Flavor {
 
-	@Override
-	public List<Rule> getRules() {
-		List<Rule> rules = new ArrayList<>();
-		// add all the rules
-		return rules;
+	override fun getRules() : List<Rule> {
+		return mutableListOf<Rule>().apply {
+			// add all the rules
+		}
 	}
 
-	@Override
-	public List<InlineRule> getInlineRules() {
-		List<InlineRule> rules = new ArrayList<>();
+	override fun getInlineRules() : List<InlineRule> {
+		return mutableListOf<InlineRule>().apply {
 		// Add all the rules
-		return rules;
+		}
 	}
 
-	@Override
-	public Rule getDefaultRule() {
-		return new NewDefaultRule();
-	}
+	override fun getDefaultRule() = NewDefaultRule()
 }
 ```
 
 And pass it in the `MarkyMark.Builder()`
 
-```java
-new MarkyMark.Builder<View>().addFlavor(new OtherFlavor()) // etc
+```kotlin
+MarkyMark.Builder<View>().addFlavor(OtherFlavor()) // etc
 ```
 
 ### Multi line blocks
 
 For more complicated `Rules` that can detect multi-line blocks you'll want to extend `Rule` and you have override the `conforms(final List<String> pMarkDownLines)` method where you would return `true` if the **first** line is recognized as the start of your block, and false otherwise. However there is a catch, you have to set a global integer with the amount of lines there are in this block, which you have to return in the `getLinesConsumed()` method. This means that you have to count the amount of lines that belong to your block inside the `conforms()` method, which isn't desirable and should be refactored as soon as possible.
 
-```java
-public class NewRule implements Rule {
+```kotlin
+class NewRule : Rule {
 
-	/** Pattern used to find the start of your block */
-	public static final Pattern START_PATTERN = Pattern.compile("some regex");
-	
-	/** Pattern used to find the end of your block */
-    	public static final Pattern END_PATTERN = Pattern.compile("some regex");
-
-	/** The amount of lines of the block */
-	private int mLinesConsumed;
+    /** Start pattern of the block */
+    private val startPattern = Pattern.compile("some regex")
     
-	@Override
-	public boolean comforms(final List<String> pMarkDownLines) {
-		if (!START_PATTERN.matcher(pMarkDownLines.get(0)).matches()) {
-			return false;
-		}
-		mLinesConsumed = 0;
-		for (String line : pMarkDownLines) {
-		    mLinesConsumer += 1;
-		    if (END_PATTERN.matcher(line).matches()) {
-		        return true;
-		    }
-		}
-		return false;
-	}
+    /** End pattern of the block */
+    private val endPattern = Pattern.compile("some regex")
+    
+    /** The amount of lines of the block */
+    private var lines : Int = 0
+    
+    override fun getLinesConsumed(): Int = lines
 
-	@Override
-	public int linesConsumed() {
-		return mLinesConsumed;
-	}
+    override fun conforms(markDownLines: MutableList<String>): Boolean {
+        if (!startPattern.matcher(markDownLines.first()).matches()) {
+            return false
+        }
+        lines = 0
+        for (line in markDownLines) {
+            lines += 1
+            if (endPattern.matcher(line).matches()) {
+                return true
+            }
+        }
+        return false
+    }
 
-	@Override
-	public MarkDownItem toMarkDownItem(final List<String> pMarkDownLines) {
-	   	// pMarkDownLines is now an List with all the lines in your block
-		return new SomeMarkDownItem();
-	}
+    override fun toMarkDownItem(markDownLines: MutableList<String>): MarkDownItem = SomeMarkDownItem()
 }
 ```
 
@@ -333,48 +295,36 @@ For detecting inline Markdown, like **bold** or *italic* strings, instead of ext
 
 For example, a rule that would match %%some text%% would look like this
 
-```java
-public class PercentRule implements InlineRule {
+```kotlin
+class PercentRule : InlineRule {
 
-	@Override
-	public Pattern getRegex() {
-		return Pattern.compile("%{2}(.+?)-{2}");
-	}
+    override fun getRegex() : Pattern = Pattern.compile("%{2}(.+?)-{2}")
 
-	@Override
-	public MarkDownString toMarkDownString(final String pContent) {
-		return new PercentString(content, true);
-	}
+    override fun toMarkDownString(content: String) = PercentString(content, true)
 }
 ```
 
 Where `PercentString` would be an extension of `MarkDownString`
 
-```java
-public class PercentString extends MarkDownString {
-
-	public PercentString(final String pContent, final boolean pCanHasChildItems) {
-		super(pContent, pCanHasChildItems);
-	}
-}
+```kotlin
+class PercentString(content: String, canHasChildItems: Boolean) : MarkDownString(content, canHasChildItems)
 ```
 
 For inline Markdown, instead of extending `DisplayItem<View, Foo, Spanned>` you'd want to extend `InlineDisplayItem<Spanned, PercentString>`
 
-```java
-public class PercentInlineDisplayItem implements InlineDisplayItem<Spanned, PercentString> {
+```kotlin
+class PercentInlineDisplayItem : InlineDisplayItem<Spanned, PercentString> {
 
-	@Override
-	public Spanned create(final InlineConverter<Spanned> pInlineConverter, final PercentString pMarkDownString) {
-		// return your Spannable String here
-	}
+    override fun create(inlineConverter: InlineConverter<Spanned>, markDownString: PercentString): Spanned {
+        // return your Spannable String here
+    }
 }
 ```
 
 And add them to `MarkyMark`s `InlineConverter<Spanned>` as explained above
 
-```java
-inlineViewConverter.addMapping(new PercentInlineDisplayItem());
+```kotlin
+inlineViewConverter.addMapping(PercentInlineDisplayItem())
 ```
 
 # Download
@@ -407,18 +357,19 @@ compile 'com.github.m2mobi.MarkyMark-Android:markymark-commons:0.2.0'
 
 From which you can create `MarkyMark` like so
 
-```java
-Converter<View> viewConverter = new Converter<>();
-viewConverter.addMapping(new SomeItem();
+```kotlin
+val viewConverter = Converter<View>().apply {
+	addMapping(SomeItem())
+}
+val inlineConverter = InlineConverter<Spanned>().apply {
+        addMapping(SomeInlineItem())
+}
 
-InlineConverter<Spanned> inlineConverter = new InlineConverter<>();
-inlineConverter.addMapping(new SomeInlineItem());
-
-final MarkyMark<View> markyMark = new MarkyMark.Builder<View>()
-				                .addFlavor(new SomeFlavor())
-				                .setConverter(viewConverter)
-				                .setInlineConverter(inlineConverter)
-			                    	.build();
+val markyMark = MarkyMark.Builder<View>()
+	.addFlavor(SomeFlavor())
+	.setConverter(viewConverter)
+	.setInlineConverter(inlineConverter)
+	.build()
 ```
 
 # Contributions
