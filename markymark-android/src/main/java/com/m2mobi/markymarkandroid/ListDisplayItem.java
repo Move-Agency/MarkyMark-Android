@@ -102,7 +102,7 @@ public class ListDisplayItem implements DisplayItem<View, MarkDownList, Spanned>
 			Drawable bullet = mContext.getResources().getDrawable(getDrawable(pMarkDownList.getNestedLevel()));
 			TopCompoundDrawable gravityDrawable = new TopCompoundDrawable(bullet, textView.getLineHeight());
 			bullet.setBounds(0, 0, bullet.getIntrinsicWidth(), bullet.getIntrinsicHeight());
-			gravityDrawable.setBounds(0, 0, bullet.getIntrinsicWidth(), 0);
+			gravityDrawable.setBounds(0, 0, bullet.getIntrinsicWidth(), bullet.getIntrinsicHeight());
 			textView.setCompoundDrawables(gravityDrawable, null, null, null);
 			textView.setCompoundDrawablePadding(mIndicatorSpacingPixels);
 			textView.setText(pText);
