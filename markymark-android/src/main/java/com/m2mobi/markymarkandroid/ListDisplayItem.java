@@ -5,8 +5,13 @@
 package com.m2mobi.markymarkandroid;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
@@ -94,7 +99,11 @@ public class ListDisplayItem implements DisplayItem<View, MarkDownList, Spanned>
 		if (pMarkDownList.isOrdered()) {
 			textView.setText(String.format(Locale.getDefault(), "%d. %s", pIndex + 1, pText));
 		} else {
-			textView.setCompoundDrawablesWithIntrinsicBounds(getDrawable(pMarkDownList.getNestedLevel()), 0, 0, 0);
+			Drawable bullet = mContext.getResources().getDrawable(getDrawable(pMarkDownList.getNestedLevel()));
+			TopCompoundDrawable gravityDrawable = new TopCompoundDrawable(bullet, textView.getLineHeight());
+			bullet.setBounds(0, 0, bullet.getIntrinsicWidth(), bullet.getIntrinsicHeight());
+			gravityDrawable.setBounds(0, 0, bullet.getIntrinsicWidth(), 0);
+			textView.setCompoundDrawables(gravityDrawable, null, null, null);
 			textView.setCompoundDrawablePadding(mIndicatorSpacingPixels);
 			textView.setText(pText);
 		}
@@ -113,5 +122,57 @@ public class ListDisplayItem implements DisplayItem<View, MarkDownList, Spanned>
 	@DrawableRes
 	private int getDrawable(final int pNestedLevel) {
 		return mBulletDrawables[pNestedLevel % mBulletDrawables.length];
+	}
+
+	/**
+	 * Drawable that aligns vertically on the first line of the TextView
+	 */
+	public class TopCompoundDrawable extends Drawable {
+
+		private final Drawable mDrawable;
+
+		private final int mTextLineHeight;
+
+		public TopCompoundDrawable(Drawable drawable, int textLineHeight) {
+			mDrawable = drawable;
+			mTextLineHeight = textLineHeight;
+		}
+
+		@Override
+		public int getIntrinsicWidth() {
+			return mDrawable.getIntrinsicWidth();
+		}
+
+		@Override
+		public int getIntrinsicHeight() {
+			return mDrawable.getIntrinsicHeight();
+		}
+
+		@Override
+		public void draw(@NonNull Canvas canvas) {
+			int halfCanvas = canvas.getHeight() / 2;
+			int halfLineHeight = mTextLineHeight / 2;
+
+			// align to top
+			canvas.save();
+			canvas.translate(0, -halfCanvas + halfLineHeight);
+			mDrawable.draw(canvas);
+			canvas.restore();
+		}
+
+		@Override
+		public void setAlpha(final int alpha) {
+			mDrawable.setAlpha(alpha);
+		}
+
+		@Override
+		public void setColorFilter(@Nullable final ColorFilter colorFilter) {
+			mDrawable.setColorFilter(colorFilter);
+		}
+
+		@Override
+		public int getOpacity() {
+			return mDrawable.getOpacity();
+		}
 	}
 }
