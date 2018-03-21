@@ -342,17 +342,17 @@ allprojects {
 
 Android MarkyMark with Contentful support
 ```groovy
-compile 'com.github.m2mobi.MarkyMark-Android:markymark-android:0.2.1' 
-compile 'com.github.m2mobi.MarkyMark-Android:markymark-contentful:0.2.1' 
+compile 'com.github.m2mobi.MarkyMark-Android:markymark-android:0.2.2' 
+compile 'com.github.m2mobi.MarkyMark-Android:markymark-contentful:0.2.2' 
 ```
 
 If you want to use MarkyMark outside of a Android project you might be interested in these pure Java modules
 
 ```groovy
 // Base
-compile 'com.github.m2mobi.MarkyMark-Android:markymark-core:0.2.1' 
+compile 'com.github.m2mobi.MarkyMark-Android:markymark-core:0.2.2' 
 // Commons
-compile 'com.github.m2mobi.MarkyMark-Android:markymark-commons:0.2.1' 
+compile 'com.github.m2mobi.MarkyMark-Android:markymark-commons:0.2.2' 
 ```
 
 From which you can create `MarkyMark` like so
@@ -409,7 +409,7 @@ M2mobi, info@m2mobi.com
 ```
 The MIT License (MIT)
 
-Copyright (c) 2016 M2mobi
+Copyright (c) 2016-2018 M2mobi
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
