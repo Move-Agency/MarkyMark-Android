@@ -29,5 +29,4 @@ dependencies {
     api project(':markymark-common')
     implementation "com.android.support:appcompat-v7:$android_support_version"
     implementation 'org.apache.commons:commons-lang3:3.7'
-    implementation 'com.squareup.picasso:picasso:2.5.2'
 }

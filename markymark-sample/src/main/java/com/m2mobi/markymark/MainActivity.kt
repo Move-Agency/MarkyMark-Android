@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         val markDown = loadMarkDownFromAsset(this, "contentful.txt")
 
-        val mark = MarkyMarkAndroid.getMarkyMark(this, ContentfulFlavor())
+        val mark = MarkyMarkAndroid.getMarkyMark(this, ContentfulFlavor(), PicassoImageLoader(this))
         mark.parseMarkDown(markDown).forEach { layout.addView(it) }
     }
 

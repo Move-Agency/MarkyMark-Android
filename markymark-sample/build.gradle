@@ -34,4 +34,5 @@ dependencies {
     api project(':markymark-contentful')
     api "com.android.support:appcompat-v7:$android_support_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 }
