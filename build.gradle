@@ -1,4 +1,5 @@
 buildscript {
+    ext.kotlin_version = '1.2.31'
     ext {
         min_sdk_version = 14
         compile_sdk_version = 27
@@ -20,6 +21,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$gradle_buildtools_version"
         classpath "com.github.dcendents:android-maven-gradle-plugin:$maven_gradle_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
