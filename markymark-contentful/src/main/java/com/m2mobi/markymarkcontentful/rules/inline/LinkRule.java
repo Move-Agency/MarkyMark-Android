@@ -19,16 +19,17 @@ public class LinkRule implements InlineRule {
 	@Override
 	public Pattern getRegex() {
 		// Ignores links that start with '!'
-		return Pattern.compile("(?<!!\\p{Z}{0,1})\\[{1}(.+?)\\]\\({1}(.+?)\\)");
+		return Pattern.compile("(\\[(.*)\\]\\((.*)\\))");
 	}
 
 	@Override
 	public MarkdownString toMarkdownString(final String pContent) {
 		Matcher matcher = getRegex().matcher(pContent);
 		if (matcher.find()) {
-			return new LinkString(matcher.group(1), matcher.group(2), false);
+			System.out.println("Link content: " + matcher.group(2) + " url " + matcher.group(3));
+			return new LinkString(matcher.group(2), matcher.group(3), true);
 		}
 
-		return new LinkString("", "", false);
+		return new LinkString("", "", true);
 	}
 }

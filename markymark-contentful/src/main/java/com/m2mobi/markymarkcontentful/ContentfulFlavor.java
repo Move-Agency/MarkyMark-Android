@@ -16,6 +16,7 @@ import com.m2mobi.markymarkcontentful.rules.ParagraphRule;
 import com.m2mobi.markymarkcontentful.rules.QuoteRule;
 import com.m2mobi.markymarkcontentful.rules.inline.BoldRule;
 import com.m2mobi.markymarkcontentful.rules.inline.InlineCodeRule;
+import com.m2mobi.markymarkcontentful.rules.inline.InlineImageRule;
 import com.m2mobi.markymarkcontentful.rules.inline.ItalicRule;
 import com.m2mobi.markymarkcontentful.rules.inline.LinkRule;
 import com.m2mobi.markymarkcontentful.rules.inline.StrikeRule;
@@ -43,6 +44,7 @@ public class ContentfulFlavor implements Flavor {
 	@Override
 	public List<InlineRule> getInlineRules() {
 		List<InlineRule> rules = new ArrayList<>();
+		rules.add(new InlineImageRule());
 		rules.add(new StrikeRule());
 		rules.add(new ItalicRule());
 		rules.add(new BoldRule("*"));

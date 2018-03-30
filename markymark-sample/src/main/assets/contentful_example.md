@@ -99,4 +99,14 @@ Special html symbols: `&euro; &copy;` become -> &euro; &copy;
 
 ---
 
-![800px-Android 5.0-en](https://images.contentful.com/7hqxd0h2npta/16JgtcyfEIeakoOqqKqiC/f80f6b559228a17c50ef52a064df047c/800px-Android_5.0-en.png)
+### Image
+![](https://cdn-images-1.medium.com/fit/c/200/200/1*IGOIBH3zyoHYBW23d2TBpQ.png)
+
+### Image with link
+[![](https://cdn-images-1.medium.com/fit/c/200/200/1*IGOIBH3zyoHYBW23d2TBpQ.png)](https://www.m2mobi.com)
+
+### Image with link and text
+[![](https://cdn-images-1.medium.com/fit/c/200/200/1*IGOIBH3zyoHYBW23d2TBpQ.png) with a text](https://www.m2mobi.com)
+
+### Image in a paragraph
+Hello [this is an image ![](https://cdn-images-1.medium.com/fit/c/200/200/1*IGOIBH3zyoHYBW23d2TBpQ.png) this is a text](https://www.m2mobi.com) and now the link ended

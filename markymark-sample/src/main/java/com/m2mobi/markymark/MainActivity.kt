@@ -23,8 +23,7 @@ class MainActivity : AppCompatActivity() {
         val markyMark = MarkyMarkAndroid.getMarkyMark(this, ContentfulFlavor(), PicassoImageLoader(this))
         markyMarkView.setMarkyMark(markyMark)
 
-        val markdown = loadMarkdownFromAsset(this, "contentful.txt")
-
+        val markdown = loadMarkdownFromAsset(this, "contentful_example.md")
         markyMarkView.setMarkdown(markdown)
     }
 

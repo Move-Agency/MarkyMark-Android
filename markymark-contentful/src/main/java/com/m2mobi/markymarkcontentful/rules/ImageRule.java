@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 public class ImageRule extends RegexRule {
 
 	/** Regex to match an image */
-	public static final Pattern IMAGE_PATTERN = Pattern.compile("(!\\p{Z}?)\\[(.+?)\\]\\((.+?)\\)");
+	private static final Pattern IMAGE_PATTERN = Pattern.compile("(!\\[(.*)\\]\\((.*)\\))");
 
 	@Override
 	protected Pattern getRegex() {

@@ -18,6 +18,7 @@ import com.m2mobi.markymark.InlineDisplayItem;
 import com.m2mobi.markymark.MarkyMark;
 import com.m2mobi.markymarkandroid.inline.BoldInlineDisplayItem;
 import com.m2mobi.markymarkandroid.inline.CodeInlineDisplayItem;
+import com.m2mobi.markymarkandroid.inline.ImageInlineDisplayItem;
 import com.m2mobi.markymarkandroid.inline.ItalicInlineDisplayItem;
 import com.m2mobi.markymarkandroid.inline.LinkInlineDisplayItem;
 import com.m2mobi.markymarkandroid.inline.StrikeInlineDisplayItem;
@@ -66,6 +67,7 @@ public class MarkyMarkAndroid {
         inlineConverter.addMapping(new ItalicInlineDisplayItem());
         inlineConverter.addMapping(new LinkInlineDisplayItem());
         inlineConverter.addMapping(new CodeInlineDisplayItem());
+        inlineConverter.addMapping(new ImageInlineDisplayItem(imageLoader));
 
         final ThemedContext context = new ThemedContext(pContext);
 
