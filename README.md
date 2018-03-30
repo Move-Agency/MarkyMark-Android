@@ -6,17 +6,30 @@ MarkyMark is a parser that converts markdown into native views. The way it looks
 
 ## Usage Android
 
-Use `MarkyMarkAndroid.getMarkyMark()` to get an instance of MarkyMark. There are multiple flavors of MarkDown in this example we provide the `ContentfulFlavor`. For more info about flavors see flavors.
-You can use the MarkyMark instance to parse the MarkDown and convert them to Android views.
-Now add the resulting list of `View`s to a layout.
+Create an Android instance of MarkyMark that can convert MarkDown to View's. A helper class is provided to create an Android instance.
 
 ```kotlin
 val markyMark = MarkyMarkAndroid.getMarkyMark(this, ContentfulFlavor(), PicassoImageLoader())
+```
+
+There are 2 ways to use the MarkyMark instance.
+
+You can use the MarkyMark instance to parse the MarkDown into a list of View's and add them to (for example) a LinearLayout:
+```kotlin
+val linearLayout = findViewById<LinearLayout>(R.id.linearlayout)
 val views = markyMark.parseMarkDown("# Header\nParagraph etc")
 for (view in views) {
      layout.addView(view)
 }
 ```
+
+Or use the provided [MarkyMarkView](markymark-android/src/main/java/com/m2mobi/markymarkandroid/MarkyMarkView.java) to do it for you.
+```kotlin
+val markyMarkView = findViewById<MarkyMarkView>(R.id.markymarkview)
+markyMarkView.setMarkyMark(markyMark)
+markyMarkView.parseMarkDown("# Header\nParagraph etc")
+```
+
 ## Styling
 
 To style your MarkDown content you can override MarkyMark styles where necessary.
