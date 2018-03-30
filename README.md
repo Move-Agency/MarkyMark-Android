@@ -4,9 +4,22 @@
 
 MarkyMark is a parser that converts markdown into native views. The way it looks is highly customizable and the supported markdown syntax is easy to extend.
 
-## Usage
+## Usage Android
 
-Override MarkyMark styles where nescessary.
+Use `MarkyMarkAndroid.getMarkyMark()` to get an instance of MarkyMark. There are multiple flavors of MarkDown in this example we provide the `ContentfulFlavor`. For more info about flavors see flavors.
+You can use the MarkyMark instance to parse the MarkDown and convert them to Android views.
+Now add the resulting list of `View`s to a layout.
+
+```kotlin
+val markyMark = MarkyMarkAndroid.getMarkyMark(this, ContentfulFlavor(), PicassoImageLoader())
+val views = markyMark.parseMarkDown("# Header\nParagraph etc")
+for (view in views) {
+     layout.addView(view)
+}
+```
+## Styling
+
+To style your MarkDown content you can override MarkyMark styles where necessary.
 
 ```xml
 <!-- Base application theme. -->
@@ -32,7 +45,7 @@ Override MarkyMark styles where nescessary.
 </style>
 ```
 
-### All parent styles
+### Available parent styles
 
 - `MarkyMarkCode`
 - `MarkyMarkHeader`
@@ -47,17 +60,6 @@ Override MarkyMark styles where nescessary.
 - `MarkyMarkList`
 - `MarkyMarkParagraph`
 - `MarkyMarkQuote`
-
-Next use MarkyMark to parse Markdown and add the resulting
-list of `View`s to a layout.
-
-```kotlin
-val markyMark = MarkyMarkAndroid.getMarkyMark(this, ContentfulFlavor())
-val views = markyMark.parseMarkDown("# Header\nParagraph etc")
-for (view in views) {
-     layout.addView(view)
-}
-```
 
 If you want more customization it is also possible to provide your own custom inline/block items, or replace existing ones. More on how you can use these in **Advanced Usage** found below
 
@@ -76,88 +78,14 @@ val markyMark = MarkyMarkAndroid.getMarkyMark(
                 activity,
                 ContentfulFlavor(),
                 displayItems,
-                inlineDisplayItems
+                inlineDisplayItems,
+                PicassoImageLoader()
 )
 ```
 
-## Supported tags in Contentful Flavour
+### Loading images
 
-```
-# Headers
----
-
-# H1
-## H2
-### H3
-#### H4
-##### H5
-###### H6
-### __*bold & italic*__
-
-# Lists
----
-
-## Ordered list
-1. Number 1
-2. Number 2
-3. Number 3
-5. Number 4
-  1. Nested 1
-  2. Nested 2
-6. Number 5 click [here](https://m2mobi.com)
-7. Number 5
-
-## Unordered list
-- Item 1
-- Item 2
-- Item 3
-  - Nested item 1
-  - Nested item 2
-    - Sub-nested item 1
-    - Sub-nested item 2
-      - Sub-sub-nested item 1
-      - Sub-sub-nested item 2
-       - Sub-sub-nested item 3 (with single space) and a very long piece of text
-
-## Combo
-
-1. Ordered 1
-2. Ordered 2
-- Unordered 1
-- Unordered 2
-  - __*Nested unordered 1 bold*__
-  - Nested unordered 2
-    1. Sub-nested ordered 1
-    2. Sub-nested ordered 2
-    - unordered
-    - unordered
-
-# Paragraphs
-
----
-## Quotes
-> MarkDown is *awesome*
-> Seriously..
-
-## Links
-[This is a test link](https://m2mobi.com)
-Inline links are also possible, click [here](https://m2mobi.com)
-Phone numbers as well [+06-12345678](tel:06-12345678)
-
-## Code
-
-`inline code`
-```code block```
-```
-
-## Styled text
-This is __bold__, this is *italic*, this is ~~striked out~~, this is everything __~~*combined*~~__.
-Special html symbols: `&euro; &copy;` become -> &euro; &copy;
-
-## Images
----
-
-`![Alternate text](www.imageurl.com)`
+You can use your favorite image loading library to load images. When creating a MarkyMark android instance an implementation of [ImageLoader](markymark-android/src/main/java/com/m2mobi/markymarkandroid/ImageLoader.java) needs to be provided, an example using [Picasso](https://github.com/square/picasso) can be found [here](markymark-sample/src/main/java/com/m2mobi/markymark/PicassoImageLoader.kt).
 
 # Advanced usage
 ---
@@ -289,7 +217,7 @@ class NewRule : Rule {
 }
 ```
 
-## Inline rules
+### Inline rules
 
 For detecting inline Markdown, like **bold** or *italic* strings, instead of extending `RegexRule` or `Rule` just extend `InlineRule` and return a `MarkDownString` instead of a `MarkDownItem`.
 
@@ -325,6 +253,87 @@ And add them to `MarkyMark`s `InlineConverter<Spanned>` as explained above
 
 ```kotlin
 inlineViewConverter.addMapping(PercentInlineDisplayItem())
+```
+
+
+## Supported tags in Contentful Flavour
+
+```
+# Headers
+---
+
+# H1
+## H2
+### H3
+#### H4
+##### H5
+###### H6
+### __*bold & italic*__
+
+# Lists
+---
+
+## Ordered list
+1. Number 1
+2. Number 2
+3. Number 3
+5. Number 4
+  1. Nested 1
+  2. Nested 2
+6. Number 5 click [here](https://m2mobi.com)
+7. Number 5
+
+## Unordered list
+- Item 1
+- Item 2
+- Item 3
+  - Nested item 1
+  - Nested item 2
+    - Sub-nested item 1
+    - Sub-nested item 2
+      - Sub-sub-nested item 1
+      - Sub-sub-nested item 2
+       - Sub-sub-nested item 3 (with single space) and a very long piece of text
+
+## Combo
+
+1. Ordered 1
+2. Ordered 2
+- Unordered 1
+- Unordered 2
+  - __*Nested unordered 1 bold*__
+  - Nested unordered 2
+    1. Sub-nested ordered 1
+    2. Sub-nested ordered 2
+    - unordered
+    - unordered
+
+# Paragraphs
+
+---
+## Quotes
+> MarkDown is *awesome*
+> Seriously..
+
+## Links
+[This is a test link](https://m2mobi.com)
+Inline links are also possible, click [here](https://m2mobi.com)
+Phone numbers as well [+06-12345678](tel:06-12345678)
+
+## Code
+
+`inline code`
+```code block```
+
+## Styled text
+This is __bold__, this is *italic*, this is ~~striked out~~, this is everything __~~*combined*~~__.
+Special html symbols: `&euro; &copy;` become -> &euro; &copy;
+
+## Images
+---
+
+`![Alternate text](www.imageurl.com)`
+
 ```
 
 # Download
