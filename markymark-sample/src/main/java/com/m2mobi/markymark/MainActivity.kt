@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.LinearLayout
 import com.m2mobi.markymarkandroid.MarkyMarkAndroid
+import com.m2mobi.markymarkandroid.MarkyMarkView
 import com.m2mobi.markymarkcontentful.ContentfulFlavor
 import java.io.BufferedReader
 
@@ -17,12 +18,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val layout = findViewById<LinearLayout>(R.id.layout)
+
+        val markyMarkView = findViewById<MarkyMarkView>(R.id.markymarkview)
+        val markyMark = MarkyMarkAndroid.getMarkyMark(this, ContentfulFlavor(), PicassoImageLoader(this))
+        markyMarkView.setMarkyMark(markyMark)
 
         val markDown = loadMarkDownFromAsset(this, "contentful.txt")
 
-        val mark = MarkyMarkAndroid.getMarkyMark(this, ContentfulFlavor(), PicassoImageLoader(this))
-        mark.parseMarkDown(markDown).forEach { layout.addView(it) }
+        markyMarkView.setMarkDown(markDown)
     }
 
     private fun loadMarkDownFromAsset(pContext: Context, pFileName: String): String {
