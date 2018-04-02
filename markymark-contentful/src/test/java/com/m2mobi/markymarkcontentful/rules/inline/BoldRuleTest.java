@@ -24,11 +24,11 @@ public class BoldRuleTest {
 
 	@Test
 	public void shouldCreateBoldString() {
-		assertEquals("text", mBoldRule.toMarkDownString("__text__").getContent());
+		assertEquals("text", mBoldRule.toMarkdownString("__text__").getContent());
 	}
 
 	@Test
 	public void shouldNotCreateBoldString() {
-		assertNotEquals("text", mBoldRule.toMarkDownString("$$text$$").getContent());
+		assertNotEquals("text", mBoldRule.toMarkdownString("$$text$$").getContent());
 	}
 }

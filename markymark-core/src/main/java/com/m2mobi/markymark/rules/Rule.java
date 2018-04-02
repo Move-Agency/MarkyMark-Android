@@ -6,21 +6,21 @@
 
 package com.m2mobi.markymark.rules;
 
-import com.m2mobi.markymark.item.MarkDownItem;
+import com.m2mobi.markymark.item.MarkdownItem;
 
 import java.util.List;
 
 /**
- * Rules are used to identify a piece of markdown (header, list, paragraph) and convert it to a {@link MarkDownItem}
+ * Rules are used to identify a piece of Markdown (header, list, paragraph) and convert it to a {@link MarkdownItem}
  */
 public interface Rule {
 
 	/**
-	 * checks if the passed MarkDown conforms to this rule
+	 * checks if the passed Markdown conforms to this rule
 	 *
-	 * @return {@code true} if the MarkDown conforms to this rule, {@code false} otherwise.
+	 * @return {@code true} if the Markdown conforms to this rule, {@code false} otherwise.
 	 */
-	boolean conforms(final List<String> pMarkDownLines);
+	boolean conforms(final List<String> pMarkdownLines);
 
 	/**
 	 * @return the amount of lines consumed by this rule
@@ -28,7 +28,7 @@ public interface Rule {
 	int getLinesConsumed();
 
 	/**
-	 * @return MarkDownItem that has been created from the MarkDown input
+	 * @return MarkdownItem that has been created from the Markdown input
 	 */
-	MarkDownItem toMarkDownItem(final List<String> pMarkDownLines);
+	MarkdownItem toMarkdownItem(final List<String> pMarkdownLines);
 }

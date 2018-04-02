@@ -14,7 +14,7 @@
     <style name="MarkdownStyle" parent="MarkyMarkStyle">
         <item name="android:lineSpacingExtra">4dp</item>
         <item name="android:lineSpacingMultiplier">1</item>
-        <item name="MarkDownHeader4Style">@style/header4</item>
+        <item name="MarkdownHeader4Style">@style/header4</item>
     </style>
 
     <style name="header4" parent="MarkyMarkHeader4">

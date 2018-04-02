@@ -26,10 +26,10 @@ public class CodeBlockDisplayItem implements DisplayItem<View, CodeBlock, Spanne
 	}
 
 	@Override
-	public View create(final CodeBlock pMarkDownItem, final InlineConverter<Spanned> pInlineConverter) {
-		TextView textView = new TextView(mContext, null, R.attr.MarkDownCodeStyle);
+	public View create(final CodeBlock pMarkdownItem, final InlineConverter<Spanned> pInlineConverter) {
+		TextView textView = new TextView(mContext, null, R.attr.MarkdownCodeStyle);
 		textView.setHorizontallyScrolling(true);
-		textView.setText(pMarkDownItem.getContent());
+		textView.setText(pMarkdownItem.getContent());
 
 		HorizontalScrollView scrollView = new HorizontalScrollView(mContext);
 		scrollView.addView(textView);

@@ -4,12 +4,12 @@
 
 package com.m2mobi.markymarkcommon.markdownitems.inline;
 
-import com.m2mobi.markymark.item.inline.MarkDownString;
+import com.m2mobi.markymark.item.inline.MarkdownString;
 
 /**
- * {@link MarkDownString} used for storing links in text
+ * {@link MarkdownString} used for storing links in text
  */
-public class LinkString extends MarkDownString {
+public class LinkString extends MarkdownString {
 
 	private final String mUrl;
 

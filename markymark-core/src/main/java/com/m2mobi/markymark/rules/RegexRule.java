@@ -15,8 +15,8 @@ public abstract class RegexRule implements Rule {
 	protected abstract Pattern getRegex();
 
 	@Override
-	public boolean conforms(final List<String> pMarkDownLines) {
-		return getRegex().matcher(pMarkDownLines.get(0)).matches();
+	public boolean conforms(final List<String> pMarkdownLines) {
+		return getRegex().matcher(pMarkdownLines.get(0)).matches();
 	}
 
 	@Override

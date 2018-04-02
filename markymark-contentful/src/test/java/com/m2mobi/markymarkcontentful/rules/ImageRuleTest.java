@@ -25,13 +25,13 @@ public class ImageRuleTest {
 
 	@Test
 	public void shouldBeImage() {
-		List<String> strings = MarkDownUtil.createSingleMarkDownString("![Image](www.google.com/images/cheese)");
+		List<String> strings = MarkdownUtil.createSingleMarkdownString("![Image](www.google.com/images/cheese)");
 		assertEquals(true, mImageRule.conforms(strings));
 	}
 
 	@Test
 	public void shouldNotBeImage() {
-		List<String> strings = MarkDownUtil.createSingleMarkDownString("[Image](www.google.com/images/cheese)");
+		List<String> strings = MarkdownUtil.createSingleMarkdownString("[Image](www.google.com/images/cheese)");
 		assertEquals(false, mImageRule.conforms(strings));
 	}
 }

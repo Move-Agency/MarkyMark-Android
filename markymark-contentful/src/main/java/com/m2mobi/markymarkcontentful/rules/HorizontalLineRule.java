@@ -4,7 +4,7 @@
 
 package com.m2mobi.markymarkcontentful.rules;
 
-import com.m2mobi.markymark.item.MarkDownItem;
+import com.m2mobi.markymark.item.MarkdownItem;
 import com.m2mobi.markymark.rules.RegexRule;
 import com.m2mobi.markymarkcommon.markdownitems.HorizontalLine;
 
@@ -25,7 +25,7 @@ public class HorizontalLineRule extends RegexRule {
 	}
 
 	@Override
-	public MarkDownItem toMarkDownItem(final List<String> pMarkDownLines) {
+	public MarkdownItem toMarkdownItem(final List<String> pMarkdownLines) {
 		return new HorizontalLine();
 	}
 }

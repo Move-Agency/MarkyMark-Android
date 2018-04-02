@@ -25,8 +25,8 @@ public class HorizontalRuleDisplayItem implements DisplayItem<View, HorizontalLi
 	}
 
 	@Override
-	public View create(final HorizontalLine pHorizontalLine, final InlineConverter<Spanned> pInlineConverter) {
-		View view = new View(mContext, null, R.attr.MarkDownHorizontalRuleStyle);
+	public View create(final HorizontalLine pMarkdownItem, final InlineConverter<Spanned> pInlineConverter) {
+		View view = new View(mContext, null, R.attr.MarkdownHorizontalRuleStyle);
 		view.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 		return view;
 	}

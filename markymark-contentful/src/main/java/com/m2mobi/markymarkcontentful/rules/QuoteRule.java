@@ -4,7 +4,7 @@
 
 package com.m2mobi.markymarkcontentful.rules;
 
-import com.m2mobi.markymark.item.MarkDownItem;
+import com.m2mobi.markymark.item.MarkdownItem;
 import com.m2mobi.markymark.rules.Rule;
 import com.m2mobi.markymarkcommon.markdownitems.QuoteBlock;
 
@@ -21,8 +21,8 @@ public class QuoteRule implements Rule {
 	private static final Pattern QUOTE_PATTERN = Pattern.compile("(^>+)(.*?)$");
 
 	@Override
-	public boolean conforms(final List<String> pMarkDownLines) {
-		return QUOTE_PATTERN.matcher(pMarkDownLines.get(0)).matches();
+	public boolean conforms(final List<String> pMarkdownLines) {
+		return QUOTE_PATTERN.matcher(pMarkdownLines.get(0)).matches();
 	}
 
 	@Override
@@ -31,8 +31,8 @@ public class QuoteRule implements Rule {
 	}
 
 	@Override
-	public MarkDownItem toMarkDownItem(final List<String> pMarkDownLines) {
-		final Matcher matcher = QUOTE_PATTERN.matcher(pMarkDownLines.get(0));
+	public MarkdownItem toMarkdownItem(final List<String> pMarkdownLines) {
+		final Matcher matcher = QUOTE_PATTERN.matcher(pMarkdownLines.get(0));
 		if (matcher.find()) {
 			return new QuoteBlock(matcher.group(2));
 		}

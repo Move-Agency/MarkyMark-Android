@@ -20,8 +20,8 @@ import org.apache.commons.lang3.StringEscapeUtils;
 public class TextDisplayItem implements InlineDisplayItem<Spanned, TextString> {
 
 	@Override
-	public Spanned create(final InlineConverter<Spanned> pInlineConverter, final TextString pMarkDownString) {
-		final Spannable spannable = SpannableUtils.createSpannable(pInlineConverter, pMarkDownString);
+	public Spanned create(final InlineConverter<Spanned> pInlineConverter, final TextString pMarkdownString) {
+		final Spannable spannable = SpannableUtils.createSpannable(pInlineConverter, pMarkdownString);
 		final String result = StringEscapeUtils.unescapeHtml4(String.valueOf(spannable));
 		return new SpannedString(result);
 	}

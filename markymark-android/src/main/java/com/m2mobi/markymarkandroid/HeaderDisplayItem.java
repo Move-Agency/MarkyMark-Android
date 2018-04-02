@@ -21,12 +21,12 @@ public class HeaderDisplayItem implements DisplayItem<View, Header, Spanned> {
 	protected final Context mContext;
 
 	protected static final int[] attr = new int[] {
-			R.attr.MarkDownHeader1Style,
-			R.attr.MarkDownHeader2Style,
-			R.attr.MarkDownHeader3Style,
-			R.attr.MarkDownHeader4Style,
-			R.attr.MarkDownHeader5Style,
-			R.attr.MarkDownHeader6Style
+			R.attr.MarkdownHeader1Style,
+			R.attr.MarkdownHeader2Style,
+			R.attr.MarkdownHeader3Style,
+			R.attr.MarkdownHeader4Style,
+			R.attr.MarkdownHeader5Style,
+			R.attr.MarkdownHeader6Style
 	};
 
 	public HeaderDisplayItem(final Context pContext) {
@@ -34,9 +34,9 @@ public class HeaderDisplayItem implements DisplayItem<View, Header, Spanned> {
 	}
 
 	@Override
-	public View create(final Header pMarkDownItem, final InlineConverter<Spanned> pInlineConverter) {
-		TextView textView = new TextView(mContext, null, attr[pMarkDownItem.getHeader() - 1]);
-		textView.setText(pInlineConverter.convert(pMarkDownItem.getContent()));
+	public View create(final Header pMarkdownItem, final InlineConverter<Spanned> pInlineConverter) {
+		TextView textView = new TextView(mContext, null, attr[pMarkdownItem.getHeader() - 1]);
+		textView.setText(pInlineConverter.convert(pMarkdownItem.getContent()));
 		return textView;
 	}
 }

@@ -4,7 +4,7 @@
 
 package com.m2mobi.markymarkcontentful.rules;
 
-import com.m2mobi.markymarkcommon.markdownitems.MarkDownList;
+import com.m2mobi.markymarkcommon.markdownitems.MarkdownList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,72 +27,72 @@ public class ListRuleTest {
 
 	@Test
 	public void shouldConformToList() {
-		List<String> strings = MarkDownUtil.createSingleMarkDownString("1. Number 1");
+		List<String> strings = MarkdownUtil.createSingleMarkdownString("1. Number 1");
 		assertEquals(true, mListRule.conforms(strings));
 
-		strings = MarkDownUtil.createSingleMarkDownString("- Number 1");
+		strings = MarkdownUtil.createSingleMarkdownString("- Number 1");
 		assertEquals(true, mListRule.conforms(strings));
 	}
 
 	@Test
 	public void shouldCreateOrderedList() {
-		List<String> strings = MarkDownUtil.createMarkDownBlock("1. Number 1", "2. Number 2", "3. Number 3");
+		List<String> strings = MarkdownUtil.createMarkdownBlock("1. Number 1", "2. Number 2", "3. Number 3");
 		assertEquals(true, mListRule.conforms(strings));
 
-		assertEquals(true, ((MarkDownList) mListRule.toMarkDownItem(strings)).isOrdered());
+		assertEquals(true, ((MarkdownList) mListRule.toMarkdownItem(strings)).isOrdered());
 	}
 
 	@Test
 	public void shouldCreateUnOrderedList() {
-		List<String> strings = MarkDownUtil.createMarkDownBlock("- Number 1", "- Number 2", "- Number 3");
+		List<String> strings = MarkdownUtil.createMarkdownBlock("- Number 1", "- Number 2", "- Number 3");
 		assertEquals(true, mListRule.conforms(strings));
 
-		assertEquals(false, ((MarkDownList) mListRule.toMarkDownItem(strings)).isOrdered());
+		assertEquals(false, ((MarkdownList) mListRule.toMarkdownItem(strings)).isOrdered());
 	}
 
 	@Test
 	public void shouldCreateCorrectLengthList() {
-		List<String> strings = MarkDownUtil.createMarkDownBlock("- Number 1", "- Number 2", "- Number 3");
+		List<String> strings = MarkdownUtil.createMarkdownBlock("- Number 1", "- Number 2", "- Number 3");
 		assertEquals(true, mListRule.conforms(strings));
 
-		assertEquals(3, ((MarkDownList) mListRule.toMarkDownItem(strings)).getListItems().size());
+		assertEquals(3, ((MarkdownList) mListRule.toMarkdownItem(strings)).getListItems().size());
 	}
 
 	@Test
 	public void shouldCreateNestedList() {
-		List<String> strings = MarkDownUtil.createMarkDownBlock("- Number 1", "- Number 2", "  - Nest 1", "  - Nest 2");
+		List<String> strings = MarkdownUtil.createMarkdownBlock("- Number 1", "- Number 2", "  - Nest 1", "  - Nest 2");
 		assertEquals(true, mListRule.conforms(strings));
 
-		assertEquals(true, ((MarkDownList) mListRule.toMarkDownItem(strings)).getLastListItem().hasChild());
+		assertEquals(true, ((MarkdownList) mListRule.toMarkdownItem(strings)).getLastListItem().hasChild());
 	}
 
 	@Test
 	public void shouldNotCreateNestedList() {
-		List<String> strings = MarkDownUtil.createMarkDownBlock("- Number 1", "- Number 2");
+		List<String> strings = MarkdownUtil.createMarkdownBlock("- Number 1", "- Number 2");
 		assertEquals(true, mListRule.conforms(strings));
 
-		assertEquals(false, ((MarkDownList) mListRule.toMarkDownItem(strings)).getLastListItem().hasChild());
+		assertEquals(false, ((MarkdownList) mListRule.toMarkdownItem(strings)).getLastListItem().hasChild());
 	}
 
 	@Test
 	public void shouldCreateNestedOrderedList() {
-		List<String> strings = MarkDownUtil.createMarkDownBlock("- Number 1", "- Number 2", "  1. Nest 1", "  2. Nest 2");
+		List<String> strings = MarkdownUtil.createMarkdownBlock("- Number 1", "- Number 2", "  1. Nest 1", "  2. Nest 2");
 		assertEquals(true, mListRule.conforms(strings));
 
-		assertEquals(true, ((MarkDownList) mListRule.toMarkDownItem(strings)).getLastListItem().getChild().get(0).isOrdered());
+		assertEquals(true, ((MarkdownList) mListRule.toMarkdownItem(strings)).getLastListItem().getChild().get(0).isOrdered());
 	}
 
 	@Test
 	public void shouldCreateNestedUnorderedList() {
-		List<String> strings = MarkDownUtil.createMarkDownBlock("- Number 1", "- Number 2", "  - Nest 1", "  - Nest 2");
+		List<String> strings = MarkdownUtil.createMarkdownBlock("- Number 1", "- Number 2", "  - Nest 1", "  - Nest 2");
 		assertEquals(true, mListRule.conforms(strings));
 
-		assertEquals(false, ((MarkDownList) mListRule.toMarkDownItem(strings)).getLastListItem().getChild().get(0).isOrdered());
+		assertEquals(false, ((MarkdownList) mListRule.toMarkdownItem(strings)).getLastListItem().getChild().get(0).isOrdered());
 	}
 
 	@Test
 	public void shouldNotConformToList() {
-		List<String> strings = MarkDownUtil.createSingleMarkDownString("#. Number 1");
+		List<String> strings = MarkdownUtil.createSingleMarkdownString("#. Number 1");
 		assertEquals(false, mListRule.conforms(strings));
 	}
 }
