@@ -48,8 +48,8 @@ public class MarkyMarkAndroid {
      *
      * @param pContext            Context used to create Views
      * @param pFlavor             Flavor that provides the markdown parsing rules
-     * @param pDisplayItems       Extra DisplayItems (replaces DisplayItems that render the same MarkDownItem}
-     * @param pInlineDisplayItems Extra InlineDisplayItems (replaces InlineDisplayItems that render the same MarkDownItem}
+     * @param pDisplayItems       Extra DisplayItems (replaces DisplayItems that render the same MarkdownItem}
+     * @param pInlineDisplayItems Extra InlineDisplayItems (replaces InlineDisplayItems that render the same MarkdownItem}
      * @param imageLoader         The ImageLoader that should be used to load images
      * @return MarkMark instance that renders MarkyMarkAndroid Views from Markdown
      */

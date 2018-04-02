@@ -6,7 +6,7 @@ MarkyMark is a parser that converts markdown into native views. The way it looks
 
 ## Usage Android
 
-Create an Android instance of MarkyMark that can convert MarkDown to View's. A helper class is provided to create an Android instance.
+Create an Android instance of MarkyMark that can convert Markdown to View's. A helper class is provided to create an Android instance.
 
 ```kotlin
 val markyMark = MarkyMarkAndroid.getMarkyMark(this, ContentfulFlavor(), PicassoImageLoader())
@@ -14,10 +14,10 @@ val markyMark = MarkyMarkAndroid.getMarkyMark(this, ContentfulFlavor(), PicassoI
 
 There are 2 ways to use the MarkyMark instance.
 
-You can use the MarkyMark instance to parse the MarkDown into a list of View's and add them to (for example) a LinearLayout:
+You can use the MarkyMark instance to parse the Markdown into a list of View's and add them to (for example) a LinearLayout:
 ```kotlin
 val linearLayout = findViewById<LinearLayout>(R.id.linearlayout)
-val views = markyMark.parseMarkDown("# Header\nParagraph etc")
+val views = markyMark.parseMarkdown("# Header\nParagraph etc")
 for (view in views) {
      layout.addView(view)
 }
@@ -27,12 +27,12 @@ Or use the provided [MarkyMarkView](markymark-android/src/main/java/com/m2mobi/m
 ```kotlin
 val markyMarkView = findViewById<MarkyMarkView>(R.id.markymarkview)
 markyMarkView.setMarkyMark(markyMark)
-markyMarkView.parseMarkDown("# Header\nParagraph etc")
+markyMarkView.parseMarkdown("# Header\nParagraph etc")
 ```
 
 ## Styling
 
-To style your MarkDown content you can override MarkyMark styles where necessary.
+To style your Markdown content you can override MarkyMark styles where necessary.
 
 ```xml
 <!-- Base application theme. -->
@@ -49,7 +49,7 @@ To style your MarkDown content you can override MarkyMark styles where necessary
  <style name="MarkdownStyle" parent="MarkyMarkStyle">
     <item name="android:lineSpacingExtra">4dp</item>
     <item name="android:lineSpacingMultiplier">1</item>
-    <item name="MarkDownHeader4Style">@style/Header4</item>
+    <item name="MarkdownHeader4Style">@style/Header4</item>
 </style>
 
 <!-- Different color for H4 tags -->
@@ -110,22 +110,22 @@ and/or corresponding rules.
 
 Adding a rule requires these steps
 
-### Extend the marker interface `MarkDownItem`
+### Extend the marker interface `MarkdownItem`
 
-Create a `MarkDownItem` from which you can create a `View` later, so you'll want to have every piece of information needed in order to create said `View`
+Create a `MarkdownItem` from which you can create a `View` later, so you'll want to have every piece of information needed in order to create said `View`
 
 ```kotlin
-data class NewMarkDownItem(val content: String) : MarkDownItem
+data class NewMarkdownItem(val content: String) : MarkdownItem
 ```
 
-### Extend `DisplayItem<View, NewMarkDownItem, Spanned>`
+### Extend `DisplayItem<View, NewMarkdownItem, Spanned>`
 
-Create a `DisplayItem` that can handle your `NewMarkDownItem` and convert it into a `View`
+Create a `DisplayItem` that can handle your `NewMarkdownItem` and convert it into a `View`
 
 ```kotlin
-class NewDisplayItem(val context: Context) : DisplayItem<View, NewMarkDownItem, Spanned> {
+class NewDisplayItem(val context: Context) : DisplayItem<View, NewMarkdownItem, Spanned> {
 
-	override fun create(markDownItem: NewMarkDownItem, inlineConverter: InlineConverter<Spanned>) : View {
+	override fun create(markDownItem: NewMarkdownItem, inlineConverter: InlineConverter<Spanned>) : View {
 		return TextView(context).apply {
 			text = inlineConverter.convert(markDownItem.content)
 		}
@@ -141,19 +141,19 @@ viewConverter.addMapping(NewDisplayItem(themedContext))
 
 ### Extend `Rule`
 
-Create a `Rule` that recognizes your new item and creates a corresponding `MarkDownItem` for it.
+Create a `Rule` that recognizes your new item and creates a corresponding `MarkdownItem` for it.
 Most new rules will just be single line, like headers, in that case your new rule can just extend `RegexRule`.
-Return your regular expression `Pattern` in the `getRegex()` method and return your new `MarkDownItem` in the `toMarkDownItem(markDownLines: List<String>)`
+Return your regular expression `Pattern` in the `getRegex()` method and return your new `MarkdownItem` in the `toMarkdownItem(markDownLines: List<String>)`
 
 ```kotlin
 class NewRule : RegexRule {
 
 	override fun getRegex() : Pattern = Pattern.compile("some regex")
 	
-	override fun toMarkDownItem(markDownLines: List<String>) : MarkDownItem {
+	override fun toMarkdownItem(markDownLines: List<String>) : MarkdownItem {
 	    // In this case, since it is a single line rule
 	    // markDownLines will always be an list with one String
-	    return NewMarkDownItem(markDownLines.first())
+	    return NewMarkdownItem(markDownLines.first())
 	}
 }
 ```
@@ -196,7 +196,7 @@ MarkyMark.Builder<View>().addFlavor(OtherFlavor()) // etc
 
 ### Multi line blocks
 
-For more complicated `Rules` that can detect multi-line blocks you'll want to extend `Rule` and you have override the `conforms(final List<String> pMarkDownLines)` method where you would return `true` if the **first** line is recognized as the start of your block, and false otherwise. However there is a catch, you have to set a global integer with the amount of lines there are in this block, which you have to return in the `getLinesConsumed()` method. This means that you have to count the amount of lines that belong to your block inside the `conforms()` method, which isn't desirable and should be refactored as soon as possible.
+For more complicated `Rules` that can detect multi-line blocks you'll want to extend `Rule` and you have override the `conforms(final List<String> pMarkdownLines)` method where you would return `true` if the **first** line is recognized as the start of your block, and false otherwise. However there is a catch, you have to set a global integer with the amount of lines there are in this block, which you have to return in the `getLinesConsumed()` method. This means that you have to count the amount of lines that belong to your block inside the `conforms()` method, which isn't desirable and should be refactored as soon as possible.
 
 ```kotlin
 class NewRule : Rule {
@@ -226,13 +226,13 @@ class NewRule : Rule {
         return false
     }
 
-    override fun toMarkDownItem(markDownLines: MutableList<String>): MarkDownItem = SomeMarkDownItem()
+    override fun toMarkdownItem(markDownLines: MutableList<String>): MarkdownItem = SomeMarkdownItem()
 }
 ```
 
 ### Inline rules
 
-For detecting inline Markdown, like **bold** or *italic* strings, instead of extending `RegexRule` or `Rule` just extend `InlineRule` and return a `MarkDownString` instead of a `MarkDownItem`.
+For detecting inline Markdown, like **bold** or *italic* strings, instead of extending `RegexRule` or `Rule` just extend `InlineRule` and return a `MarkdownString` instead of a `MarkdownItem`.
 
 For example, a rule that would match %%some text%% would look like this
 
@@ -241,14 +241,14 @@ class PercentRule : InlineRule {
 
     override fun getRegex() : Pattern = Pattern.compile("%{2}(.+?)-{2}")
 
-    override fun toMarkDownString(content: String) = PercentString(content, true)
+    override fun toMarkdownString(content: String) = PercentString(content, true)
 }
 ```
 
-Where `PercentString` would be an extension of `MarkDownString`
+Where `PercentString` would be an extension of `MarkdownString`
 
 ```kotlin
-class PercentString(content: String, canHasChildItems: Boolean) : MarkDownString(content, canHasChildItems)
+class PercentString(content: String, canHasChildItems: Boolean) : MarkdownString(content, canHasChildItems)
 ```
 
 For inline Markdown, instead of extending `DisplayItem<View, Foo, Spanned>` you'd want to extend `InlineDisplayItem<Spanned, PercentString>`
@@ -325,7 +325,7 @@ inlineViewConverter.addMapping(PercentInlineDisplayItem())
 
 ---
 ## Quotes
-> MarkDown is *awesome*
+> Markdown is *awesome*
 > Seriously..
 
 ## Links
@@ -406,10 +406,10 @@ As of now only the `markymark-contentful` module has tests.
 
 Like mentioned in **Advanced Usage**, the way rules are implemented now is:
 - Pass a list of `String`s to an rule
-- The rule checks whether the first string conforms to that particular `MarkDownItem`
+- The rule checks whether the first string conforms to that particular `MarkdownItem`
 - The rule also counts (if the first `String` conforms) how many lines belong to the item
 - The parser asks the rule how many lines belong to the item
-- The parser passes those lines to the rule to create the `MarkDownItem`
+- The parser passes those lines to the rule to create the `MarkdownItem`
 - The parser removes those lines from the original list of `Strings`
 - Repeat
 

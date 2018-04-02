@@ -4,12 +4,12 @@
 
 package com.m2mobi.markymarkcommon.markdownitems.inline;
 
-import com.m2mobi.markymark.item.inline.MarkDownString;
+import com.m2mobi.markymark.item.inline.MarkdownString;
 
 /**
- * {@link MarkDownString} used for storing inline code
+ * {@link MarkdownString} used for storing inline code
  */
-public class CodeString extends MarkDownString {
+public class CodeString extends MarkdownString {
 
 	public CodeString(final String pContent, final boolean pCanHaveChildItems) {
 		super(pContent, pCanHaveChildItems);

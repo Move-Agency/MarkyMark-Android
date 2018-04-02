@@ -19,8 +19,8 @@ import com.m2mobi.markymarkcommon.markdownitems.inline.ItalicString;
 public class ItalicInlineDisplayItem implements InlineDisplayItem<Spanned, ItalicString> {
 
 	@Override
-	public Spanned create(final InlineConverter<Spanned> pInlineConverter, final ItalicString pMarkDownString) {
-		final Spannable spannable = SpannableUtils.createSpannable(pInlineConverter, pMarkDownString);
+	public Spanned create(final InlineConverter<Spanned> pInlineConverter, final ItalicString pMarkdownString) {
+		final Spannable spannable = SpannableUtils.createSpannable(pInlineConverter, pMarkdownString);
 		spannable.setSpan(new StyleSpan(Typeface.ITALIC), 0, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		return spannable;
 	}

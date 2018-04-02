@@ -7,6 +7,6 @@ package com.m2mobi.markymark.item;
 /**
  * Marker interface used to identify items in Markdown text
  */
-public interface MarkDownItem {
+public interface MarkdownItem {
 
 }

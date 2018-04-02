@@ -24,11 +24,11 @@ public class InlineCodeRuleTest {
 
 	@Test
 	public void shouldCreateInlineCodeString() {
-		assertEquals("text", mInlineCodeRule.toMarkDownString("`text`").getContent());
+		assertEquals("text", mInlineCodeRule.toMarkdownString("`text`").getContent());
 	}
 
 	@Test
 	public void shouldNotCreateInlineCodeString() {
-		assertNotEquals("text", mInlineCodeRule.toMarkDownString("$$text$$").getContent());
+		assertNotEquals("text", mInlineCodeRule.toMarkdownString("$$text$$").getContent());
 	}
 }

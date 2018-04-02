@@ -4,10 +4,10 @@
 
 package com.m2mobi.markymarkcontentful.rules;
 
-import com.m2mobi.markymark.item.MarkDownItem;
+import com.m2mobi.markymark.item.MarkdownItem;
 import com.m2mobi.markymark.rules.Rule;
 import com.m2mobi.markymarkcommon.markdownitems.ListItem;
-import com.m2mobi.markymarkcommon.markdownitems.MarkDownList;
+import com.m2mobi.markymarkcommon.markdownitems.MarkdownList;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -27,8 +27,8 @@ public class ListRule implements Rule {
 	/** int index of the current line used to keep track of the lines that need to be parsed */
 	private int mCurrentLine = 0;
 
-	/** List of markdown strings used to create MarkDownLists */
-	private List<String> mMarkDownLines;
+	/** List of markdown strings used to create MarkdownLists */
+	private List<String> mMarkdownLines;
 
 	/** Matches an ordered list */
 	private static final Pattern ORDERED_LIST_PATTERN = Pattern.compile("^\\s{0,3}\\d+\\.\\s+(.+)$");
@@ -43,13 +43,13 @@ public class ListRule implements Rule {
 	private static final Pattern NESTED_UNORDERED_LIST_PATTERN = Pattern.compile("^(\\s*)\\-{1}\\s+([^\\*].+)$");
 
 	@Override
-	public boolean conforms(final List<String> pMarkDownLines) {
-		if (!ORDERED_LIST_PATTERN.matcher(pMarkDownLines.get(0)).matches()
-				&& !UNORDERED_LIST_PATTERN.matcher(pMarkDownLines.get(0)).matches()) {
+	public boolean conforms(final List<String> pMarkdownLines) {
+		if (!ORDERED_LIST_PATTERN.matcher(pMarkdownLines.get(0)).matches()
+				&& !UNORDERED_LIST_PATTERN.matcher(pMarkdownLines.get(0)).matches()) {
 			return false;
 		}
 		mLinesConsumed = 0;
-		for (String line : pMarkDownLines) {
+		for (String line : pMarkdownLines) {
 			if (isList(line)) {
 				mLinesConsumed++;
 			} else {
@@ -65,45 +65,45 @@ public class ListRule implements Rule {
 	}
 
 	@Override
-	public MarkDownItem toMarkDownItem(final List<String> pMarkDownLines) {
-		mMarkDownLines = pMarkDownLines;
+	public MarkdownItem toMarkdownItem(final List<String> pMarkdownLines) {
+		mMarkdownLines = pMarkdownLines;
 		mCurrentLine = 0;
 
-		MarkDownList list = new MarkDownList(isOrdered(mMarkDownLines.get(mCurrentLine)), 0);
-		parseMarkDownList(list, getNestingLevel(mMarkDownLines.get(mCurrentLine)));
+		MarkdownList list = new MarkdownList(isOrdered(mMarkdownLines.get(mCurrentLine)), 0);
+		parseMarkdownList(list, getNestingLevel(mMarkdownLines.get(mCurrentLine)));
 
 		return list;
 	}
 
 	/**
-	 * Recursive method that constructs a MarkDownList from markDown
+	 * Recursive method that constructs a MarkdownList from Markdown
 	 *
-	 * @param pMarkDownList
-	 * 		Root MarkDownList item
+	 * @param pMarkdownList
+	 * 		Root MarkdownList item
 	 * @param currentLevel
 	 * 		current nesting level
-	 * @return Returns a MarkDownList
+	 * @return Returns a MarkdownList
 	 */
-	private void parseMarkDownList(final MarkDownList pMarkDownList, int currentLevel) {
-		String line = mMarkDownLines.get(mCurrentLine);
+	private void parseMarkdownList(final MarkdownList pMarkdownList, int currentLevel) {
+		String line = mMarkdownLines.get(mCurrentLine);
 		while (isList(line)) {
 			final int level = getNestingLevel(line);
 			if (level > currentLevel) {
 				// Create sub-list
-				final MarkDownList childMarkDownList = new MarkDownList(isOrdered(line), level);
-				pMarkDownList.getLastListItem().addChild(childMarkDownList);
-				parseMarkDownList(childMarkDownList, level);
+				final MarkdownList childMarkdownList = new MarkdownList(isOrdered(line), level);
+				pMarkdownList.getLastListItem().addChild(childMarkdownList);
+				parseMarkdownList(childMarkdownList, level);
 			} else if (level == currentLevel) {
 				// Add a list item
-				pMarkDownList.addListItem(new ListItem(getTextForLine(line)));
+				pMarkdownList.addListItem(new ListItem(getTextForLine(line)));
 				mCurrentLine++;
 			} else {
 				break;
 			}
-			if (mCurrentLine >= mMarkDownLines.size()) {
+			if (mCurrentLine >= mMarkdownLines.size()) {
 				break;
 			}
-			line = mMarkDownLines.get(mCurrentLine);
+			line = mMarkdownLines.get(mCurrentLine);
 		}
 	}
 

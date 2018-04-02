@@ -5,9 +5,9 @@
 package com.m2mobi.markymark.item.inline;
 
 /**
- * {@link MarkDownString} implementation used for text
+ * {@link MarkdownString} implementation used for text
  */
-public class TextString extends MarkDownString {
+public class TextString extends MarkdownString {
 
 	public TextString(final String pContent, final boolean pCanHasChildItems) {
 		super(pContent, pCanHasChildItems);

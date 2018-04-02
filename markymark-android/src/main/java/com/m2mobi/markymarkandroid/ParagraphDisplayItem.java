@@ -26,10 +26,10 @@ public class ParagraphDisplayItem implements DisplayItem<View, Paragraph, Spanne
 	}
 
 	@Override
-	public View create(final Paragraph pMarkDownItem, InlineConverter<Spanned> pInlineConverter) {
-		TextView textView = new TextView(mContext, null, R.attr.MarkDownParagraphStyle);
+	public View create(final Paragraph pMarkdownItem, InlineConverter<Spanned> pInlineConverter) {
+		TextView textView = new TextView(mContext, null, R.attr.MarkdownParagraphStyle);
 		textView.setMovementMethod(LinkMovementMethod.getInstance());
-		final CharSequence convert = pInlineConverter.convert(pMarkDownItem.getContent());
+		final CharSequence convert = pInlineConverter.convert(pMarkdownItem.getContent());
 		textView.setText(convert);
 		return textView;
 	}

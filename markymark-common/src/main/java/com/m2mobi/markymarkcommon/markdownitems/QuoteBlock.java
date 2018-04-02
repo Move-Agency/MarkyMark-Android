@@ -4,14 +4,14 @@
 
 package com.m2mobi.markymarkcommon.markdownitems;
 
-import com.m2mobi.markymark.item.MarkDownItem;
-import com.m2mobi.markymark.item.inline.MarkDownString;
+import com.m2mobi.markymark.item.MarkdownItem;
+import com.m2mobi.markymark.item.inline.MarkdownString;
 import com.m2mobi.markymarkcommon.markdownitems.inline.InlineString;
 
 /**
- * {@link MarkDownItem} used for storing text inside a quote block
+ * {@link MarkdownItem} used for storing text inside a quote block
  */
-public class QuoteBlock implements MarkDownItem {
+public class QuoteBlock implements MarkdownItem {
 
 	private final String mContent;
 
@@ -19,7 +19,7 @@ public class QuoteBlock implements MarkDownItem {
 		mContent = pContent;
 	}
 
-	public MarkDownString getContent() {
+	public MarkdownString getContent() {
 		return new InlineString(mContent, true);
 	}
 }

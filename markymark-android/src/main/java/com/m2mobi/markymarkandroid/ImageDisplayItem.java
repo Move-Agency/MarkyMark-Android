@@ -32,11 +32,11 @@ public class ImageDisplayItem implements DisplayItem<View, Image, Spanned> {
 	}
 
 	@Override
-	public View create(final Image pMarkDownItem, final InlineConverter<Spanned> pInlineConverter) {
-		final ImageView imageView = new ImageView(mContext, null, R.attr.MarkDownImageStyle);
+	public View create(final Image pMarkdownItem, final InlineConverter<Spanned> pInlineConverter) {
+		final ImageView imageView = new ImageView(mContext, null, R.attr.MarkdownImageStyle);
 		imageView.setLayoutParams(new LayoutParams(MATCH_PARENT, WRAP_CONTENT));
 		imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-		mImageLoader.loadImage(imageView, pMarkDownItem.getFilename());
+		mImageLoader.loadImage(imageView, pMarkdownItem.getFilename());
 		return imageView;
 	}
 }

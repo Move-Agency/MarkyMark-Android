@@ -18,8 +18,8 @@ import com.m2mobi.markymarkcommon.markdownitems.inline.StrikeString;
 public class StrikeInlineDisplayItem implements InlineDisplayItem<Spanned, StrikeString> {
 
 	@Override
-	public Spanned create(final InlineConverter<Spanned> pInlineConverter, final StrikeString pMarkDownString) {
-		final Spannable spannable = SpannableUtils.createSpannable(pInlineConverter, pMarkDownString);
+	public Spanned create(final InlineConverter<Spanned> pInlineConverter, final StrikeString pMarkdownString) {
+		final Spannable spannable = SpannableUtils.createSpannable(pInlineConverter, pMarkdownString);
 		spannable.setSpan(new StrikethroughSpan(), 0, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		return spannable;
 	}

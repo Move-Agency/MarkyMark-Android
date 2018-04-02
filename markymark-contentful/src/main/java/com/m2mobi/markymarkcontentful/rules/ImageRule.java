@@ -4,7 +4,7 @@
 
 package com.m2mobi.markymarkcontentful.rules;
 
-import com.m2mobi.markymark.item.MarkDownItem;
+import com.m2mobi.markymark.item.MarkdownItem;
 import com.m2mobi.markymark.rules.RegexRule;
 import com.m2mobi.markymarkcommon.markdownitems.Image;
 
@@ -26,8 +26,8 @@ public class ImageRule extends RegexRule {
 	}
 
 	@Override
-	public MarkDownItem toMarkDownItem(final List<String> pMarkDownLines) {
-		final Matcher matcher = IMAGE_PATTERN.matcher(pMarkDownLines.get(0));
+	public MarkdownItem toMarkdownItem(final List<String> pMarkdownLines) {
+		final Matcher matcher = IMAGE_PATTERN.matcher(pMarkdownLines.get(0));
 		if (matcher.find()) {
 			return new Image(matcher.group(3), matcher.group(2));
 		}

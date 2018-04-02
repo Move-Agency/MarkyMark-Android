@@ -4,14 +4,14 @@
 
 package com.m2mobi.markymarkcommon.markdownitems;
 
-import com.m2mobi.markymark.item.MarkDownItem;
-import com.m2mobi.markymark.item.inline.MarkDownString;
+import com.m2mobi.markymark.item.MarkdownItem;
+import com.m2mobi.markymark.item.inline.MarkdownString;
 import com.m2mobi.markymarkcommon.markdownitems.inline.InlineString;
 
 /**
- * {@link MarkDownItem} used for storing text inside a paragraph
+ * {@link MarkdownItem} used for storing text inside a paragraph
  */
-public class Paragraph implements MarkDownItem {
+public class Paragraph implements MarkdownItem {
 
 	private InlineString mContent;
 
@@ -19,7 +19,7 @@ public class Paragraph implements MarkDownItem {
 		mContent = pContent;
 	}
 
-	public MarkDownString getContent() {
+	public MarkdownString getContent() {
 		return mContent;
 	}
 }

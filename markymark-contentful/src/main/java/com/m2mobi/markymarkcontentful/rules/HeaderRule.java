@@ -4,7 +4,7 @@
 
 package com.m2mobi.markymarkcontentful.rules;
 
-import com.m2mobi.markymark.item.MarkDownItem;
+import com.m2mobi.markymark.item.MarkdownItem;
 import com.m2mobi.markymark.rules.RegexRule;
 import com.m2mobi.markymark.rules.Rule;
 import com.m2mobi.markymarkcommon.markdownitems.Header;
@@ -27,10 +27,10 @@ public class HeaderRule extends RegexRule {
 	}
 
 	@Override
-	public MarkDownItem toMarkDownItem(final List<String> pMarkDownLines) {
+	public MarkdownItem toMarkdownItem(final List<String> pMarkdownLines) {
 		String headerContent = "";
 		int headerType = 1;
-		Matcher headerMatcher = HEADER_PATTERN.matcher(pMarkDownLines.get(0));
+		Matcher headerMatcher = HEADER_PATTERN.matcher(pMarkdownLines.get(0));
 		if (headerMatcher.matches()) {
 			headerType = headerMatcher.group(1).length();
 			headerContent = headerMatcher.group(2);

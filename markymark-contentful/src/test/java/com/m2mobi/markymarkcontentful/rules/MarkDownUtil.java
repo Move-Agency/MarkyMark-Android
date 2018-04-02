@@ -11,18 +11,18 @@ import java.util.List;
 /**
  * Test utils to create lists of Markdown strings
  */
-class MarkDownUtil {
+class MarkdownUtil {
 
 	/**
 	 * Create a list with a single {@link String} Containing markdown text
 	 *
-	 * @param pMarkDown
+	 * @param pMarkdown
 	 * 		the Markdown text
 	 * @return List with one item
 	 */
-	static List<String> createSingleMarkDownString(final String pMarkDown) {
+	static List<String> createSingleMarkdownString(final String pMarkdown) {
 		List<String> strings = new ArrayList<>();
-		strings.add(pMarkDown);
+		strings.add(pMarkdown);
 		return strings;
 	}
 
@@ -33,7 +33,7 @@ class MarkDownUtil {
 	 * 		multiple strings containing Markdown text
 	 * @return List filled with the argument strings
 	 */
-	static List<String> createMarkDownBlock(final String... pMarkdownStrings) {
+	static List<String> createMarkdownBlock(final String... pMarkdownStrings) {
 		List<String> strings = new ArrayList<>();
 		strings.addAll(Arrays.asList(pMarkdownStrings));
 		return strings;

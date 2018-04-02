@@ -27,9 +27,9 @@ public class QuoteDisplayItem implements DisplayItem<View, QuoteBlock, Spanned> 
 	}
 
 	@Override
-	public View create(final QuoteBlock pMarkDownItem, final InlineConverter<Spanned> pInlineConverter) {
-		TextView textView = new TextView(mContext, null, R.attr.MarkDownQuoteStyle);
-		final Spanned spanned = pInlineConverter.convert(pMarkDownItem.getContent());
+	public View create(final QuoteBlock pMarkdownItem, final InlineConverter<Spanned> pInlineConverter) {
+		TextView textView = new TextView(mContext, null, R.attr.MarkdownQuoteStyle);
+		final Spanned spanned = pInlineConverter.convert(pMarkdownItem.getContent());
 		final SpannableString spannableString = new SpannableString(spanned);
 		spannableString.setSpan(new QuoteSpan(), 0, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		textView.setText(spannableString);

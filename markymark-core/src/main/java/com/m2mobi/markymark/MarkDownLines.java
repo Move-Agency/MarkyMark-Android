@@ -13,13 +13,13 @@ import java.util.List;
 /**
  * Holder for the markdown that should be rendered
  */
-class MarkDownLines {
+class MarkdownLines {
 
 	/** List of Strings containing the markdown to render */
 	private List<String> mLines;
 
-	MarkDownLines(final String pMarkDown) {
-		mLines = new ArrayList<>(Arrays.asList(pMarkDown.split("\n")));
+	MarkdownLines(final String pMarkdown) {
+		mLines = new ArrayList<>(Arrays.asList(pMarkdown.split("\n")));
 	}
 
 	/**

@@ -4,7 +4,7 @@
 
 package com.m2mobi.markymark;
 
-import com.m2mobi.markymark.item.inline.MarkDownString;
+import com.m2mobi.markymark.item.inline.MarkdownString;
 import com.m2mobi.markymark.item.inline.TextString;
 import com.m2mobi.markymark.rules.InlineRule;
 
@@ -21,14 +21,14 @@ import java.util.regex.Matcher;
  */
 public class InlineConverter<T> {
 
-	/** HashMap that maps MarkDownString items to display items */
-	private final Map<Class<? extends MarkDownString>, InlineDisplayItem<T, MarkDownString>> mMapping = new HashMap<>();
+	/** HashMap that maps MarkdownString items to display items */
+	private final Map<Class<? extends MarkdownString>, InlineDisplayItem<T, MarkdownString>> mMapping = new HashMap<>();
 
-	/** List of InlineRules used to parse MarkDownStrings */
+	/** List of InlineRules used to parse MarkdownStrings */
 	private List<InlineRule> mInlineRules;
 
 	/**
-	 * Sets the inline rules used to parse MarkDownStrings
+	 * Sets the inline rules used to parse MarkdownStrings
 	 *
 	 * @param pInlineRules
 	 * 		List of inline rules
@@ -49,32 +49,32 @@ public class InlineConverter<T> {
 
 		// Get the generic type from the interface
 		final Class<T> tClass = (Class<T>) ((ParameterizedType) type).getActualTypeArguments()[1];
-		mMapping.put((Class<? extends MarkDownString>) tClass, pInlineDisplayItem);
+		mMapping.put((Class<? extends MarkdownString>) tClass, pInlineDisplayItem);
 	}
 
 	/**
-	 * Creates a T from the given {@link MarkDownString} using the mapped InlineDisplayItem
+	 * Creates a T from the given {@link MarkdownString} using the mapped InlineDisplayItem
 	 *
-	 * @param pMarkDownString
+	 * @param pMarkdownString
 	 * 		The inline markdown string that will be rendered
 	 * @return Returns a {@link T} using the mapped {@link InlineDisplayItem}
 	 */
-	public T convert(final MarkDownString pMarkDownString) {
-		return getDisplayItemForClass(pMarkDownString.getClass()).create(this, pMarkDownString);
+	public T convert(final MarkdownString pMarkdownString) {
+		return getDisplayItemForClass(pMarkdownString.getClass()).create(this, pMarkdownString);
 	}
 
 	/**
-	 * Gets the InlineDisplayItem that is mapped to a MarkDownString
+	 * Gets the InlineDisplayItem that is mapped to a MarkdownString
 	 *
 	 * @param pClass
 	 * 		A MarkdownString class
-	 * @return Returns the InlineDisplayItem that should be used to convert the MarkDownString to a {@link T}
+	 * @return Returns the InlineDisplayItem that should be used to convert the MarkdownString to a {@link T}
 	 */
 	@SuppressWarnings("unchecked")
-	private InlineDisplayItem<T, MarkDownString> getDisplayItemForClass(final Class pClass) {
+	private InlineDisplayItem<T, MarkdownString> getDisplayItemForClass(final Class pClass) {
 		InlineDisplayItem displayItem = mMapping.get(pClass);
 		if (displayItem == null) {
-			throw new IllegalStateException("MarkDownItem not mapped to DisplayItem, use Converter.addMapping to add a map for: " +
+			throw new IllegalStateException("MarkdownItem not mapped to DisplayItem, use Converter.addMapping to add a map for: " +
 					pClass.toString());
 		}
 		return displayItem;
@@ -84,39 +84,39 @@ public class InlineConverter<T> {
 	 * TODO: Documentation
 	 * TODO: consider moving this to a more suitable class?
 	 */
-	public List<MarkDownString> parseContent(final String pContent) {
-		final List<MarkDownString> markDownStrings = new ArrayList<>();
+	public List<MarkdownString> parseContent(final String pContent) {
+		final List<MarkdownString> markdownStrings = new ArrayList<>();
 
 		String toCheck = pContent;
 		while (!toCheck.isEmpty()) {
 			MatchedRule matchedRule = findFirstMatch(toCheck);
 			if (matchedRule != null) {
 				if (matchedRule.mStart > 0) {
-					markDownStrings.add(new TextString(toCheck.substring(0, matchedRule.mStart), false));
+					markdownStrings.add(new TextString(toCheck.substring(0, matchedRule.mStart), false));
 				}
 
 				String content = toCheck.substring(matchedRule.mStart, matchedRule.mEnd);
-				markDownStrings.add(matchedRule.mInlineRule.toMarkDownString(content));
+				markdownStrings.add(matchedRule.mInlineRule.toMarkdownString(content));
 				toCheck = toCheck.substring(matchedRule.mEnd, toCheck.length());
 			} else if (!toCheck.isEmpty()) {
-				markDownStrings.add(new TextString(toCheck, false));
+				markdownStrings.add(new TextString(toCheck, false));
 				break;
 			}
 		}
-		return markDownStrings;
+		return markdownStrings;
 	}
 
 	/**
 	 * Finds the first InlineRule that matches
 	 *
-	 * @param pMarkDown
+	 * @param pMarkdown
 	 * 		String containing markdown
 	 * @return Returns a MatchedRule
 	 */
-	private MatchedRule findFirstMatch(String pMarkDown) {
+	private MatchedRule findFirstMatch(String pMarkdown) {
 		MatchedRule currentMatch = null;
 		for (InlineRule inlineRule : mInlineRules) {
-			final Matcher matcher = inlineRule.getRegex().matcher(pMarkDown);
+			final Matcher matcher = inlineRule.getRegex().matcher(pMarkdown);
 			if (matcher.find()) {
 				MatchedRule matchedRule = new MatchedRule(inlineRule, matcher.start(), matcher.end());
 				if (currentMatch == null || currentMatch.isStartLower(matchedRule)) {

@@ -24,11 +24,11 @@ public class StrikeRuleTest {
 
 	@Test
 	public void shouldCreateStrikeString() {
-		assertEquals("text", mStrikeRule.toMarkDownString("~~text~~").getContent());
+		assertEquals("text", mStrikeRule.toMarkdownString("~~text~~").getContent());
 	}
 
 	@Test
 	public void shouldNotCreateStrikeString() {
-		assertNotEquals("text", mStrikeRule.toMarkDownString("$$text$$").getContent());
+		assertNotEquals("text", mStrikeRule.toMarkdownString("$$text$$").getContent());
 	}
 }

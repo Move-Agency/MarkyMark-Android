@@ -19,8 +19,8 @@ import com.m2mobi.markymarkcommon.markdownitems.inline.BoldString;
 public class BoldInlineDisplayItem implements InlineDisplayItem<Spanned, BoldString> {
 
 	@Override
-	public Spanned create(final InlineConverter<Spanned> pInlineConverter, final BoldString pMarkDownString) {
-		final Spannable spannable = SpannableUtils.createSpannable(pInlineConverter, pMarkDownString);
+	public Spanned create(final InlineConverter<Spanned> pInlineConverter, final BoldString pMarkdownString) {
+		final Spannable spannable = SpannableUtils.createSpannable(pInlineConverter, pMarkdownString);
 		spannable.setSpan(new StyleSpan(Typeface.BOLD), 0, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		return spannable;
 	}

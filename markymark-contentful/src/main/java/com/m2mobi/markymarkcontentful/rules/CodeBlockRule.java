@@ -4,7 +4,7 @@
 
 package com.m2mobi.markymarkcontentful.rules;
 
-import com.m2mobi.markymark.item.MarkDownItem;
+import com.m2mobi.markymark.item.MarkdownItem;
 import com.m2mobi.markymark.rules.Rule;
 import com.m2mobi.markymarkcommon.markdownitems.CodeBlock;
 
@@ -29,12 +29,12 @@ public class CodeBlockRule implements Rule {
 	private int mLinesConsumed;
 
 	@Override
-	public boolean conforms(final List<String> pMarkDownLines) {
-		if (!CODE_PATTERN_START.matcher(pMarkDownLines.get(0)).matches()) {
+	public boolean conforms(final List<String> pMarkdownLines) {
+		if (!CODE_PATTERN_START.matcher(pMarkdownLines.get(0)).matches()) {
 			return false;
 		}
 		mLinesConsumed = 0;
-		for (String line : pMarkDownLines) {
+		for (String line : pMarkdownLines) {
 			mLinesConsumed += 1;
 			if (mLinesConsumed == 1) {
 				if (CODE_PATTERN_END_SINGLE_LINE.matcher(line).matches()) {
@@ -55,9 +55,9 @@ public class CodeBlockRule implements Rule {
 	}
 
 	@Override
-	public MarkDownItem toMarkDownItem(final List<String> pMarkDownLines) {
+	public MarkdownItem toMarkdownItem(final List<String> pMarkdownLines) {
 		StringBuilder sb = new StringBuilder();
-		for (String line : pMarkDownLines) {
+		for (String line : pMarkdownLines) {
 			sb.append(line);
 			sb.append("\n");
 		}

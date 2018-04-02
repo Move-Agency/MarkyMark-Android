@@ -24,11 +24,11 @@ public class ItalicRuleTest {
 
 	@Test
 	public void shouldCreateItalicString() {
-		assertEquals("text", mItalicRule.toMarkDownString("*text*").getContent());
+		assertEquals("text", mItalicRule.toMarkdownString("*text*").getContent());
 	}
 
 	@Test
 	public void shouldNotCreateItalicString() {
-		assertNotEquals("text", mItalicRule.toMarkDownString("$$text$$").getContent());
+		assertNotEquals("text", mItalicRule.toMarkdownString("$$text$$").getContent());
 	}
 }
