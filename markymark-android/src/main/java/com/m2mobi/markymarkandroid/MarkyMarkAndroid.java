@@ -74,8 +74,7 @@ public class MarkyMarkAndroid {
         viewConverter.addMapping(new HorizontalRuleDisplayItem(context));
         viewConverter.addMapping(new ListDisplayItem(
                 context,
-                R.dimen.list_indentation_spacing,
-                R.dimen.list_indicator_spacing,
+                R.dimen.list_margin,
                 new int[]{
                         R.drawable.bullet_filled,
                         R.drawable.bullet,
