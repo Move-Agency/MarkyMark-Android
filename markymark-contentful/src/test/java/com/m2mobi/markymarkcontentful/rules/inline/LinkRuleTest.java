@@ -28,16 +28,16 @@ public class LinkRuleTest {
 
 	@Test
 	public void shouldCreateLinkString() {
-		assertEquals("Link", mLinkRule.toMarkDownString(mUrl).getContent());
+		assertEquals("Link", mLinkRule.toMarkdownString(mUrl).getContent());
 	}
 
 	@Test
 	public void shouldCreateLinkUrl() {
-		assertEquals("www.google.com", ((LinkString) mLinkRule.toMarkDownString(mUrl)).getUrl());
+		assertEquals("www.google.com", ((LinkString) mLinkRule.toMarkdownString(mUrl)).getUrl());
 	}
 
 	@Test
 	public void shouldNotCreateLinString() {
-		assertNotEquals("Link", mLinkRule.toMarkDownString("www.google.com").getContent());
+		assertNotEquals("Link", mLinkRule.toMarkdownString("www.google.com").getContent());
 	}
 }

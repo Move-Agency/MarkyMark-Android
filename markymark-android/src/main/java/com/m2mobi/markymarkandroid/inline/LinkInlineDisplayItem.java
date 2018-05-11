@@ -18,9 +18,9 @@ import com.m2mobi.markymarkcommon.markdownitems.inline.LinkString;
 public class LinkInlineDisplayItem implements InlineDisplayItem<Spanned, LinkString> {
 
 	@Override
-	public Spanned create(final InlineConverter<Spanned> pInlineConverter, final LinkString pMarkDownString) {
-		final Spannable spannable = SpannableUtils.createSpannable(pInlineConverter, pMarkDownString);
-		spannable.setSpan(new URLSpan(pMarkDownString.getUrl()), 0, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+	public Spanned create(final InlineConverter<Spanned> pInlineConverter, final LinkString pMarkdownString) {
+		final Spannable spannable = SpannableUtils.createSpannable(pInlineConverter, pMarkdownString);
+		spannable.setSpan(new URLSpan(pMarkdownString.getUrl()), 0, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		return spannable;
 	}
 }

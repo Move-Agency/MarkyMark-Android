@@ -16,22 +16,22 @@ public class HorizontalLineRuleTest {
 
 	@Test
 	public void shouldBeHorizontalRule() {
-		List<String> markdown = MarkDownUtil.createSingleMarkDownString("---");
+		List<String> markdown = MarkdownUtil.createSingleMarkdownString("---");
 		Assert.assertEquals(true, new HorizontalLineRule().conforms(markdown));
 
-		markdown = MarkDownUtil.createSingleMarkDownString("----");
+		markdown = MarkdownUtil.createSingleMarkdownString("----");
 		Assert.assertEquals(true, new HorizontalLineRule().conforms(markdown));
 	}
 
 	@Test
 	public void shouldNotBeHorizontalRule() {
-		List<String> markdown = MarkDownUtil.createSingleMarkDownString("--");
+		List<String> markdown = MarkdownUtil.createSingleMarkdownString("--");
 		Assert.assertEquals(false, new HorizontalLineRule().conforms(markdown));
 
-		markdown = MarkDownUtil.createSingleMarkDownString("===");
+		markdown = MarkdownUtil.createSingleMarkdownString("===");
 		Assert.assertEquals(false, new HorizontalLineRule().conforms(markdown));
 
-		markdown = MarkDownUtil.createSingleMarkDownString("===Hoi");
+		markdown = MarkdownUtil.createSingleMarkdownString("===Hoi");
 		Assert.assertEquals(false, new HorizontalLineRule().conforms(markdown));
 	}
 

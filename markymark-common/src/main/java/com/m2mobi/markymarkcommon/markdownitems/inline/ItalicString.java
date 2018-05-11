@@ -4,12 +4,12 @@
 
 package com.m2mobi.markymarkcommon.markdownitems.inline;
 
-import com.m2mobi.markymark.item.inline.MarkDownString;
+import com.m2mobi.markymark.item.inline.MarkdownString;
 
 /**
- * {@link MarkDownString} used for storing italic text
+ * {@link MarkdownString} used for storing italic text
  */
-public class ItalicString extends MarkDownString {
+public class ItalicString extends MarkdownString {
 
 	public ItalicString(final String pContent, final boolean pCanHasChildItems) {
 		super(pContent, pCanHasChildItems);

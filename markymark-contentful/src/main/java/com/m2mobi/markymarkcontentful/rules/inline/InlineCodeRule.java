@@ -4,7 +4,7 @@
 
 package com.m2mobi.markymarkcontentful.rules.inline;
 
-import com.m2mobi.markymark.item.inline.MarkDownString;
+import com.m2mobi.markymark.item.inline.MarkdownString;
 import com.m2mobi.markymark.rules.InlineRule;
 import com.m2mobi.markymarkcommon.markdownitems.inline.CodeString;
 
@@ -22,7 +22,7 @@ public class InlineCodeRule implements InlineRule {
 	}
 
 	@Override
-	public MarkDownString toMarkDownString(final String pContent) {
+	public MarkdownString toMarkdownString(final String pContent) {
 		final Matcher matcher = getRegex().matcher(pContent);
 		if (matcher.find()) {
 			return new CodeString(matcher.group(1), false);

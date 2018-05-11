@@ -4,7 +4,7 @@
 
 package com.m2mobi.markymark;
 
-import com.m2mobi.markymark.item.MarkDownItem;
+import com.m2mobi.markymark.item.MarkdownItem;
 import com.m2mobi.markymark.rules.InlineRule;
 import com.m2mobi.markymark.rules.Rule;
 
@@ -22,10 +22,10 @@ public class MarkyMark<T> {
 	/** Rule that should be used as a default fallback */
 	private Rule mDefaultRule;
 
-	/** Converter used to convert MarkDownItems to {@link T} */
+	/** Converter used to convert MarkdownItems to {@link T} */
 	private Converter<T> mConverter;
 
-	/** InlineConverter used to convert MarkDownStrings */
+	/** InlineConverter used to convert MarkdownStrings */
 	private InlineConverter mInlineConverter;
 
 	/**
@@ -43,23 +43,23 @@ public class MarkyMark<T> {
 	}
 
 	/**
-	 * Parse the MarkDown
+	 * Parse the Markdown
 	 *
-	 * @param pMarkDownString
-	 * 		The MarkDown String that should be parsed
-	 * @return An array of MarkDown items
+	 * @param pMarkdownString
+	 * 		The Markdown String that should be parsed
+	 * @return An array of Markdown items
 	 */
-	public List<T> parseMarkDown(final String pMarkDownString) {
-		MarkDownLines markDownLines = new MarkDownLines(pMarkDownString);
-		List<MarkDownItem> markDownItems = new ArrayList<>();
+	public List<T> parseMarkdown(final String pMarkdownString) {
+		MarkdownLines markdownLines = new MarkdownLines(pMarkdownString);
+		List<MarkdownItem> markdownItems = new ArrayList<>();
 
-		while (!markDownLines.isEmpty()) {
-			Rule rule = getRuleForLines(markDownLines.getLines());
-			markDownItems.add(rule.toMarkDownItem(markDownLines.getLines(rule.getLinesConsumed())));
-			markDownLines.removeLinesForRule(rule);
+		while (!markdownLines.isEmpty()) {
+			Rule rule = getRuleForLines(markdownLines.getLines());
+			markdownItems.add(rule.toMarkdownItem(markdownLines.getLines(rule.getLinesConsumed())));
+			markdownLines.removeLinesForRule(rule);
 		}
 
-		return mConverter.convert(markDownItems, mInlineConverter);
+		return mConverter.convert(markdownItems, mInlineConverter);
 	}
 
 	/**
@@ -89,13 +89,13 @@ public class MarkyMark<T> {
 		/** Rule that should be used as a default fallback */
 		private Rule mDefaultRule;
 
-		/** Converter used to convert MarkDownItems */
+		/** Converter used to convert MarkdownItems */
 		private Converter<T> mConverter;
 
-		/** InlineConverter used to convert MarkDownStrings */
+		/** InlineConverter used to convert MarkdownStrings */
 		private InlineConverter mInlineConverter;
 
-		/** InlineRules used to parse MarkDownStrings */
+		/** InlineRules used to parse MarkdownStrings */
 		private List<InlineRule> mInlineRules;
 
 		/**
@@ -137,10 +137,10 @@ public class MarkyMark<T> {
 		}
 
 		/**
-		 * Set the Converter that should be used to convert MarkDownItems to {@link T}
+		 * Set the Converter that should be used to convert MarkdownItems to {@link T}
 		 *
 		 * @param pConverter
-		 * 		The Converter used to convert MarkDownItems
+		 * 		The Converter used to convert MarkdownItems
 		 * @return This Builder
 		 */
 		public Builder<T> setConverter(final Converter<T> pConverter) {
@@ -149,10 +149,10 @@ public class MarkyMark<T> {
 		}
 
 		/**
-		 * Set the InlineConverter that should be used to convert MarkDownStrings
+		 * Set the InlineConverter that should be used to convert MarkdownStrings
 		 *
 		 * @param pInlineConverter
-		 * 		The Converter used to convert MarkDownStrings
+		 * 		The Converter used to convert MarkdownStrings
 		 * @return This Builder
 		 */
 		public Builder<T> setInlineConverter(final InlineConverter pInlineConverter) {

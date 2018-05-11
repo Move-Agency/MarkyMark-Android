@@ -4,12 +4,12 @@
 
 package com.m2mobi.markymarkcommon.markdownitems;
 
-import com.m2mobi.markymark.item.MarkDownItem;
+import com.m2mobi.markymark.item.MarkdownItem;
 
 /**
- * {@link MarkDownItem} used for storing information to show an image
+ * {@link MarkdownItem} used for storing information to show an image
  */
-public class Image implements MarkDownItem {
+public class Image implements MarkdownItem {
 
 	private final String mFilename;
 

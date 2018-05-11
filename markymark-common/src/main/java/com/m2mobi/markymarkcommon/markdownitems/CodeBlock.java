@@ -4,12 +4,12 @@
 
 package com.m2mobi.markymarkcommon.markdownitems;
 
-import com.m2mobi.markymark.item.MarkDownItem;
+import com.m2mobi.markymark.item.MarkdownItem;
 
 /**
- * {@link MarkDownItem} used for storing text inside a code block
+ * {@link MarkdownItem} used for storing text inside a code block
  */
-public class CodeBlock implements MarkDownItem {
+public class CodeBlock implements MarkdownItem {
 
 	/** List of code lines */
 	private final String mContent;

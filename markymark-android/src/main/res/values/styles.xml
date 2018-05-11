@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Default MarkDown style -->
+    <!-- Default Markdown style -->
     <style name="MarkyMarkStyle">
         <item name="android:textColorLink">?attr/colorPrimary</item>
 
-        <item name="MarkDownCodeStyle">@style/MarkyMarkCode</item>
-        <item name="MarkDownListStyle">@style/MarkyMarkList</item>
-        <item name="MarkDownImageStyle">@style/MarkyMarkImage</item>
-        <item name="MarkDownQuoteStyle">@style/MarkyMarkQuote</item>
-        <item name="MarkDownParagraphStyle">@style/MarkyMarkParagraph</item>
-        <item name="MarkDownHorizontalRuleStyle">@style/MarkyMarkHorizontalRule</item>
+        <item name="MarkdownCodeStyle">@style/MarkyMarkCode</item>
+        <item name="MarkdownListStyle">@style/MarkyMarkList</item>
+        <item name="MarkdownImageStyle">@style/MarkyMarkImage</item>
+        <item name="MarkdownQuoteStyle">@style/MarkyMarkQuote</item>
+        <item name="MarkdownParagraphStyle">@style/MarkyMarkParagraph</item>
+        <item name="MarkdownHorizontalRuleStyle">@style/MarkyMarkHorizontalRule</item>
 
-        <item name="MarkDownHeader1Style">@style/MarkyMarkHeader1</item>
-        <item name="MarkDownHeader2Style">@style/MarkyMarkHeader2</item>
-        <item name="MarkDownHeader3Style">@style/MarkyMarkHeader3</item>
-        <item name="MarkDownHeader4Style">@style/MarkyMarkHeader4</item>
-        <item name="MarkDownHeader5Style">@style/MarkyMarkHeader5</item>
-        <item name="MarkDownHeader6Style">@style/MarkyMarkHeader6</item>
+        <item name="MarkdownHeader1Style">@style/MarkyMarkHeader1</item>
+        <item name="MarkdownHeader2Style">@style/MarkyMarkHeader2</item>
+        <item name="MarkdownHeader3Style">@style/MarkyMarkHeader3</item>
+        <item name="MarkdownHeader4Style">@style/MarkyMarkHeader4</item>
+        <item name="MarkdownHeader5Style">@style/MarkyMarkHeader5</item>
+        <item name="MarkdownHeader6Style">@style/MarkyMarkHeader6</item>
     </style>
 
     <!-- Default styles, can be used as parent when overriding -->

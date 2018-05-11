@@ -66,7 +66,7 @@
 ---
 
 ## Quotes
-> MarkDown is *awesome*
+> Markdown is *awesome*
 > Seriously..
 
 ## Links
@@ -83,7 +83,7 @@ inline code `TextView textView = new TextView(pContext);`
 
 ```
 @Override
-public View getMarkDownView(Context pContext) {
+public View getMarkdownView(Context pContext) {
     TextView textView = new TextView(pContext);
     textView.setText(Html.fromHtml(mContent));
     textView.setTextSize(10);
@@ -99,4 +99,4 @@ Special html symbols: `&euro; &copy;` become -> &euro; &copy;
 
 ---
 
-![800px-Android 5.0-en](//images.contentful.com/7hqxd0h2npta/16JgtcyfEIeakoOqqKqiC/f80f6b559228a17c50ef52a064df047c/800px-Android_5.0-en.png)
+![800px-Android 5.0-en](https://images.contentful.com/7hqxd0h2npta/16JgtcyfEIeakoOqqKqiC/f80f6b559228a17c50ef52a064df047c/800px-Android_5.0-en.png)

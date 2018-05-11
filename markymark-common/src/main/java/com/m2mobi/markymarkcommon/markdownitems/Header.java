@@ -4,16 +4,16 @@
 
 package com.m2mobi.markymarkcommon.markdownitems;
 
-import com.m2mobi.markymark.item.MarkDownItem;
-import com.m2mobi.markymark.item.inline.MarkDownString;
+import com.m2mobi.markymark.item.MarkdownItem;
+import com.m2mobi.markymark.item.inline.MarkdownString;
 import com.m2mobi.markymarkcommon.markdownitems.inline.InlineString;
 
 /**
- * {@link MarkDownItem} used for storing text inside a header
+ * {@link MarkdownItem} used for storing text inside a header
  */
-public class Header implements MarkDownItem {
+public class Header implements MarkdownItem {
 
-	private final MarkDownString mContent;
+	private final MarkdownString mContent;
 
 	private final int mHeader;
 
@@ -22,7 +22,7 @@ public class Header implements MarkDownItem {
 		mHeader = pHeader;
 	}
 
-	public MarkDownString getContent() {
+	public MarkdownString getContent() {
 		return mContent;
 	}
 

@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/layout"
+    <com.m2mobi.markymarkandroid.MarkyMarkView
+        android:id="@+id/markymarkview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"

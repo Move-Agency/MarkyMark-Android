@@ -4,12 +4,12 @@
 
 package com.m2mobi.markymarkcommon.markdownitems.inline;
 
-import com.m2mobi.markymark.item.inline.MarkDownString;
+import com.m2mobi.markymark.item.inline.MarkdownString;
 
 /**
- * {@link MarkDownString} used for storing strike through text
+ * {@link MarkdownString} used for storing strike through text
  */
-public class StrikeString extends MarkDownString {
+public class StrikeString extends MarkdownString {
 
 	public StrikeString(final String pContent, final boolean pCanHasChildItems) {
 		super(pContent, pCanHasChildItems);

@@ -25,13 +25,13 @@ public class CodeBlockRuleTest {
 
 	@Test
 	public void shouldConformToCodeBlock() {
-		List<String> strings = MarkDownUtil.createMarkDownBlock("```", "code", "```");
+		List<String> strings = MarkdownUtil.createMarkdownBlock("```", "code", "```");
 		assertEquals(true, mCodeBlockRule.conforms(strings));
 	}
 
 	@Test
 	public void shouldNotConformToCodeBlock() {
-		List<String> strings = MarkDownUtil.createMarkDownBlock("***", "code", "***");
+		List<String> strings = MarkdownUtil.createMarkdownBlock("***", "code", "***");
 		assertEquals(false, mCodeBlockRule.conforms(strings));
 	}
 }

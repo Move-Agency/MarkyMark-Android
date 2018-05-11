@@ -7,7 +7,7 @@ package com.m2mobi.markymark.item.inline;
 /**
  * Wrapper containing content of a Markdown string
  */
-public abstract class MarkDownString {
+public abstract class MarkdownString {
 
 	/** String containing markdown */
 	private String mContent;
@@ -15,7 +15,7 @@ public abstract class MarkDownString {
 	/** Boolean indicating if this item can have other markdown items */
 	private boolean mCanHaveChildItems;
 
-	public MarkDownString(final String pContent, final boolean pCanHaveChildItems) {
+	public MarkdownString(final String pContent, final boolean pCanHaveChildItems) {
 		mCanHaveChildItems = pCanHaveChildItems;
 		mContent = pContent;
 	}

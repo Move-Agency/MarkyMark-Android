@@ -4,7 +4,7 @@
 
 package com.m2mobi.markymark.rules;
 
-import com.m2mobi.markymark.item.inline.MarkDownString;
+import com.m2mobi.markymark.item.inline.MarkdownString;
 
 import java.util.regex.Pattern;
 
@@ -15,5 +15,5 @@ public interface InlineRule {
 
 	Pattern getRegex();
 
-	MarkDownString toMarkDownString(String pContent);
+	MarkdownString toMarkdownString(String pContent);
 }

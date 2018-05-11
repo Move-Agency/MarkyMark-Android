@@ -4,12 +4,12 @@
 
 package com.m2mobi.markymarkcommon.markdownitems.inline;
 
-import com.m2mobi.markymark.item.inline.MarkDownString;
+import com.m2mobi.markymark.item.inline.MarkdownString;
 
 /**
- * {@link MarkDownString} used for storing bold text
+ * {@link MarkdownString} used for storing bold text
  */
-public class BoldString extends MarkDownString {
+public class BoldString extends MarkdownString {
 
 	public BoldString(final String pContent, final boolean pCanHasChildItems) {
 		super(pContent, pCanHasChildItems);

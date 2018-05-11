@@ -25,34 +25,34 @@ public class HeaderRuleTest {
 
 	@Test
 	public void shouldBeHeader() {
-		List<String> strings = MarkDownUtil.createSingleMarkDownString("# Header");
+		List<String> strings = MarkdownUtil.createSingleMarkdownString("# Header");
 		assertEquals(true, mHeaderRule.conforms(strings));
 
-		strings = MarkDownUtil.createSingleMarkDownString("## Header");
+		strings = MarkdownUtil.createSingleMarkdownString("## Header");
 		assertEquals(true, mHeaderRule.conforms(strings));
 
-		strings = MarkDownUtil.createSingleMarkDownString("### Header");
+		strings = MarkdownUtil.createSingleMarkdownString("### Header");
 		assertEquals(true, mHeaderRule.conforms(strings));
 
-		strings = MarkDownUtil.createSingleMarkDownString("#### Header");
+		strings = MarkdownUtil.createSingleMarkdownString("#### Header");
 		assertEquals(true, mHeaderRule.conforms(strings));
 
-		strings = MarkDownUtil.createSingleMarkDownString("##### Header");
+		strings = MarkdownUtil.createSingleMarkdownString("##### Header");
 		assertEquals(true, mHeaderRule.conforms(strings));
 
-		strings = MarkDownUtil.createSingleMarkDownString("###### Header");
+		strings = MarkdownUtil.createSingleMarkdownString("###### Header");
 		assertEquals(true, mHeaderRule.conforms(strings));
 	}
 
 	@Test
 	public void isNotHeader() {
-		List<String> strings = MarkDownUtil.createSingleMarkDownString("Header#");
+		List<String> strings = MarkdownUtil.createSingleMarkdownString("Header#");
 		assertEquals(false, mHeaderRule.conforms(strings));
 
-		strings = MarkDownUtil.createSingleMarkDownString("Header #");
+		strings = MarkdownUtil.createSingleMarkdownString("Header #");
 		assertEquals(false, mHeaderRule.conforms(strings));
 
-		strings = MarkDownUtil.createSingleMarkDownString("Header # Test");
+		strings = MarkdownUtil.createSingleMarkdownString("Header # Test");
 		assertEquals(false, mHeaderRule.conforms(strings));
 	}
 }

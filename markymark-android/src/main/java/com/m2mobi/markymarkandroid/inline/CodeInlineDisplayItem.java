@@ -20,8 +20,8 @@ import com.m2mobi.markymarkcommon.markdownitems.inline.CodeString;
 public class CodeInlineDisplayItem implements InlineDisplayItem<Spanned, CodeString> {
 
 	@Override
-	public Spanned create(final InlineConverter<Spanned> pInlineConverter, final CodeString pMarkDownString) {
-		SpannableString spannable = new SpannableString(pMarkDownString.getContent());
+	public Spanned create(final InlineConverter<Spanned> pInlineConverter, final CodeString pMarkdownString) {
+		SpannableString spannable = new SpannableString(pMarkdownString.getContent());
 		spannable.setSpan(new TypefaceSpan("monospace"), 0, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		spannable.setSpan(new BackgroundColorSpan(Color.LTGRAY), 0, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		return spannable;

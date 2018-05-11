@@ -22,7 +22,7 @@ import android.widget.TextView;
 import com.m2mobi.markymark.DisplayItem;
 import com.m2mobi.markymark.InlineConverter;
 import com.m2mobi.markymarkcommon.markdownitems.ListItem;
-import com.m2mobi.markymarkcommon.markdownitems.MarkDownList;
+import com.m2mobi.markymarkcommon.markdownitems.MarkdownList;
 
 import java.util.List;
 import java.util.Locale;
@@ -31,9 +31,9 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 /**
- * Converts an {@link MarkDownList} to a {@link View}.
+ * Converts an {@link MarkdownList} to a {@link View}.
  */
-public class ListDisplayItem implements DisplayItem<View, MarkDownList, Spanned> {
+public class ListDisplayItem implements DisplayItem<View, MarkdownList, Spanned> {
 
 	private Context mContext;
 
@@ -51,23 +51,23 @@ public class ListDisplayItem implements DisplayItem<View, MarkDownList, Spanned>
 	}
 
 	@Override
-	public View create(final MarkDownList pMarkDownItem, final InlineConverter<Spanned> pInlineConverter) {
-		return createLayout(pMarkDownItem, pInlineConverter);
+	public View create(final MarkdownList pMarkdownItem, final InlineConverter<Spanned> pInlineConverter) {
+		return createLayout(pMarkdownItem, pInlineConverter);
 	}
 
-	private LinearLayout createLayout(final MarkDownList pMarkDownItem, final InlineConverter<Spanned> pInlineConverter) {
+	private LinearLayout createLayout(final MarkdownList pMarkdownItem, final InlineConverter<Spanned> pInlineConverter) {
 		LinearLayout layout = new LinearLayout(mContext);
 		layout.setLayoutParams(new LayoutParams(MATCH_PARENT, WRAP_CONTENT));
 		layout.setOrientation(LinearLayout.VERTICAL);
 
-		final List<ListItem> items = pMarkDownItem.getListItems();
+		final List<ListItem> items = pMarkdownItem.getListItems();
 		for (int i = 0; i < items.size(); i++) {
 			final ListItem item = items.get(i);
-			final View view = getTextView(pMarkDownItem, pInlineConverter.convert(item.getText()), i);
+			final View view = getTextView(pMarkdownItem, pInlineConverter.convert(item.getText()), i);
 			layout.addView(view);
 
 			if (item.hasChild()) {
-				for (MarkDownList list : item.getChild()) {
+				for (MarkdownList list : item.getChild()) {
 					final LinearLayout nestedLayout = createLayout(list, pInlineConverter);
 					LayoutParams params = new LayoutParams(
 							LayoutParams.WRAP_CONTENT,
@@ -85,21 +85,21 @@ public class ListDisplayItem implements DisplayItem<View, MarkDownList, Spanned>
 	/**
 	 * Creates a TextView that represents a list item
 	 *
-	 * @param pMarkDownList
-	 * 		MarkDownList used to determine the kind of list
+	 * @param pMarkdownList
+	 * 		MarkdownList used to determine the kind of list
 	 * @param pText
 	 * 		Content of the list item
 	 * @param pIndex
 	 * 		Index of the item in the list
 	 * @return Returns a TextView
 	 */
-	private TextView getTextView(final MarkDownList pMarkDownList, final CharSequence pText, final int pIndex) {
-		final TextView textView = new TextView(mContext, null, R.attr.MarkDownListStyle);
+	private TextView getTextView(final MarkdownList pMarkdownList, final CharSequence pText, final int pIndex) {
+		final TextView textView = new TextView(mContext, null, R.attr.MarkdownListStyle);
 		textView.setMovementMethod(LinkMovementMethod.getInstance());
-		if (pMarkDownList.isOrdered()) {
+		if (pMarkdownList.isOrdered()) {
 			textView.setText(String.format(Locale.getDefault(), "%d. %s", pIndex + 1, pText));
 		} else {
-			Drawable bullet = mContext.getResources().getDrawable(getDrawable(pMarkDownList.getNestedLevel()));
+			Drawable bullet = mContext.getResources().getDrawable(getDrawable(pMarkdownList.getNestedLevel()));
 			TopCompoundDrawable gravityDrawable = new TopCompoundDrawable(bullet, textView.getLineHeight());
 			bullet.setBounds(0, 0, bullet.getIntrinsicWidth(), bullet.getIntrinsicHeight());
 			gravityDrawable.setBounds(0, 0, bullet.getIntrinsicWidth(), bullet.getIntrinsicHeight());

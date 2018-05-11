@@ -16,7 +16,7 @@ import com.m2mobi.markymarkcommon.markdownitems.inline.InlineString;
 public class StringInlineDisplayItem implements InlineDisplayItem<Spanned, InlineString> {
 
 	@Override
-	public Spanned create(final InlineConverter<Spanned> pInlineConverter, final InlineString pMarkDownString) {
-		return SpannableUtils.createSpannable(pInlineConverter, pMarkDownString);
+	public Spanned create(final InlineConverter<Spanned> pInlineConverter, final InlineString pMarkdownString) {
+		return SpannableUtils.createSpannable(pInlineConverter, pMarkdownString);
 	}
 }

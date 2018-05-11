@@ -9,7 +9,7 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 
 import com.m2mobi.markymark.InlineConverter;
-import com.m2mobi.markymark.item.inline.MarkDownString;
+import com.m2mobi.markymark.item.inline.MarkdownString;
 
 /**
  * Utility methods related to {@link Spannable}s
@@ -21,22 +21,22 @@ class SpannableUtils {
 	}
 
 	/**
-	 * Creates a Spannable from a MarkDownString
+	 * Creates a Spannable from a MarkdownString
 	 *
 	 * @param pInlineConverter
-	 * 		InlineConverter used to convert {@link MarkDownString} to spannable
-	 * @param pMarkDownString
-	 * 		MarkDownString used to create the spannables
+	 * 		InlineConverter used to convert {@link MarkdownString} to spannable
+	 * @param pMarkdownString
+	 * 		MarkdownString used to create the spannables
 	 * @return Returns a Spannable
 	 */
-	static Spannable createSpannable(final InlineConverter<Spanned> pInlineConverter, final MarkDownString pMarkDownString) {
+	static Spannable createSpannable(final InlineConverter<Spanned> pInlineConverter, final MarkdownString pMarkdownString) {
 		SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
-		if (pMarkDownString.hasChildItems()) {
-			for (MarkDownString markDownString : pInlineConverter.parseContent(pMarkDownString.getContent())) {
-				stringBuilder.append(pInlineConverter.convert(markDownString));
+		if (pMarkdownString.hasChildItems()) {
+			for (MarkdownString markdownString : pInlineConverter.parseContent(pMarkdownString.getContent())) {
+				stringBuilder.append(pInlineConverter.convert(markdownString));
 			}
 		} else {
-			stringBuilder.append(pMarkDownString.getContent());
+			stringBuilder.append(pMarkdownString.getContent());
 		}
 		return stringBuilder;
 	}

@@ -25,13 +25,13 @@ public class QuoteRuleTest {
 
 	@Test
 	public void shouldBeQuote() {
-		List<String> strings = MarkDownUtil.createSingleMarkDownString("> Quote");
+		List<String> strings = MarkdownUtil.createSingleMarkdownString("> Quote");
 		assertEquals(true, mQuoteRule.conforms(strings));
 	}
 
 	@Test
 	public void shouldNotBeQuote() {
-		List<String> strings = MarkDownUtil.createSingleMarkDownString("< Quote");
+		List<String> strings = MarkdownUtil.createSingleMarkdownString("< Quote");
 		assertEquals(false, mQuoteRule.conforms(strings));
 	}
 }
