@@ -27,7 +27,7 @@ Or use the provided [MarkyMarkView](markymark-android/src/main/java/com/m2mobi/m
 ```kotlin
 val markyMarkView = findViewById<MarkyMarkView>(R.id.markymarkview)
 markyMarkView.setMarkyMark(markyMark)
-markyMarkView.parseMarkdown("# Header\nParagraph etc")
+markyMarkView.setMarkdown("# Header\nParagraph etc")
 ```
 
 ## Styling
