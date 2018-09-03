@@ -4,6 +4,7 @@
 
 package com.m2mobi.markymarkandroid
 
+import android.app.Activity
 import android.content.Context
 import android.text.Spanned
 import android.view.View
@@ -30,26 +31,26 @@ object MarkyMarkAndroid {
     /**
      * Creates a MarkyMark instance that converts the rules provided by the flavor into MarkyMarkAndroid Views
      *
-     * @param pContext    Context used to create Views
+     * @param activity    Context used to create Views
      * @param pFlavor     Flavor that provides the markdown parsing rules
      * @param imageLoader The ImageLoader that should be used to load images
      * @return MarkMark instance that renders MarkyMarkAndroid Views from Markdown
      */
-    fun getMarkyMark(pContext: Context, pFlavor: Flavor, imageLoader: ImageLoader): MarkyMark<View> {
-        return getMarkyMark(pContext, pFlavor, null, null, imageLoader)
+    fun getMarkyMark(activity: Activity, pFlavor: Flavor, imageLoader: ImageLoader): MarkyMark<View> {
+        return getMarkyMark(activity, pFlavor, null, null, imageLoader)
     }
 
     /**
      * Creates a MarkyMark instance that converts the rules provided by the flavor into MarkyMarkAndroid Views
      *
-     * @param pContext            Context used to create Views
+     * @param activity            Context used to create Views
      * @param pFlavor             Flavor that provides the markdown parsing rules
      * @param pDisplayItems       Extra DisplayItems (replaces DisplayItems that render the same MarkdownItem}
      * @param pInlineDisplayItems Extra InlineDisplayItems (replaces InlineDisplayItems that render the same MarkdownItem}
      * @param imageLoader         The ImageLoader that should be used to load images
      * @return MarkMark instance that renders MarkyMarkAndroid Views from Markdown
      */
-    fun getMarkyMark(pContext: Context, pFlavor: Flavor,
+    fun getMarkyMark(activity: Activity, pFlavor: Flavor,
                      pDisplayItems: List<DisplayItem<*, *, *>>? = null,
                      pInlineDisplayItems: List<InlineDisplayItem<*, *>>? = null,
                      imageLoader: ImageLoader): MarkyMark<View> {
@@ -64,7 +65,7 @@ object MarkyMarkAndroid {
         inlineConverter.addMapping(LinkInlineDisplayItem())
         inlineConverter.addMapping(CodeInlineDisplayItem())
 
-        val context = ThemedContext(pContext)
+        val context = ThemedContext(activity)
 
         viewConverter.addMapping(HeaderDisplayItem(context))
         viewConverter.addMapping(ParagraphDisplayItem(context))
