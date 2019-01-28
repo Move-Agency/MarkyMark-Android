@@ -52,6 +52,17 @@ public class Converter<T> {
 	}
 
 	/**
+	 * Get a mapped item.
+	 *
+	 * @param tClass
+	 * 		Class to check the map for.
+	 * @return Mapped item.
+	 */
+	DisplayItem getMapping(final Class<? extends MarkdownItem> tClass) {
+		return mMapping.get(tClass);
+	}
+
+	/**
 	 * Gets the DisplayItem that is mapped to a MarkdownItem
 	 *
 	 * @param pClass
