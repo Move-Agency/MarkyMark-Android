@@ -1,0 +1,14 @@
+language: android
+jdk: oraclejdk8
+
+android:
+  components:
+    - build-tools-26.0.3
+    - android-27
+  licenses:
+    - 'android-sdk-license-.+'
+
+script:
+    - echo "Travis branch is $TRAVIS_BRANCH"
+    - echo "Travis branch is in pull request $TRAVIS_PULL+REQUEST"
+    - ./gradlew build test
