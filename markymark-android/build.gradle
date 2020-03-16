@@ -1,37 +1,41 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'kotlin-android-extensions'
 
 group='com.github.M2Mobi'
 
 android {
-    compileSdkVersion compile_sdk_version
-    buildToolsVersion build_tools_version
+    compileSdkVersion target_sdk_version
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
-    }
     defaultConfig {
         minSdkVersion min_sdk_version
-        targetSdkVersion compile_sdk_version
+        targetSdkVersion target_sdk_version
     }
+
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    compileOptions {
+        sourceCompatibility jvm_version
+        targetCompatibility jvm_version
+    }
+
+    kotlinOptions {
+        jvmTarget = jvm_version.toString()
     }
 }
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar'])
-    api project(':markymark-core')
     api project(':markymark-common')
-    implementation "com.android.support:appcompat-v7:$android_support_version"
-    implementation 'org.apache.commons:commons-lang3:3.7'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-}
-repositories {
-    mavenCentral()
+
+    implementation libraries.kotlin_core
+    implementation libraries.android_core
+    implementation 'org.apache.commons:commons-lang3:3.8.1'
+
+    testImplementation libraries.testing
+    testImplementation libraries.android_testing
 }

@@ -5,7 +5,6 @@
 package com.m2mobi.markymark;
 
 import com.m2mobi.markymark.item.inline.MarkdownString;
-import com.m2mobi.markymark.rules.InlineRule;
 
 /**
  * Interface used to create an {@link T} using the MarkdownString created by a {@link InlineRule}

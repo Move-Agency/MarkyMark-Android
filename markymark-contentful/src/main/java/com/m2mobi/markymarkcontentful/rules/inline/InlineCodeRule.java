@@ -22,8 +22,8 @@ public class InlineCodeRule implements InlineRule {
 	}
 
 	@Override
-	public MarkdownString toMarkdownString(final String pContent) {
-		final Matcher matcher = getRegex().matcher(pContent);
+	public MarkdownString toMarkdownString(final String content) {
+		final Matcher matcher = getRegex().matcher(content);
 		if (matcher.find()) {
 			return new CodeString(matcher.group(1), false);
 		}

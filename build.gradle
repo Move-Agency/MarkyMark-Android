@@ -1,35 +1,34 @@
 buildscript {
-    ext.kotlin_version = '1.2.61'
+    apply from: "dependencies.gradle"
+
     ext {
         min_sdk_version = 14
-        compile_sdk_version = 27
-        build_sdk_version = 27
-        build_tools_version = '26.0.3'
-        gradle_buildtools_version ='3.0.1'
-        maven_gradle_version ='2.0'
+        target_sdk_version = 29
 
-        //Android
-        android_support_version = '27.1.0'
-
-        // JUnit
-        junit_version = '4.12'
-        mockito_version = '2.23.4'
-        hamcrest_version = '1.3'
+        jvm_version = JavaVersion.VERSION_1_8
     }
+
     repositories {
         google()
         jcenter()
     }
+
     dependencies {
-        classpath "com.android.tools.build:gradle:$gradle_buildtools_version"
-        classpath "com.github.dcendents:android-maven-gradle-plugin:$maven_gradle_version"
+        classpath "com.android.tools.build:gradle:3.6.1"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
 allprojects {
+    apply from: "$rootProject.rootDir/dependencies.gradle"
+
     repositories {
-        jcenter()
         google()
+        jcenter()
+        mavenCentral()
     }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }
