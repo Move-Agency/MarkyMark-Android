@@ -15,7 +15,9 @@ ext {
         ],
         testing: [
             "io.mockk:mockk:$mockk_version",
-            "org.junit.jupiter:junit-jupiter:$junit_version"
+            "org.junit.jupiter:junit-jupiter-api:$junit_version",
+            "org.jetbrains.kotlin:kotlin-test:$kotlin_version",
+            "org.jetbrains.kotlin:kotlin-test-junit5:$kotlin_version"
         ],
         android_testing: [
             "android.arch.core:core-testing:1.1.1"
