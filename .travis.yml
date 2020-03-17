@@ -10,8 +10,8 @@ before_install:
 
 android:
   components:
-    - build-tools-26.0.3
-    - android-27
+    - build-tools-29.0.3
+    - android-29
   licenses:
     - 'android-sdk-license-.+'
 
