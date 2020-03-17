@@ -2,7 +2,7 @@
 * Copyright (C) M2mobi BV - All Rights Reserved
 */
 
-package com.m2mobi.markymarkcommon.markdownitems;
+package com.m2mobi.markymarkcommon.markdownitem;
 
 import com.m2mobi.markymark.item.MarkdownItem;
 

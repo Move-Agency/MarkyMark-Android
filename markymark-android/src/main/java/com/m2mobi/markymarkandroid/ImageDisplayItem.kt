@@ -12,7 +12,7 @@ import android.widget.LinearLayout.LayoutParams
 
 import com.m2mobi.markymark.DisplayItem
 import com.m2mobi.markymark.InlineConverter
-import com.m2mobi.markymarkcommon.markdownitems.Image
+import com.m2mobi.markymarkcommon.markdownitem.Image
 
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT

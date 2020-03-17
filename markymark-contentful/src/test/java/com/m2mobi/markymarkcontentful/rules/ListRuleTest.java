@@ -24,7 +24,8 @@
 
 package com.m2mobi.markymarkcontentful.rules;
 
-import com.m2mobi.markymarkcommon.markdownitems.MarkdownList;
+import com.m2mobi.markymarkcommon.markdownitem.MarkdownList;
+import com.m2mobi.markymarkcommon.rule.ListRule;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

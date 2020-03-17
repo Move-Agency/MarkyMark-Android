@@ -43,7 +43,7 @@ import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 import com.m2mobi.markymark.DisplayItem
 import com.m2mobi.markymark.InlineConverter
-import com.m2mobi.markymarkcommon.markdownitems.MarkdownList
+import com.m2mobi.markymarkcommon.markdownitem.MarkdownList
 
 /**
  * Creates a view containing list items created from a [MarkdownList]

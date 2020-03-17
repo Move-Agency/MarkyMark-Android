@@ -13,7 +13,7 @@ import android.widget.TextView
 
 import com.m2mobi.markymark.DisplayItem
 import com.m2mobi.markymark.InlineConverter
-import com.m2mobi.markymarkcommon.markdownitems.QuoteBlock
+import com.m2mobi.markymarkcommon.markdownitem.QuoteBlock
 
 /**
  * Converts an [QuoteBlock] to a [View].

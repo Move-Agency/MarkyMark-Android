@@ -10,7 +10,7 @@ import android.text.style.StyleSpan
 
 import com.m2mobi.markymark.InlineConverter
 import com.m2mobi.markymark.InlineDisplayItem
-import com.m2mobi.markymarkcommon.markdownitems.inline.BoldString
+import com.m2mobi.markymarkcommon.markdownitem.inline.BoldString
 
 /**
  * Converts a [BoldString] to a [Spanned].

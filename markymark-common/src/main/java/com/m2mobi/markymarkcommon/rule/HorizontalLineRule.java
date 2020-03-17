@@ -22,42 +22,30 @@
  * SOFTWARE.
  */
 
-package com.m2mobi.markymarkcontentful.rules;
+package com.m2mobi.markymarkcommon.rule;
 
-import com.m2mobi.markymarkcommon.rule.ImageRule;
+import com.m2mobi.markymark.item.MarkdownItem;
+import com.m2mobi.markymark.rules.RegexRule;
+import com.m2mobi.markymarkcommon.markdownitem.HorizontalLine;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.regex.Pattern;
 
 /**
- * Tests for {@link ImageRule}
+ * {@link RegexRule} that matches horizontal lines
  */
-public class ImageRuleTest {
+public class HorizontalLineRule extends RegexRule {
 
-	private ImageRule mImageRule = null;
+	/** Pattern used to find horizontal lines */
+	private static final Pattern HORIZONTAL_LINE_PATTERN = Pattern.compile("^-{3,}$");
 
-	@BeforeEach
-	public void init() {
-		mImageRule = new ImageRule();
+	@Override
+	protected Pattern getRegex() {
+		return HORIZONTAL_LINE_PATTERN;
 	}
 
-	@Test
-	public void shouldBeImage() {
-		List<String> strings = new ArrayList<>();
-		strings.add("![Image](www.google.com/images/cheese)");
-		assertTrue(mImageRule.conforms(strings));
-	}
-
-	@Test
-	public void shouldNotBeImage() {
-		List<String> strings = new ArrayList<>();
-		strings.add("[Image](www.google.com/images/cheese)");
-		assertFalse(mImageRule.conforms(strings));
+	@Override
+	public MarkdownItem toMarkdownItem(final List<String> pMarkdownLines) {
+		return new HorizontalLine();
 	}
 }

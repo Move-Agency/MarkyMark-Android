@@ -22,42 +22,32 @@
  * SOFTWARE.
  */
 
-package com.m2mobi.markymarkcontentful.rules;
+package com.m2mobi.markymarkcommon.rule.inline;
 
-import com.m2mobi.markymarkcommon.rule.ImageRule;
+import com.m2mobi.markymark.item.inline.MarkdownString;
+import com.m2mobi.markymark.rules.InlineRule;
+import com.m2mobi.markymarkcommon.markdownitem.inline.ItalicString;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
- * Tests for {@link ImageRule}
+ * {@link InlineRule} that matches italic text
  */
-public class ImageRuleTest {
+public class ItalicRule implements InlineRule {
 
-	private ImageRule mImageRule = null;
-
-	@BeforeEach
-	public void init() {
-		mImageRule = new ImageRule();
+	@Override
+	public Pattern getRegex() {
+		return Pattern.compile("(?<!\\*)(\\*{1})(?!\\*)(.+?)(?<!\\*)(\\*{1})(?!\\*)");
 	}
 
-	@Test
-	public void shouldBeImage() {
-		List<String> strings = new ArrayList<>();
-		strings.add("![Image](www.google.com/images/cheese)");
-		assertTrue(mImageRule.conforms(strings));
-	}
-
-	@Test
-	public void shouldNotBeImage() {
-		List<String> strings = new ArrayList<>();
-		strings.add("[Image](www.google.com/images/cheese)");
-		assertFalse(mImageRule.conforms(strings));
+	@Override
+	public MarkdownString toMarkdownString(String pContent) {
+		Matcher matcher = getRegex().matcher(pContent);
+		String content = "";
+		if (matcher.find()) {
+			content = matcher.group(2);
+		}
+		return new ItalicString(content, true);
 	}
 }

@@ -22,42 +22,46 @@
  * SOFTWARE.
  */
 
-package com.m2mobi.markymarkcontentful.rules;
+package com.m2mobi.markymarkcommon.rule.inline;
 
-import com.m2mobi.markymarkcommon.rule.ImageRule;
+import com.m2mobi.markymark.item.inline.MarkdownString;
+import com.m2mobi.markymark.rules.InlineRule;
+import com.m2mobi.markymarkcommon.markdownitem.inline.BoldString;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
- * Tests for {@link ImageRule}
+ * {@link InlineRule} that matches bold text
  */
-public class ImageRuleTest {
+public class BoldRule implements InlineRule {
 
-	private ImageRule mImageRule = null;
+	/** Regex pattern used to match bold strings */
+	private final Pattern mBoldPattern;
 
-	@BeforeEach
-	public void init() {
-		mImageRule = new ImageRule();
+	/**
+	 * Creates a new BoldRule that matches on the given pattern e.g. ('*' or '_')
+	 *
+	 * @param pPattern
+	 * 		The pattern to use
+	 */
+	public BoldRule(final String pPattern) {
+		final String escaped = Pattern.quote(pPattern);
+		mBoldPattern = Pattern.compile("(" + escaped + "{2})(.+?)(" + escaped + "{2})(?!" + escaped + ")");
 	}
 
-	@Test
-	public void shouldBeImage() {
-		List<String> strings = new ArrayList<>();
-		strings.add("![Image](www.google.com/images/cheese)");
-		assertTrue(mImageRule.conforms(strings));
+	@Override
+	public Pattern getRegex() {
+		return mBoldPattern;
 	}
 
-	@Test
-	public void shouldNotBeImage() {
-		List<String> strings = new ArrayList<>();
-		strings.add("[Image](www.google.com/images/cheese)");
-		assertFalse(mImageRule.conforms(strings));
+	@Override
+	public MarkdownString toMarkdownString(String pContent) {
+		Matcher matcher = getRegex().matcher(pContent);
+		String content = "";
+		if (matcher.find()) {
+			content = matcher.group(2);
+		}
+		return new BoldString(content, true);
 	}
 }

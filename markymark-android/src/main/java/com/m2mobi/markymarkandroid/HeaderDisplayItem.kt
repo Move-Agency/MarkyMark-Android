@@ -11,7 +11,7 @@ import android.widget.TextView
 
 import com.m2mobi.markymark.DisplayItem
 import com.m2mobi.markymark.InlineConverter
-import com.m2mobi.markymarkcommon.markdownitems.Header
+import com.m2mobi.markymarkcommon.markdownitem.Header
 
 /**
  * Converts an [Header] to a [View].

@@ -22,42 +22,35 @@
  * SOFTWARE.
  */
 
-package com.m2mobi.markymarkcontentful.rules;
+package com.m2mobi.markymarkcommon.rule;
 
-import com.m2mobi.markymarkcommon.rule.ImageRule;
+import com.m2mobi.markymark.item.MarkdownItem;
+import com.m2mobi.markymark.rules.RegexRule;
+import com.m2mobi.markymarkcommon.markdownitem.Image;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
- * Tests for {@link ImageRule}
+ * {@link RegexRule} that matches image tags
  */
-public class ImageRuleTest {
+public class ImageRule extends RegexRule {
 
-	private ImageRule mImageRule = null;
+	/** Regex to match an image */
+	public static final Pattern IMAGE_PATTERN = Pattern.compile("(!\\p{Z}?)\\[(.+?)\\]\\((.+?)\\)");
 
-	@BeforeEach
-	public void init() {
-		mImageRule = new ImageRule();
+	@Override
+	protected Pattern getRegex() {
+		return IMAGE_PATTERN;
 	}
 
-	@Test
-	public void shouldBeImage() {
-		List<String> strings = new ArrayList<>();
-		strings.add("![Image](www.google.com/images/cheese)");
-		assertTrue(mImageRule.conforms(strings));
-	}
-
-	@Test
-	public void shouldNotBeImage() {
-		List<String> strings = new ArrayList<>();
-		strings.add("[Image](www.google.com/images/cheese)");
-		assertFalse(mImageRule.conforms(strings));
+	@Override
+	public MarkdownItem toMarkdownItem(final List<String> pMarkdownLines) {
+		final Matcher matcher = IMAGE_PATTERN.matcher(pMarkdownLines.get(0));
+		if (matcher.find()) {
+			return new Image(matcher.group(3), matcher.group(2));
+		}
+		return new Image("", "");
 	}
 }

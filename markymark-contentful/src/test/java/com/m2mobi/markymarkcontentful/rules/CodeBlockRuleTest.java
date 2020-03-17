@@ -24,6 +24,8 @@
 
 package com.m2mobi.markymarkcontentful.rules;
 
+import com.m2mobi.markymarkcommon.rule.CodeBlockRule;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

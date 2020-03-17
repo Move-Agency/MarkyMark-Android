@@ -22,42 +22,33 @@
  * SOFTWARE.
  */
 
-package com.m2mobi.markymarkcontentful.rules;
+package com.m2mobi.markymarkcommon.rule;
 
-import com.m2mobi.markymarkcommon.rule.ImageRule;
+import com.m2mobi.markymark.item.MarkdownItem;
+import com.m2mobi.markymark.rules.Rule;
+import com.m2mobi.markymarkcommon.markdownitem.Paragraph;
+import com.m2mobi.markymarkcommon.markdownitem.inline.InlineString;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 /**
- * Tests for {@link ImageRule}
+ * {@link Rule} that matches paragraphs
  */
-public class ImageRuleTest {
+public class ParagraphRule implements Rule {
 
-	private ImageRule mImageRule = null;
-
-	@BeforeEach
-	public void init() {
-		mImageRule = new ImageRule();
+	@Override
+	public boolean conforms(final List<String> pMarkdownLines) {
+		return true;
 	}
 
-	@Test
-	public void shouldBeImage() {
-		List<String> strings = new ArrayList<>();
-		strings.add("![Image](www.google.com/images/cheese)");
-		assertTrue(mImageRule.conforms(strings));
+	@Override
+	public int getLinesConsumed() {
+		return 1;
 	}
 
-	@Test
-	public void shouldNotBeImage() {
-		List<String> strings = new ArrayList<>();
-		strings.add("[Image](www.google.com/images/cheese)");
-		assertFalse(mImageRule.conforms(strings));
+	@Override
+	public MarkdownItem toMarkdownItem(final List<String> pMarkdownLines) {
+		String line = pMarkdownLines.get(0);
+		return new Paragraph(new InlineString(line, true));
 	}
 }

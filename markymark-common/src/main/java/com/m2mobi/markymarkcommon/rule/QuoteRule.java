@@ -22,42 +22,40 @@
  * SOFTWARE.
  */
 
-package com.m2mobi.markymarkcontentful.rules;
+package com.m2mobi.markymarkcommon.rule;
 
-import com.m2mobi.markymarkcommon.rule.ImageRule;
+import com.m2mobi.markymark.item.MarkdownItem;
+import com.m2mobi.markymark.rules.Rule;
+import com.m2mobi.markymarkcommon.markdownitem.QuoteBlock;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
- * Tests for {@link ImageRule}
+ * {@link Rule} that matches quotes
  */
-public class ImageRuleTest {
+public class QuoteRule implements Rule {
 
-	private ImageRule mImageRule = null;
+	/** Pattern used to find quotes */
+	private static final Pattern QUOTE_PATTERN = Pattern.compile("(^>+)(.*?)$");
 
-	@BeforeEach
-	public void init() {
-		mImageRule = new ImageRule();
+	@Override
+	public boolean conforms(final List<String> pMarkdownLines) {
+		return QUOTE_PATTERN.matcher(pMarkdownLines.get(0)).matches();
 	}
 
-	@Test
-	public void shouldBeImage() {
-		List<String> strings = new ArrayList<>();
-		strings.add("![Image](www.google.com/images/cheese)");
-		assertTrue(mImageRule.conforms(strings));
+	@Override
+	public int getLinesConsumed() {
+		return 1;
 	}
 
-	@Test
-	public void shouldNotBeImage() {
-		List<String> strings = new ArrayList<>();
-		strings.add("[Image](www.google.com/images/cheese)");
-		assertFalse(mImageRule.conforms(strings));
+	@Override
+	public MarkdownItem toMarkdownItem(final List<String> pMarkdownLines) {
+		final Matcher matcher = QUOTE_PATTERN.matcher(pMarkdownLines.get(0));
+		if (matcher.find()) {
+			return new QuoteBlock(matcher.group(2));
+		}
+		return new QuoteBlock("");
 	}
 }

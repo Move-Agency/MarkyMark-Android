@@ -22,42 +22,34 @@
  * SOFTWARE.
  */
 
-package com.m2mobi.markymarkcontentful.rules;
+package com.m2mobi.markymarkcommon.rule.inline
 
-import com.m2mobi.markymarkcommon.rule.ImageRule;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import com.m2mobi.markymark.item.inline.MarkdownString
+import com.m2mobi.markymark.rules.InlineRule
+import com.m2mobi.markymarkcommon.markdownitem.inline.LinkString
+import java.util.regex.Pattern
 
 /**
- * Tests for {@link ImageRule}
+ * Rule for the markdown inline link
  */
-public class ImageRuleTest {
+class LinkRule : InlineRule {
 
-	private ImageRule mImageRule = null;
+    /**
+     * A Regex to detect links. Ignores if they start with a "!" as those are image links.
+     */
+    override fun getRegex(): Pattern = Pattern.compile(PATTERN)
 
-	@BeforeEach
-	public void init() {
-		mImageRule = new ImageRule();
-	}
+    override fun toMarkdownString(content: String): MarkdownString {
+        val matcher = regex.matcher(content)
+        return if (matcher.find()) {
+            LinkString(matcher.group(1), matcher.group(2), false)
+        } else {
+            LinkString("", "", false)
+        }
+    }
 
-	@Test
-	public void shouldBeImage() {
-		List<String> strings = new ArrayList<>();
-		strings.add("![Image](www.google.com/images/cheese)");
-		assertTrue(mImageRule.conforms(strings));
-	}
+    companion object {
 
-	@Test
-	public void shouldNotBeImage() {
-		List<String> strings = new ArrayList<>();
-		strings.add("[Image](www.google.com/images/cheese)");
-		assertFalse(mImageRule.conforms(strings));
-	}
+        private const val PATTERN = "(?<!!)\\[(.+?)]\\((.+?)\\)"
+    }
 }

@@ -12,7 +12,7 @@ import android.text.style.TypefaceSpan
 
 import com.m2mobi.markymark.InlineConverter
 import com.m2mobi.markymark.InlineDisplayItem
-import com.m2mobi.markymarkcommon.markdownitems.inline.CodeString
+import com.m2mobi.markymarkcommon.markdownitem.inline.CodeString
 
 /**
  * Converts a [CodeString] to a [Spanned].

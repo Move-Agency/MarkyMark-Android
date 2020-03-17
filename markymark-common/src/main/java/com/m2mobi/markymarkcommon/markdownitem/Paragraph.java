@@ -2,11 +2,11 @@
 * Copyright (C) M2mobi BV - All Rights Reserved
 */
 
-package com.m2mobi.markymarkcommon.markdownitems;
+package com.m2mobi.markymarkcommon.markdownitem;
 
 import com.m2mobi.markymark.item.MarkdownItem;
 import com.m2mobi.markymark.item.inline.MarkdownString;
-import com.m2mobi.markymarkcommon.markdownitems.inline.InlineString;
+import com.m2mobi.markymarkcommon.markdownitem.inline.InlineString;
 
 /**
  * {@link MarkdownItem} used for storing text inside a paragraph
