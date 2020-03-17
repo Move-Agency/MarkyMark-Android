@@ -22,42 +22,11 @@
  * SOFTWARE.
  */
 
-package com.m2mobi.markymarkcontentful.rules.inline;
+package com.m2mobi.markymarkcommon.markdownitems.inline
 
-import com.m2mobi.markymarkcommon.markdownitems.inline.LinkString;
+import com.m2mobi.markymark.item.inline.MarkdownString
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
-/**
- * Tests for {@link LinkRule}
- */
-public class LinkRuleTest {
-
-	private static final String mUrl = "[Link](www.google.com)";
-
-	private LinkRule mLinkRule = null;
-
-	@BeforeEach
-	public void init() {
-		mLinkRule = new LinkRule();
-	}
-
-	@Test
-	public void shouldCreateLinkString() {
-		assertEquals("Link", mLinkRule.toMarkdownString(mUrl).getContent());
-	}
-
-	@Test
-	public void shouldCreateLinkUrl() {
-		assertEquals("www.google.com", ((LinkString) mLinkRule.toMarkdownString(mUrl)).getUrl());
-	}
-
-	@Test
-	public void shouldNotCreateLinString() {
-		assertNotEquals("Link", mLinkRule.toMarkdownString("www.google.com").getContent());
-	}
-}
+data class StrikeString(
+    override val content: String,
+    override val isChildrenEnabled: Boolean
+): MarkdownString()

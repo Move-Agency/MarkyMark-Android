@@ -8,7 +8,7 @@ import java.util.regex.Pattern
 /**
  * Rule for the markdown inline link
  */
-class LinkRule : InlineRule {
+object LinkRule : InlineRule {
 
     /**
      * A Regex to detect links. Ignores if they start with a "!" as those are image links.
@@ -18,14 +18,15 @@ class LinkRule : InlineRule {
     override fun toMarkdownString(content: String): MarkdownString {
         val matcher = regex.matcher(content)
         return if (matcher.find()) {
-            LinkString(matcher.group(1), matcher.group(2), false)
+            LinkString(
+                url = matcher.group(2),
+                title = matcher.group(3) ?: "",
+                content = matcher.group(1)
+            )
         } else {
-            LinkString("", "", false)
+            LinkString()
         }
     }
 
-    companion object {
-
-        private const val PATTERN = "(?<!!)\\[(.+?)]\\((.+?)\\)"
-    }
+    private const val PATTERN = "(?<!!)\\[(.+?)]\\((.+?)(?: \"(.+?)\")?\\)"
 }

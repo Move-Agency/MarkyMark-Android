@@ -22,38 +22,13 @@
  * SOFTWARE.
  */
 
-package com.m2mobi.markymarkandroid.inline
+package com.m2mobi.markymarkcommon.markdownitems.inline
 
-import android.text.Spannable
-import android.text.SpannableStringBuilder
-import android.text.Spanned
-
-import com.m2mobi.markymark.InlineConverter
 import com.m2mobi.markymark.item.inline.MarkdownString
 
-/**
- * Utility methods related to [Spannable]s
- */
-internal object SpannableUtils {
-
-    /**
-     * Creates a Spannable from a MarkdownString
-     *
-     * @param pInlineConverter
-     * InlineConverter used to convert [MarkdownString] to spannable
-     * @param pMarkdownString
-     * MarkdownString used to create the spannables
-     * @return Returns a Spannable
-     */
-    fun createSpannable(pInlineConverter: InlineConverter<Spanned>, pMarkdownString: MarkdownString): Spannable {
-        val stringBuilder = SpannableStringBuilder()
-        if (pMarkdownString.isChildrenEnabled) {
-            for (markdownString in pInlineConverter.parseContent(pMarkdownString.content)) {
-                stringBuilder.append(pInlineConverter.convert(markdownString))
-            }
-        } else {
-            stringBuilder.append(pMarkdownString.content)
-        }
-        return stringBuilder
-    }
-}// no instances
+data class LinkString @JvmOverloads constructor(
+    val url: String = "",
+    val title: String = "",
+    override val content: String = "",
+    override val isChildrenEnabled: Boolean = false
+) : MarkdownString()
