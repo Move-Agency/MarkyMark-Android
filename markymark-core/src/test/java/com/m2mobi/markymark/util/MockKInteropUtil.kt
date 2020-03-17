@@ -22,33 +22,19 @@
  * SOFTWARE.
  */
 
-package com.m2mobi.markymarkcontentful.rules.inline;
+package com.m2mobi.markymark.util
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import io.mockk.MockKVerificationScope
+import io.mockk.mockkClass
+import io.mockk.verify
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+object MockKInteropUtil {
 
-/**
- * Tests for {@link InlineCodeRule}
- */
-public class InlineCodeRuleTest {
+    fun <T: Any> mock(type: Class<T>): T {
+        return mockkClass(type.kotlin)
+    }
 
-	private InlineCodeRule mInlineCodeRule = null;
-
-	@BeforeEach
-	public void init() {
-		mInlineCodeRule = new InlineCodeRule();
-	}
-
-	@Test
-	public void shouldCreateInlineCodeString() {
-		assertEquals("text", mInlineCodeRule.toMarkdownString("`text`").getContent());
-	}
-
-	@Test
-	public void shouldNotCreateInlineCodeString() {
-		assertNotEquals("text", mInlineCodeRule.toMarkdownString("$$text$$").getContent());
-	}
+    fun verifyInterop(block: MockKVerificationScope.() -> Unit) {
+        verify(verifyBlock = block)
+    }
 }

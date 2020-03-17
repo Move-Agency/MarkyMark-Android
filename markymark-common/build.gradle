@@ -1,12 +1,23 @@
-apply plugin: 'java'
-apply plugin: 'maven'
+apply plugin: "kotlin"
 
 group='com.github.M2Mobi'
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':markymark-core')
+    api project(':markymark-core')
+
+    implementation libraries.kotlin_core
+
+    testImplementation libraries.testing
 }
 
-sourceCompatibility = "1.7"
-targetCompatibility = "1.7"
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = jvm_version.toString()
+    }
+}
+
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = jvm_version.toString()
+    }
+}

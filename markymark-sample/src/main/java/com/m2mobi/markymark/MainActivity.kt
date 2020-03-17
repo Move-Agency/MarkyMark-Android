@@ -6,8 +6,7 @@ package com.m2mobi.markymark
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import com.m2mobi.markymarkandroid.MarkyMarkAndroid
 import com.m2mobi.markymarkandroid.MarkyMarkView
 import com.m2mobi.markymarkcontentful.ContentfulFlavor
