@@ -24,8 +24,6 @@
 
 package com.m2mobi.markymarkcontentful.rules;
 
-import com.m2mobi.markymarkcommon.rule.HorizontalLineRule;
-
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

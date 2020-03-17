@@ -24,8 +24,7 @@
 
 package com.m2mobi.markymarkcontentful.rules.inline;
 
-import com.m2mobi.markymarkcommon.markdownitem.inline.LinkString;
-import com.m2mobi.markymarkcommon.rule.inline.LinkRule;
+import com.m2mobi.markymarkcommon.markdownitems.inline.LinkString;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -2,10 +2,10 @@
 * Copyright (C) M2mobi BV - All Rights Reserved
 */
 
-package com.m2mobi.markymarkcommon.markdownitem;
+package com.m2mobi.markymarkcommon.markdownitems;
 
 import com.m2mobi.markymark.item.inline.MarkdownString;
-import com.m2mobi.markymarkcommon.markdownitem.inline.InlineString;
+import com.m2mobi.markymarkcommon.markdownitems.inline.InlineString;
 
 import java.util.ArrayList;
 import java.util.List;

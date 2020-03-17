@@ -9,7 +9,7 @@ import android.text.style.URLSpan
 
 import com.m2mobi.markymark.InlineConverter
 import com.m2mobi.markymark.InlineDisplayItem
-import com.m2mobi.markymarkcommon.markdownitem.inline.LinkString
+import com.m2mobi.markymarkcommon.markdownitems.inline.LinkString
 
 /**
  * Converts a [LinkString] to a [Spanned].

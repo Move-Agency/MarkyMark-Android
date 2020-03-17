@@ -11,7 +11,7 @@ import android.view.ViewGroup.LayoutParams
 
 import com.m2mobi.markymark.DisplayItem
 import com.m2mobi.markymark.InlineConverter
-import com.m2mobi.markymarkcommon.markdownitem.HorizontalLine
+import com.m2mobi.markymarkcommon.markdownitems.HorizontalLine
 
 /**
  * Converts an [HorizontalLine] to a [View].

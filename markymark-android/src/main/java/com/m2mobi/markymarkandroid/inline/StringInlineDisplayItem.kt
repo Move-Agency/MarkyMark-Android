@@ -8,7 +8,7 @@ import android.text.Spanned
 
 import com.m2mobi.markymark.InlineConverter
 import com.m2mobi.markymark.InlineDisplayItem
-import com.m2mobi.markymarkcommon.markdownitem.inline.InlineString
+import com.m2mobi.markymarkcommon.markdownitems.inline.InlineString
 
 /**
  * Converts an [InlineString] to a [Spanned].

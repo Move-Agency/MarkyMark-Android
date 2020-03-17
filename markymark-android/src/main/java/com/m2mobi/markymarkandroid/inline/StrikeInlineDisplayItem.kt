@@ -9,7 +9,7 @@ import android.text.style.StrikethroughSpan
 
 import com.m2mobi.markymark.InlineConverter
 import com.m2mobi.markymark.InlineDisplayItem
-import com.m2mobi.markymarkcommon.markdownitem.inline.StrikeString
+import com.m2mobi.markymarkcommon.markdownitems.inline.StrikeString
 
 /**
  * Converts a [StrikeString] to a [Spanned].

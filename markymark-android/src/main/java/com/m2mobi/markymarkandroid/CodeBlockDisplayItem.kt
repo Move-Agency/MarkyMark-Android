@@ -12,7 +12,7 @@ import android.widget.TextView
 
 import com.m2mobi.markymark.DisplayItem
 import com.m2mobi.markymark.InlineConverter
-import com.m2mobi.markymarkcommon.markdownitem.CodeBlock
+import com.m2mobi.markymarkcommon.markdownitems.CodeBlock
 
 /**
  * Converts an [CodeBlock] to a [View].
