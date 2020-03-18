@@ -47,7 +47,7 @@ object MarkdownFlavor : Flavor {
         ItalicRule(),
         BoldRule(PATTERN_ASTERISK),
         BoldRule(PATTERN_UNDERSCORE),
-        LinkRule(),
+        LinkRule,
         InlineCodeRule()
     )
 

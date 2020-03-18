@@ -67,7 +67,7 @@ public class ContentfulFlavor implements Flavor {
 		rules.add(new ItalicRule());
 		rules.add(new BoldRule("*"));
 		rules.add(new BoldRule("_"));
-		rules.add(new LinkRule());
+		rules.add(LinkRule.INSTANCE);
 		rules.add(new InlineCodeRule());
 		return rules;
 	}
