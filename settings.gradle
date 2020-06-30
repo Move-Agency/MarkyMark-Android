@@ -1,6 +1,0 @@
-include ':sample'
-include ':core'
-include ':android'
-include ':contentful'
-include ':common'
-include ':markdown'
