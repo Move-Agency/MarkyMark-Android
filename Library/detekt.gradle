@@ -6,6 +6,11 @@ detekt {
     config = files("$rootProject.rootDir/detekt-config.yml")
     parallel = true
     failFast = true
+    autoCorrect = true
+}
+
+dependencies {
+    detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:$versions.detekt"
 }
 
 tasks.detekt.jvmTarget = "1.8"

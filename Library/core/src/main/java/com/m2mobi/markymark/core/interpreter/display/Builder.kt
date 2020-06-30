@@ -28,7 +28,11 @@ import com.m2mobi.markymark.core.model.Block
 import com.m2mobi.markymark.core.model.Formatting
 import com.m2mobi.markymark.core.model.Styling
 
-interface Builder<T, B: Block, I> {
+/**
+ * Basic definition of a Builder. A Builder is responsible for the conversion of a [Block] into items that can be
+ * displayed by a UI/GUI/View.
+ */
+interface Builder<T, B : Block, I> {
 
     fun create(block: B, formattingInterpreter: Interpreter<Formatting<Styling>, I>): T
 }

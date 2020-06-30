@@ -24,6 +24,10 @@
 
 package com.m2mobi.markymark.core.model
 
+/**
+ * A line of text containing 0 or `N` number of formattings. A [FormattedText] can still be considered as valid if it
+ * does not contain any styling.
+ */
 data class FormattedText(
     val cleanString: String,
     val formattings: List<Formatting<Styling>>

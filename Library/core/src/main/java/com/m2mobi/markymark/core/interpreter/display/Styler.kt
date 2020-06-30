@@ -26,7 +26,11 @@ package com.m2mobi.markymark.core.interpreter.display
 
 import com.m2mobi.markymark.core.model.Styling
 
-interface Formatter<T : Styling, R> {
+/**
+ * Basic definition of a [Styler]. A [Styler] is responsible for the conversion of a [Styling] into an object that can
+ * be displayed by a UI/GUI/View.
+ */
+interface Styler<T : Styling, R> {
 
     fun create(model: T): R
 }

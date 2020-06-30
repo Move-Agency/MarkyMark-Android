@@ -25,15 +25,14 @@
 package com.m2mobi.markymark.core.model
 
 /**
- * Result of a markdown parsing operation. [NotMatched] when the operation fails or [BlockMatch] when the parsing was
- * successful.
+ * Result of a [Block] parsing operation.
  */
 sealed class BlockResult {
 
     object NotMatched : BlockResult()
 
     /**
-     * Representation of a successful markdown parsing operation. [linesParsed] refers to the lines spanned by the
+     * Representation of a successful parsing operation. [linesParsed] refers to the lines spanned by the
      * [block]. These lines will be removed from the lines that still need to be parsed.
      */
     data class BlockMatch(
