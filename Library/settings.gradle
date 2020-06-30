@@ -1,0 +1,5 @@
+rootProject.name='MarkyMark Android'
+include ':core'
+include ':markdown'
+include ':contentful'
+include ':android'

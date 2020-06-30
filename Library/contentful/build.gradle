@@ -1,0 +1,23 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+group='com.github.M2Mobi'
+
+sourceCompatibility = versions.jvm
+targetCompatibility = versions.jvm
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = versions.jvm
+    }
+}
+
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = versions.jvm
+    }
+}
+
+dependencies {
+    implementation libraries.kotlin
+}
