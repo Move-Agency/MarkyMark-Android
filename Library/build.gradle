@@ -12,6 +12,14 @@ buildscript {
     }
 }
 
+plugins {
+    id "io.gitlab.arturbosch.detekt" version "1.10.0" apply false
+}
+
+subprojects {
+    apply from: "$rootProject.rootDir/detekt.gradle"
+}
+
 allprojects {
     apply from: "$rootProject.rootDir/dependencies.gradle"
 
