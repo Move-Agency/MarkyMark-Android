@@ -24,12 +24,12 @@
 
 package com.m2mobi.markymark.core.parser.rule
 
-import com.m2mobi.markymark.core.model.FormattingMatch
+import com.m2mobi.markymark.core.model.FormattingResult
 
 /**
  * Representation of a parsing rule for inline markdown.
  */
 interface FormattingRule {
 
-    fun parse(text: String): List<FormattingMatch>
+    fun parse(text: String): List<FormattingResult>
 }

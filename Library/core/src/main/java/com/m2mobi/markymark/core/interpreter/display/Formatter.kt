@@ -22,14 +22,15 @@
  * SOFTWARE.
  */
 
-package com.m2mobi.markymark.core.model
+package com.m2mobi.markymark.core.interpreter.display
+
+import com.m2mobi.markymark.core.model.Styling
 
 /**
- * Result of a [Formatting] parsing operation. Unlike with [BlockResult] this always represents a successful parsing.
- * Text is still perfectly valid without any formatting.
+ * Basic definition of a [Formatter]. A [Formatter] is responsible for the conversion of a [Styling] into an object
+ * that can be displayed by a UI/GUI/View.
  */
-data class FormattingMatch(
-    val formatting: Formatting<Styling>,
-    val prefixLength: Int,
-    val suffixLength: Int
-)
+interface Formatter<T : Styling, R> {
+
+    fun create(model: T): R
+}

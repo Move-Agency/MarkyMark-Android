@@ -25,13 +25,12 @@
 package com.m2mobi.markymark.core.interpreter
 
 import com.m2mobi.markymark.core.model.Block
-import com.m2mobi.markymark.core.model.Formatting
 import com.m2mobi.markymark.core.model.Styling
 import com.m2mobi.markymark.core.parser.Parser
 
 /**
  * Basic definition of an Interpreter. An Interpreter is responsible for converting the intermediary representations
- * (i.e. [Block], [Formatting] & [Styling]) into end products that can be displayed by a UI/GUI/View.
+ * (i.e. [Block] and [Styling]) into end products that can be displayed by a UI/GUI/View.
  *
  * The Interpreter can be seen as the output equivalent of the [Parser].
  */

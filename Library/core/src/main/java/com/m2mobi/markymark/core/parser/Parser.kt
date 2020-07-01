@@ -25,7 +25,8 @@
 package com.m2mobi.markymark.core.parser
 
 /**
- * A parser is used to transform so raw bit of text into an intermediate representation ([T]).
+ * The idea of the [Parser] concept is that it generalizes the act of transforming a bit of "text" (referring to both
+ * the singular and plural version of the word) into an intermediary representation ([T]).
  */
 interface Parser<T> {
 

@@ -25,7 +25,6 @@
 package com.m2mobi.markymark.core.model
 
 /**
- * A styling (also called inline formatting) is some syntax present with in a line of text that alters the function
- * and/or appearance of all or part of said line.
+ * A [Styling] refers to a specific modification that can be applied to text (i.e. bolding, italicizing or linking).
  */
 abstract class Styling

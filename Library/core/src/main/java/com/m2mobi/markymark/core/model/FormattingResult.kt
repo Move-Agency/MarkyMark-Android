@@ -22,15 +22,14 @@
  * SOFTWARE.
  */
 
-package com.m2mobi.markymark.core.interpreter.display
-
-import com.m2mobi.markymark.core.model.Styling
+package com.m2mobi.markymark.core.model
 
 /**
- * Basic definition of a [Styler]. A [Styler] is responsible for the conversion of a [Styling] into an object that can
- * be displayed by a UI/GUI/View.
+ * Result of a [Formatting] parsing operation. Unlike with [BlockResult] this always represents a successful parsing.
+ * Text is still perfectly valid without any formatting.
  */
-interface Styler<T : Styling, R> {
-
-    fun create(model: T): R
-}
+data class FormattingResult(
+    val formatting: Formatting<Styling>,
+    val prefixLength: Int,
+    val suffixLength: Int
+)
