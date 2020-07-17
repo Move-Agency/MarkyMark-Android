@@ -12,6 +12,7 @@ comments:
     searchInInnerClass: false
     searchInInnerObject: false
     searchInInnerInterface: false
+    excludes: ['**/model/**']
 
 complexity:
   LargeClass:
