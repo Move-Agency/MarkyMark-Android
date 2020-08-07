@@ -2,6 +2,7 @@
 .settings/
 .idea/caches
 .idea/libraries
+.idea/dictionaries
 .idea/*.xml
 *.iml
 bin/
