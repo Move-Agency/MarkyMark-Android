@@ -25,9 +25,11 @@
 package com.m2mobi.markymark.core.parser.rule
 
 import com.m2mobi.markymark.core.model.FormattingResult
+import com.m2mobi.markymark.core.parser.BlockParser
 
 /**
- * Representation of a parsing rule for inline markdown.
+ * Representation of a parsing rule for inline markdown. Rules are responsible of doing the actual parsing of the
+ * formatting but do not alter the line themselves. The responsibility of changing the line belongs to [BlockParser].
  */
 interface FormattingRule {
 
