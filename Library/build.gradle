@@ -9,7 +9,12 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.6.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$versions.detekt"
     }
+}
+
+subprojects {
+    apply from: "$rootProject.rootDir/detekt.gradle"
 }
 
 allprojects {

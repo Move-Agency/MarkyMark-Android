@@ -1,7 +1,9 @@
 .gradle
-.idea
 .settings/
-.idea
+.idea/caches
+.idea/libraries
+.idea/dictionaries
+.idea/*.xml
 *.iml
 bin/
 out/
