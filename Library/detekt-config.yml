@@ -116,3 +116,5 @@ style:
     active: true
   WildcardImport:
     active: false
+  ForbiddenComment:
+    values: ['STOPSHIP:']
