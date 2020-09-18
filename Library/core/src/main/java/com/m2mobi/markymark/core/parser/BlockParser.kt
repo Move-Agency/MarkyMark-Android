@@ -25,7 +25,7 @@
 package com.m2mobi.markymark.core.parser
 
 import com.m2mobi.markymark.core.model.Block
-import com.m2mobi.markymark.core.model.BlockResult
+import com.m2mobi.markymark.core.model.BlockResult.BlockMatch
 import com.m2mobi.markymark.core.model.FormattedText
 import com.m2mobi.markymark.core.parser.rule.BlockRule
 
@@ -49,39 +49,28 @@ class BlockParser(
     private val formattingParser: Parser<FormattedText>
 ) : Parser<List<Block>> {
 
-    @Suppress("NestedBlockDepth")
     override fun parse(text: String): List<Block> {
-        var lines = text.lines()
-        val blocks = mutableListOf<Block>()
+        return parseLines(text.lines(), emptyList())
+    }
 
-        outer@ while (lines.isNotEmpty()) {
-            if (lines[0].isBlank()) {
-                lines = lines.drop(1)
-            } else {
+    @Suppress("NestedBlockDepth")
+    private tailrec fun parseLines(lines: List<String>, blocks: List<Block>): List<Block> {
+        return when {
+            lines.isEmpty() -> blocks
+            lines[0].isBlank() -> parseLines(lines.drop(1), blocks)
+            else -> {
                 for (rule in rules) {
                     val result = rule.parse(lines, formattingParser)
-                    if (result is BlockResult.BlockMatch) {
-                        lines = handleParsingMatch(blocks, lines, result)
-                        continue@outer
+                    if (result is BlockMatch) {
+                        return parseLines(lines.drop(result.linesParsed), blocks + result.block)
                     }
                 }
                 handleNoRulesApplied(lines[0])
             }
         }
-
-        return blocks
     }
 
-    private fun handleParsingMatch(
-        items: MutableList<Block>,
-        lines: List<String>,
-        match: BlockResult.BlockMatch
-    ): List<String> {
-        items += match.block
-        return lines.drop(match.linesParsed)
-    }
-
-    private fun handleNoRulesApplied(currentLine: String) {
+    private fun handleNoRulesApplied(currentLine: String): Nothing {
         throw IllegalStateException(
             """
                 No rules applied. Throwing to prevent infinite loop.
