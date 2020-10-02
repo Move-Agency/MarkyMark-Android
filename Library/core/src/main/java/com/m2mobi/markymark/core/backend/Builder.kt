@@ -32,5 +32,5 @@ import com.m2mobi.markymark.core.model.Formatting
  */
 interface Builder<B : Block, I, R> {
 
-    fun create(block: B, formattingInterpreter: Interpreter<Formatting<*>,I>): R
+    fun create(block: B, formattingInterpreter: Interpreter<Formatting<*>, I>): R
 }

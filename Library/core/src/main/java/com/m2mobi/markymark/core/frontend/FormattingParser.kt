@@ -53,22 +53,21 @@ class FormattingParser(private val rules: List<FormattingRule>) : Parser<Formatt
         results: List<FormattingResult>,
         progress: CleaningProgress
     ): CleaningProgress {
-        results.firstOrNull()?.run {
-            val (remainingLine, formattings) = progress
+        val result = results.firstOrNull() ?: return progress
+        val (remainingLine, formattings) = progress
 
-            val content = remainingLine
-                .substring(formatting.range)
-                .removeSurrounding(prefix = prefix, suffix = suffix)
-            val cleanedLine = remainingLine.replaceRange(formatting.range, content)
+        val content = remainingLine
+            .substring(result.formatting.range)
+            .removeSurrounding(prefix = result.prefix, suffix = result.suffix)
+        val cleanedLine = remainingLine.replaceRange(result.formatting.range, content)
 
-            return processMatches(
-                results = results.drop(1).map { it.copy(formatting = it.formatting.maybeOffset(this)) },
-                progress = CleaningProgress(
-                    remainingLine = cleanedLine,
-                    formattings = formattings.plus(formatting).map { it.maybeOffset(this) }
-                )
+        return processMatches(
+            results = results.drop(1).map { it.copy(formatting = it.formatting.maybeOffset(result)) },
+            progress = CleaningProgress(
+                remainingLine = cleanedLine,
+                formattings = formattings.plus(result.formatting).map { it.maybeOffset(result) }
             )
-        } ?: return progress
+        )
     }
 
     private fun Formatting<*>.maybeOffset(result: FormattingResult): Formatting<*> {
