@@ -30,5 +30,5 @@ package com.m2mobi.markymark.core.model
  */
 data class FormattedText(
     val cleanString: String,
-    val formattings: List<Formatting> = emptyList()
+    val formattings: List<Formatting<*>> = emptyList()
 )
