@@ -22,16 +22,19 @@
  * SOFTWARE.
  */
 
-package com.m2mobi.markymark.core.parser.rule
+package com.m2mobi.markymark.core.backend
 
-import com.m2mobi.markymark.core.model.FormattingResult
-import com.m2mobi.markymark.core.parser.BlockParser
+import com.m2mobi.markymark.core.frontend.Parser
+import com.m2mobi.markymark.core.model.Block
+import com.m2mobi.markymark.core.model.Formatting
 
 /**
- * Representation of a parsing rule for inline markdown. Rules are responsible of doing the actual parsing of the
- * formatting but do not alter the line themselves. The responsibility of changing the line belongs to [BlockParser].
+ * Basic definition of an Interpreter. An Interpreter is responsible for converting the intermediary representations
+ * (i.e. [Block] and [Formatting]) into end products that can be displayed by a UI/GUI/View.
+ *
+ * The Interpreter can be seen as the frontend equivalent of the [Parser].
  */
-interface FormattingRule {
+interface Interpreter<T, R> {
 
-    fun parse(text: String): List<FormattingResult>
+    fun interpret(model: T): R
 }

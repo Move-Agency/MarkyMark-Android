@@ -21,18 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.m2mobi.markymark.core.interpreter.display
+package com.m2mobi.markymark.core.backend
 
-import com.m2mobi.markymark.core.interpreter.Interpreter
 import com.m2mobi.markymark.core.model.Block
 import com.m2mobi.markymark.core.model.Formatting
-import com.m2mobi.markymark.core.model.Styling
 
 /**
  * Basic definition of a Builder. A Builder is responsible for the conversion of a [Block] into items that can be
  * displayed by a UI/GUI/View.
  */
-interface Builder<T, B : Block, I> {
+interface Builder<B : Block, I, R> {
 
-    fun create(block: B, formattingInterpreter: Interpreter<Formatting<Styling>, I>): T
+    fun create(block: B, formattingInterpreter: Interpreter<Formatting<*>,I>): R
 }

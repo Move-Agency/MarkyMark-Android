@@ -22,12 +22,11 @@
  * SOFTWARE.
  */
 
-package com.m2mobi.markymark.core.parser
+package com.m2mobi.markymark.core.frontend
 
 import com.m2mobi.markymark.core.model.Block
 import com.m2mobi.markymark.core.model.BlockResult.BlockMatch
 import com.m2mobi.markymark.core.model.FormattedText
-import com.m2mobi.markymark.core.parser.rule.BlockRule
 
 /*
  * TODO: Optimize to only iterate over rules once. Possible by using a similar structure formatting. The block rules
@@ -57,7 +56,7 @@ class BlockParser(
     private tailrec fun parseLines(lines: List<String>, blocks: List<Block>): List<Block> {
         return when {
             lines.isEmpty() -> blocks
-            lines[0].isBlank() -> parseLines(lines.drop(1), blocks)
+            lines.first().isBlank() -> parseLines(lines.drop(1), blocks)
             else -> {
                 for (rule in rules) {
                     val result = rule.parse(lines, formattingParser)

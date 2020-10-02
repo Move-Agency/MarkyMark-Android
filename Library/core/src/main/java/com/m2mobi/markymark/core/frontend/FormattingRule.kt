@@ -22,13 +22,15 @@
  * SOFTWARE.
  */
 
-package com.m2mobi.markymark.core.parser
+package com.m2mobi.markymark.core.frontend
+
+import com.m2mobi.markymark.core.model.FormattingResult
 
 /**
- * The idea of the [Parser] concept is that it generalizes the act of transforming a bit of "text" (referring to both
- * the singular and plural version of the word) into an intermediary representation ([T]).
+ * Representation of a parsing rule for inline markdown. Rules are responsible of doing the actual parsing of the
+ * formatting but do not alter the line themselves. The responsibility of changing the line belongs to [BlockParser].
  */
-interface Parser<T> {
+interface FormattingRule {
 
-    fun parse(text: String): T
+    fun parse(text: String): List<FormattingResult>
 }
