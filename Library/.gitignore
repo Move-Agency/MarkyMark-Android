@@ -1,6 +1,6 @@
 .gradle
 .settings/
-.idea/dictionary
+.idea/dictionaries
 .idea/codeStyles
 .idea/caches
 .idea/libraries
