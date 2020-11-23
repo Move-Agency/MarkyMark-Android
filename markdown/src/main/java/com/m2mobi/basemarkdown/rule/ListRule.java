@@ -51,16 +51,16 @@ public class ListRule implements Rule {
 	private List<String> mMarkdownLines;
 
 	/** Matches an ordered list */
-	private static final Pattern ORDERED_LIST_PATTERN = Pattern.compile("^\\s{0,3}\\d+\\.\\s+(.+)$");
+	private static final Pattern ORDERED_LIST_PATTERN = Pattern.compile("^ ?\\d+\\. {1,4}([a-zA-Z0-9]{1}.*)$");
 
 	/** Matches an unordered list */
-	private static final Pattern UNORDERED_LIST_PATTERN = Pattern.compile("^\\s{0,3}\\-{1}\\s+([^\\*].+)$");
+	private static final Pattern UNORDERED_LIST_PATTERN = Pattern.compile("^ ?[+*\\-] {1,4}([a-zA-Z0-9]{1}.*)$");
 
 	/** Matches an ordered list and the leading spaces */
-	private static final Pattern NESTED_ORDERED_LIST_PATTERN = Pattern.compile("^(\\s*)\\d+\\.\\s+(.+)$");
+	private static final Pattern NESTED_ORDERED_LIST_PATTERN = Pattern.compile("^(\\t| {4})\\d+\\. {1,4}([a-zA-Z0-9]{1}.*)$");
 
 	/** Matches an unordered list and the leading spaces */
-	private static final Pattern NESTED_UNORDERED_LIST_PATTERN = Pattern.compile("^(\\s*)\\-{1}\\s+([^\\*].+)$");
+	private static final Pattern NESTED_UNORDERED_LIST_PATTERN = Pattern.compile("^(\\t| {4})[+*\\-] {1,4}([a-zA-Z0-9]{1}.*)$");
 
 	@Override
 	public boolean conforms(final List<String> pMarkdownLines) {
