@@ -51,10 +51,10 @@ public class ListRule implements Rule {
 	private List<String> mMarkdownLines;
 
 	/** Matches an ordered list */
-	private static final Pattern ORDERED_LIST_PATTERN = Pattern.compile("^(\\t| {4})*\\d+\\. {1,4}([a-zA-Z0-9].*)$");
+	private static final Pattern ORDERED_LIST_PATTERN = Pattern.compile("^((?:\\t| {4})*)\\d+\\. {1,4}([a-zA-Z0-9].*)$");
 
 	/** Matches an unordered list */
-	private static final Pattern UNORDERED_LIST_PATTERN = Pattern.compile("^(\\t| {4})*[+*\\-] {1,4}([a-zA-Z0-9].*)$");
+	private static final Pattern UNORDERED_LIST_PATTERN = Pattern.compile("^((?:\\t| {4})*)[+*\\-] {1,4}([a-zA-Z0-9].*)$");
 
 	@Override
 	public boolean conforms(final List<String> pMarkdownLines) {
