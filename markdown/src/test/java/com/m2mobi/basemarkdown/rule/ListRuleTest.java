@@ -110,7 +110,7 @@ public class ListRuleTest {
 		strings.add("- Number 1");
 		strings.add("- Number 2");
 		assertTrue(mListRule.conforms(strings));
-		MarkdownList list = (MarkdownList) mListRule.toMarkdownItem(strings);
+
 		assertFalse(((MarkdownList) mListRule.toMarkdownItem(strings)).getLastListItem().hasChild());
 	}
 
