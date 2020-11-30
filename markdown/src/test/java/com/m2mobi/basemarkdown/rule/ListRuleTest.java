@@ -24,7 +24,6 @@
 
 package com.m2mobi.basemarkdown.rule;
 
-import com.m2mobi.basemarkdown.rule.ListRule;
 import com.m2mobi.markymarkcommon.markdownitems.MarkdownList;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -98,8 +97,8 @@ public class ListRuleTest {
 		List<String> strings = new ArrayList<>();
 		strings.add("- Number 1");
 		strings.add("- Number 2");
-		strings.add("  - Nest 1");
-		strings.add("  - Nest 2");
+		strings.add("    - Nest 1");
+		strings.add("    - Nest 2");
 		assertTrue(mListRule.conforms(strings));
 
 		assertTrue(((MarkdownList) mListRule.toMarkdownItem(strings)).getLastListItem().hasChild());
@@ -120,8 +119,8 @@ public class ListRuleTest {
 		List<String> strings = new ArrayList<>();
 		strings.add("- Number 1");
 		strings.add("- Number 2");
-		strings.add("  1. Nest 1");
-		strings.add("  2. Nest 2");
+		strings.add("    1. Nest 1");
+		strings.add("    2. Nest 2");
 		assertTrue(mListRule.conforms(strings));
 
 		assertTrue(((MarkdownList) mListRule.toMarkdownItem(strings)).getLastListItem().getChild().get(0).isOrdered());
@@ -132,8 +131,8 @@ public class ListRuleTest {
 		List<String> strings = new ArrayList<>();
 		strings.add("- Number 1");
 		strings.add("- Number 2");
-		strings.add("  - Nest 1");
-		strings.add("  - Nest 2");
+		strings.add("    - Nest 1");
+		strings.add("    - Nest 2");
 		assertTrue(mListRule.conforms(strings));
 
 		assertFalse(((MarkdownList) mListRule.toMarkdownItem(strings)).getLastListItem().getChild().get(0).isOrdered());

@@ -51,16 +51,10 @@ public class ListRule implements Rule {
 	private List<String> mMarkdownLines;
 
 	/** Matches an ordered list */
-	private static final Pattern ORDERED_LIST_PATTERN = Pattern.compile("^\\s{0,3}\\d+\\.\\s+(.+)$");
+	private static final Pattern ORDERED_LIST_PATTERN = Pattern.compile("^((?:\\t| {4})*)\\d+\\. {1,4}([a-zA-Z0-9].*)$");
 
 	/** Matches an unordered list */
-	private static final Pattern UNORDERED_LIST_PATTERN = Pattern.compile("^\\s{0,3}\\-{1}\\s+([^\\*].+)$");
-
-	/** Matches an ordered list and the leading spaces */
-	private static final Pattern NESTED_ORDERED_LIST_PATTERN = Pattern.compile("^(\\s*)\\d+\\.\\s+(.+)$");
-
-	/** Matches an unordered list and the leading spaces */
-	private static final Pattern NESTED_UNORDERED_LIST_PATTERN = Pattern.compile("^(\\s*)\\-{1}\\s+([^\\*].+)$");
+	private static final Pattern UNORDERED_LIST_PATTERN = Pattern.compile("^((?:\\t| {4})*)[+*\\-] {1,4}([a-zA-Z0-9].*)$");
 
 	@Override
 	public boolean conforms(final List<String> pMarkdownLines) {
@@ -135,7 +129,7 @@ public class ListRule implements Rule {
 	 * @return Returns true if pLine is an ordered list, false if not
 	 */
 	private boolean isOrdered(String pLine) {
-		return NESTED_ORDERED_LIST_PATTERN.matcher(pLine).matches();
+		return ORDERED_LIST_PATTERN.matcher(pLine).matches();
 	}
 
 	/**
@@ -146,8 +140,8 @@ public class ListRule implements Rule {
 	 * @return Returns true if the string is a ordered or unordered list
 	 */
 	private boolean isList(String pLine) {
-		return NESTED_ORDERED_LIST_PATTERN.matcher(pLine).matches()
-				|| NESTED_UNORDERED_LIST_PATTERN.matcher(pLine).matches();
+		return ORDERED_LIST_PATTERN.matcher(pLine).matches()
+				|| UNORDERED_LIST_PATTERN.matcher(pLine).matches();
 	}
 
 	/**
@@ -161,8 +155,11 @@ public class ListRule implements Rule {
 		final Matcher matchingRegex = getMatchingMatcher(pLine);
 		if (matchingRegex != null) {
 			// 1st group contains the whitespace in front of the pattern
-			final int level = matchingRegex.group(1).length();
-			return level / INDENT_SIZE;
+			String group = matchingRegex.group(1);
+			if (group != null) {
+				final int level = matchingRegex.group(1).length();
+				return level / INDENT_SIZE;
+			}
 		}
 		return 0;
 	}
@@ -190,12 +187,12 @@ public class ListRule implements Rule {
 	 * @return Returns a matching Matcher or null
 	 */
 	private Matcher getMatchingMatcher(String pLine) {
-		Matcher matcher = NESTED_ORDERED_LIST_PATTERN.matcher(pLine);
+		Matcher matcher = ORDERED_LIST_PATTERN.matcher(pLine);
 		if (matcher.matches()) {
 			return matcher;
 		}
 
-		matcher = NESTED_UNORDERED_LIST_PATTERN.matcher(pLine);
+		matcher = UNORDERED_LIST_PATTERN.matcher(pLine);
 		if (matcher.matches()) {
 			return matcher;
 		}
