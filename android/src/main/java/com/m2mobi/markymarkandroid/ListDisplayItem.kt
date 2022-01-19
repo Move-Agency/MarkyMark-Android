@@ -41,6 +41,9 @@ import android.widget.TableLayout.LayoutParams
 import android.widget.TextView
 import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updateMargins
+import androidx.core.view.updatePadding
 import com.m2mobi.markymark.DisplayItem
 import com.m2mobi.markymark.InlineConverter
 import com.m2mobi.markymarkcommon.markdownitems.MarkdownList
@@ -53,9 +56,10 @@ import com.m2mobi.markymarkcommon.markdownitems.MarkdownList
  * Date 04/05/2016
  * Time 11:31
  */
-class ListDisplayItem(private val mContext: Context,
-                      @DimenRes pListMargin: Int,
-                      @DrawableRes private val mBulletDrawables: IntArray
+class ListDisplayItem(
+    private val mContext: Context,
+    @DimenRes pListMargin: Int,
+    @DrawableRes private val mBulletDrawables: IntArray
 ) : DisplayItem<View, MarkdownList, Spanned> {
 
     private val mListMargin: Int = mContext.resources.getDimensionPixelSize(pListMargin)
@@ -69,14 +73,15 @@ class ListDisplayItem(private val mContext: Context,
         layout.layoutParams = LayoutParams(MATCH_PARENT, WRAP_CONTENT)
         layout.orientation = LinearLayout.VERTICAL
 
-        pMarkDownItem.listItems.forEachIndexed { index, item ->
+        for ((index, item) in pMarkDownItem.listItems.withIndex()) {
             val view = getTextView(pMarkDownItem, pInlineConverter.convert(item.text), index)
             layout.addView(view)
 
             if (item.hasChild()) {
                 for (list in item.child) {
-                    val nestedLayout = createLayout(list, pInlineConverter)
-                    nestedLayout.setPadding(mListMargin, 0, 0, 0)
+                    val nestedLayout = createLayout(list, pInlineConverter).apply {
+                        updateLayoutParams<LinearLayout.LayoutParams> { updateMargins(left = mListMargin) }
+                    }
                     layout.addView(nestedLayout)
                 }
             }
@@ -132,27 +137,20 @@ class ListDisplayItem(private val mContext: Context,
      * Span that adds a number in front of the first line of a list item
      */
     private inner class NumberSpan(
-            /** Width of the margin  */
-            private val mGapWidth: Int,
-            /** Number of the list item  */
-            private val mIndex: Int) : LeadingMarginSpan.LeadingMarginSpan2 {
+        /** Width of the margin  */
+        override val mGapWidth: Int,
+        /** Number of the list item  */
+        private val mIndex: Int
+    ) : ListMarginSpan() {
 
-        override fun drawLeadingMargin(pCanvas: Canvas, pPaint: Paint, pX: Int, pDir: Int, pTop: Int, pBaseline: Int, pBottom: Int,
-                                       pText: CharSequence, pStart: Int, pEnd: Int, pFirst: Boolean, pLayout: Layout) {
-            if (pFirst) {
-                val number = mIndex.toString() + ". "
-                val v = pPaint.measureText(number, 0, number.length)
-                pCanvas.drawText(number, mGapWidth - v, pBaseline.toFloat(), pPaint)
-            }
-        }
-
-        override fun getLeadingMargin(first: Boolean): Int {
-            return mGapWidth
-        }
-
-        override fun getLeadingMarginLineCount(): Int {
-            // Only add to first line
-            return 1
+        override fun drawLeadingMargin(
+            pCanvas: Canvas, pPaint: Paint, pX: Int, pDir: Int, pTop: Int, pBaseline: Int, pBottom: Int,
+            pText: CharSequence, pStart: Int, pEnd: Int, pFirst: Boolean, pLayout: Layout
+        ) {
+            if (!pFirst) return
+            val number = "$mIndex. "
+            val prefixWidth = pPaint.measureText(number, 0, number.length)
+            pCanvas.drawText(number, getPrefixStart(pX, prefixWidth.toInt()).toFloat(), pBaseline.toFloat(), pPaint)
         }
     }
 
@@ -160,32 +158,38 @@ class ListDisplayItem(private val mContext: Context,
      * Span that adds a bullet in front of the first line of a list item
      */
     private inner class BulletSpan(
-            /** Width of the margin  */
-            private val mGapWidth: Int,
-            /** Drawable that will be drawn in front of the first line  */
-            private val mDrawable: Drawable) : LeadingMarginSpan.LeadingMarginSpan2 {
+        /** Width of the margin  */
+        override val mGapWidth: Int,
+        /** Drawable that will be drawn in front of the first line  */
+        private val mDrawable: Drawable
+    ) : ListMarginSpan() {
 
-        override fun getLeadingMargin(first: Boolean): Int {
-            return mGapWidth
-        }
-
-        override fun drawLeadingMargin(pCanvas: Canvas, pPaint: Paint, pX: Int, pDir: Int, pTop: Int, pBaseline: Int, pBottom: Int,
-                                       pText: CharSequence, pStart: Int, pEnd: Int, pFirst: Boolean, pLayout: Layout) {
-            if (!pFirst) {
-                return
-            }
+        override fun drawLeadingMargin(
+            pCanvas: Canvas, pPaint: Paint, pX: Int, pDir: Int, pTop: Int, pBaseline: Int, pBottom: Int,
+            pText: CharSequence, pStart: Int, pEnd: Int, pFirst: Boolean, pLayout: Layout
+        ) {
+            if (!pFirst) return
             val drawableHeight = mDrawable.minimumHeight
             val drawableWidth = mDrawable.minimumWidth
-            val y = pBaseline / 2
-            val x = mGapWidth / 2
+            val spaceWidth = pPaint.measureText(" ")
+            val y = (pBottom - pTop - drawableHeight) / 2
+            val x = getPrefixStart(pX, drawableWidth) - spaceWidth.toInt()
 
             mDrawable.setBounds(x, y, x + drawableWidth, y + drawableHeight)
             mDrawable.draw(pCanvas)
         }
+    }
 
-        override fun getLeadingMarginLineCount(): Int {
-            // Only add to first line
-            return 1
+    private abstract class ListMarginSpan : LeadingMarginSpan.LeadingMarginSpan2 {
+
+        protected abstract val mGapWidth: Int
+
+        override fun getLeadingMargin(first: Boolean): Int = mGapWidth.takeIf { first } ?: 0
+
+        override fun getLeadingMarginLineCount(): Int = 1
+
+        protected fun getPrefixStart(spanX: Int, prefixWidth: Int): Int {
+            return spanX + mGapWidth - prefixWidth
         }
     }
 }
