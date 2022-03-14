@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-package com.m2mobi.markymarkcontentful.rules.inline
+package com.m2mobi.basemarkdown.rule.inline
 
-import com.m2mobi.basemarkdown.rule.inline.LinkRule
 import com.m2mobi.markymarkcommon.markdownitems.inline.LinkString
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals

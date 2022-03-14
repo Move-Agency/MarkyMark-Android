@@ -149,7 +149,7 @@ public class ListRule implements Rule {
 	 *
 	 * @param pLine
 	 * 		String containing a list item
-	 * @return Returns an integer representing the nesting level of the list item¶
+	 * @return Returns an integer representing the nesting level of the list item
 	 */
 	private int getNestingLevel(String pLine) {
 		final Matcher matchingRegex = getMatchingMatcher(pLine);

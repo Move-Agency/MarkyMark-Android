@@ -2,7 +2,7 @@
 ext {
     kotlin_version = '1.3.70'
 
-    junit_version = "5.6.0"
+    junit_version = "5.8.2"
     mockk_version = "1.9"
 
     libraries = [
@@ -16,8 +16,10 @@ ext {
         testing: [
             "io.mockk:mockk:$mockk_version",
             "org.junit.jupiter:junit-jupiter-api:$junit_version",
+            "org.junit.jupiter:junit-jupiter-engine:$junit_version",
+            "org.junit.jupiter:junit-jupiter-params:$junit_version",
             "org.jetbrains.kotlin:kotlin-test:$kotlin_version",
-            "org.jetbrains.kotlin:kotlin-test-junit5:$kotlin_version"
+            "org.jetbrains.kotlin:kotlin-test-junit5:$kotlin_version",
         ],
         android_testing: [
             "android.arch.core:core-testing:1.1.1"

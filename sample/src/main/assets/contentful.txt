@@ -74,6 +74,7 @@
 [This is a test link](https://m2mobi.com)
 Inline links are also possible, click [here](https://m2mobi.com)
 Phone numbers as well [+06-23459392](tel:06-23459392)
+Short links are also supported, like: <https://www.m2mobi.com> and <tel://123456789> but not <Google>.
 
 ## Code
 

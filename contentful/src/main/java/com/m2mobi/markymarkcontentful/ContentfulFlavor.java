@@ -35,6 +35,7 @@ import com.m2mobi.basemarkdown.rule.inline.BoldRule;
 import com.m2mobi.basemarkdown.rule.inline.InlineCodeRule;
 import com.m2mobi.basemarkdown.rule.inline.ItalicRule;
 import com.m2mobi.basemarkdown.rule.inline.LinkRule;
+import com.m2mobi.basemarkdown.rule.inline.ShortLinkRule;
 import com.m2mobi.basemarkdown.rule.inline.StrikeRule;
 import com.m2mobi.markymark.Flavor;
 import com.m2mobi.markymark.rules.InlineRule;
@@ -68,6 +69,7 @@ public class ContentfulFlavor implements Flavor {
 		rules.add(new BoldRule("*"));
 		rules.add(new BoldRule("_"));
 		rules.add(LinkRule.INSTANCE);
+		rules.add(new ShortLinkRule());
 		rules.add(new InlineCodeRule());
 		return rules;
 	}

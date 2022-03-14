@@ -48,6 +48,7 @@ object MarkdownFlavor : Flavor {
         BoldRule(PATTERN_ASTERISK),
         BoldRule(PATTERN_UNDERSCORE),
         LinkRule,
+        ShortLinkRule(),
         InlineCodeRule()
     )
 
