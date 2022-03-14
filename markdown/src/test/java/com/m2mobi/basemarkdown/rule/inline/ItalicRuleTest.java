@@ -24,8 +24,6 @@
 
 package com.m2mobi.basemarkdown.rule.inline;
 
-import com.m2mobi.basemarkdown.rule.inline.ItalicRule;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
