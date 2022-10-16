@@ -27,6 +27,8 @@ object Versions {
     const val MIN_SDK = 24
     const val TARGET_SDK = 33
 
+    const val DETEKT = "1.21.0"
+
     const val GRADLE_PLUGIN = "7.3.0"
 
     const val COMPOSE = "1.3.0-beta03"

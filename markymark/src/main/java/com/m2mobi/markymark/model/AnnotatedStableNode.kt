@@ -22,6 +22,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 
 @Stable
+@Suppress("MaxLineLength")
 sealed class AnnotatedStableNode : StableNode {
 
     /**

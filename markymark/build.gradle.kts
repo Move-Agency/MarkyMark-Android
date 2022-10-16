@@ -26,16 +26,22 @@ android {
         targetCompatibility = Versions.JVM
     }
 
-    kotlinOptions {
-        jvmTarget = Versions.JVM.toString()
-    }
-
     buildFeatures {
         compose = true
     }
 
     composeOptions {
         kotlinCompilerExtensionVersion = Versions.KOTLIN_COMPILER_EXTENSION
+    }
+
+    kotlinOptions {
+        jvmTarget = Versions.JVM.toString()
+        freeCompilerArgs = freeCompilerArgs + listOf(
+            "-P",
+            "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=${rootDir.absolutePath}/compose_metrics",
+            "-P",
+            "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=${rootDir.absolutePath}/compose_metrics"
+        )
     }
 }
 

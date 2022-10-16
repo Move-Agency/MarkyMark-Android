@@ -71,6 +71,9 @@ import com.m2mobi.markymark.model.ComposableStableNode.Rule
 import com.m2mobi.markymark.model.ComposableStableNode.TableBlock
 import com.m2mobi.markymark.model.ComposableStableNode.TableCell
 import com.m2mobi.markymark.model.StableNode
+import com.m2mobi.markymark.theme.ListItemStyle.Companion.DefaultListItemIndicatorPadding
+import com.m2mobi.markymark.theme.ListItemStyle.Companion.DefaultListItemPadding
+import com.m2mobi.markymark.theme.ListItemStyle.Companion.DefaultListItemTextStyle
 import com.m2mobi.markymark.theme.TextNodeStyle.Companion.BodyTextStyle
 import com.m2mobi.markymark.theme.UnorderedListItemStyle.Indicator.Shape.Oval
 import com.m2mobi.markymark.theme.UnorderedListItemStyle.Indicator.Shape.Rectangle
@@ -290,11 +293,11 @@ data class ListBlockStyle(
  * Theming attributes used when rendering [ListItemType]s with [DefaultMarkyMarkComposer.createListItem].
  */
 @Immutable
-abstract class ListItemStyle {
+interface ListItemStyle {
 
-    abstract val padding: Padding
-    abstract val textStyle: TextStyle
-    abstract val indicatorPadding: Padding
+    val padding: Padding
+    val textStyle: TextStyle
+    val indicatorPadding: Padding
 
     companion object {
 
@@ -313,7 +316,7 @@ data class OrderedListItemStyle(
     override val textStyle: TextStyle = DefaultListItemTextStyle,
     override val indicatorPadding: Padding = DefaultListItemIndicatorPadding,
     val indicatorTextStyle: TextStyle = textStyle,
-) : ListItemStyle()
+) : ListItemStyle
 
 /**
  * Theming attributes used when rendering [ListItemType.Unordered].
@@ -329,7 +332,7 @@ data class UnorderedListItemStyle(
         Indicator(shape = Rectangle),
         Indicator(shape = Rectangle, size = DpSize(width = 6.dp, height = 2.dp)), // Line
     ),
-) : ListItemStyle() {
+) : ListItemStyle {
 
     /**
      * Theming attributes used when rendering a [ListItemType.Unordered]'s indicator.
@@ -392,7 +395,7 @@ data class TaskListItemStyle(
     override val textStyle: TextStyle = DefaultListItemTextStyle,
     override val indicatorPadding: Padding = DefaultListItemIndicatorPadding,
     val tints: Tints = Tints(),
-) : ListItemStyle() {
+) : ListItemStyle {
 
     /**
      * Similar to [Material3's CheckboxColors][androidx.compose.material3.CheckboxColors] which can only be created
@@ -441,7 +444,18 @@ data class AnnotatedStyles(
     val codeStyle: SpanStyle = SpanStyle(fontFamily = Monospace, background = LightGray),
     val italicStyle: SpanStyle = SpanStyle(fontStyle = FontStyle.Italic),
     val strikethroughStyle: SpanStyle = SpanStyle(textDecoration = LineThrough),
-    val linkStyle: SpanStyle = SpanStyle(color = Color(0xFF66AAFF)),
-    val subscriptStyle: SpanStyle = SpanStyle(baselineShift = BaselineShift.Subscript, fontSize = 14.sp),
-    val superscriptStyle: SpanStyle = SpanStyle(baselineShift = BaselineShift.Superscript, fontSize = 10.sp),
-)
+    val linkStyle: SpanStyle = SpanStyle(color = DefaultLinkColor),
+    val subscriptStyle: SpanStyle = SpanStyle(baselineShift = BaselineShift.Subscript, fontSize = DefaultSubscriptSize),
+    val superscriptStyle: SpanStyle = SpanStyle(
+        baselineShift = BaselineShift.Superscript,
+        fontSize = DefaultSuperscriptSize,
+    ),
+) {
+
+    companion object {
+
+        private val DefaultLinkColor = Color(0xFF66AAFF)
+        private val DefaultSubscriptSize = 14.sp
+        private val DefaultSuperscriptSize = 10.sp
+    }
+}

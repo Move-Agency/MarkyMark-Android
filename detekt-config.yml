@@ -1,0 +1,135 @@
+build:
+  excludeCorrectable: true
+  maxIssues: 10
+
+comments:
+  CommentOverPrivateFunction:
+    active: false
+  CommentOverPrivateProperty:
+    active: false
+
+complexity:
+  LargeClass:
+    active: true
+    threshold: 500
+  LongMethod:
+    active: true
+    threshold: 40
+  LongParameterList:
+    active: true
+    functionThreshold: 10
+    constructorThreshold: 15
+    ignoreDefaultParameters: true
+    ignoreDataClasses: true
+    ignoreAnnotated: [ 'Composable' ]
+  MethodOverloading:
+    active: true
+    threshold: 3
+  NestedBlockDepth:
+    active: true
+    threshold: 3
+  StringLiteralDuplication:
+    active: true
+    threshold: 2
+    ignoreAnnotation: true
+    excludeStringsWithLessThan5Characters: true
+    ignoreStringsRegex: '$^'
+  TooManyFunctions:
+    active: true
+    thresholdInFiles: 25
+    thresholdInClasses: 25
+    thresholdInInterfaces: 10
+    thresholdInObjects: 10
+    thresholdInEnums: 3
+
+exceptions:
+  ExceptionRaisedInUnexpectedLocation:
+    active: true
+  NotImplementedDeclaration:
+    active: true
+  TooGenericExceptionCaught:
+    active: false
+  PrintStackTrace:
+    active: true
+
+formatting:
+  android: true
+  EnumEntryNameCase:
+    active: true
+  ImportOrdering:
+    active: true
+  Indentation:
+    active: true
+  NoWildcardImports:
+    active: false
+  Filename:
+    active: false
+
+naming:
+  EnumNaming:
+    active: true
+    enumEntryPattern: '[A-Z][_a-zA-Z0-9]*'
+  FunctionNaming:
+    active: true
+    functionPattern: '[a-zA-Z][a-zA-Z0-9]*'
+  TopLevelPropertyNaming:
+    active: true
+    constantPattern: '[A-Z][_a-zA-Z0-9]*'
+
+potential-bugs:
+  ImplicitDefaultLocale:
+    active: true
+  MapGetWithNotNullAssertionOperator:
+    active: true
+  UnnecessaryNotNullOperator:
+    active: true
+  UnnecessarySafeCall:
+    active: true
+  UnsafeCast:
+    active: true
+
+style:
+  ForbiddenMethodCall:
+    active: true
+    methods:
+      - 'kotlin.io.println'
+      - 'kotlin.io.print'
+      - 'android.util.Log.wtf'
+      - 'android.util.Log.e'
+      - 'android.util.Log.w'
+      - 'android.util.Log.d'
+      - 'android.util.Log.i'
+      - 'android.util.Log.v'
+  MandatoryBracesIfStatements:
+    active: true
+  MandatoryBracesLoops:
+    active: true
+  SpacingBetweenPackageAndImports:
+    active: true
+  TrailingWhitespace:
+    active: true
+  UnderscoresInNumericLiterals:
+    active: true
+  UnusedImports:
+    active: true
+  UnusedPrivateMember:
+    active: true
+    ignoreAnnotated: [ 'Preview' ]
+  UseDataClass:
+    active: true
+    allowVars: true
+  VarCouldBeVal:
+    active: true
+  WildcardImport:
+    active: false
+  ForbiddenComment:
+    values: [ 'STOPSHIP:' ]
+  ReturnCount:
+    active: true
+    excludeGuardClauses: true
+  MagicNumber:
+    active: true
+    ignorePropertyDeclaration: true
+    ignoreCompanionObjectPropertyDeclaration: true
+  SerialVersionUIDInSerializableClass:
+    active: false

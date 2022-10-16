@@ -31,6 +31,7 @@ import com.m2mobi.markymark.model.ComposableStableNode.ListItemType.Unordered
  * with Jetpack Compose.
  */
 @Stable
+@Suppress("MaxLineLength")
 sealed class ComposableStableNode : StableNode {
 
     /**

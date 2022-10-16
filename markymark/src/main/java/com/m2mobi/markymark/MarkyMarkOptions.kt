@@ -62,7 +62,8 @@ val LocalMarkyMarkOptions = compositionLocalOf {
 /**
  * Creates a [MutableDataSet] containing the default [ParserExtension] needed for all the syntax supported by MarkyMark.
  * - [AutolinkExtension], [docs](https://github.com/vsch/flexmark-java/wiki/Extensions#autolink)
- * - [StrikethroughSubscriptExtension], [docs](https://github.com/vsch/flexmark-java/wiki/Extensions#gfm-strikethroughsubscript)
+ * - [StrikethroughSubscriptExtension],
+ *   [docs](https://github.com/vsch/flexmark-java/wiki/Extensions#gfm-strikethroughsubscript)
  * - [TaskListExtension], [docs](https://github.com/vsch/flexmark-java/wiki/Extensions#gfm-tasklist)
  * - [SuperscriptExtension], [docs](https://github.com/vsch/flexmark-java/wiki/Extensions#superscript)
  * - [TablesExtension], [docs](https://github.com/vsch/flexmark-java/wiki/Extensions#tables)

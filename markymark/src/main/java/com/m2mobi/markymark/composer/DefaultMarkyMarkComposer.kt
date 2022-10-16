@@ -56,6 +56,7 @@ import com.m2mobi.markymark.theme.ListBlockStyle
  */
 open class DefaultMarkyMarkComposer : MarkyMarkComposer {
 
+    @Suppress("ComplexMethod", "LongMethod")
     protected open fun LazyListScope.createNode(
         modifier: Modifier,
         node: StableNode,
@@ -233,6 +234,7 @@ open class DefaultMarkyMarkComposer : MarkyMarkComposer {
 
     // Because of how lists and quotes interact we need to handle lists inside of a quote block separately. If we don't
     // do so, the list will break the quote indicator.
+    @Suppress("ComplexMethod", "NestedBlockDepth")
     private fun LazyListScope.createQuoteListBlock(
         modifier: Modifier,
         entries: List<ListEntry>,
@@ -313,27 +315,45 @@ open class DefaultMarkyMarkComposer : MarkyMarkComposer {
         level: Int,
         styles: ComposableStyles,
     ) {
-        val style = styles.listBlock
         for ((index, entry) in entries.withIndex()) {
-            val childModifier = modifier
-                .run { if (level == 0 && index == 0) paddingTop(style.padding) else this }
-                .run { if (level == 0 && index == entries.lastIndex) paddingBottom(style.padding) else this }
+            createListEntry(
+                modifier = modifier,
+                entry = entry,
+                level = level,
+                isFirst = index == 0,
+                isLast = index == entries.lastIndex,
+                styles = styles,
+            )
+        }
+    }
 
-            when (entry) {
-                is ListItem -> createListItem(
-                    modifier = childModifier.paddingHorizontal(style.padding),
-                    node = entry,
-                    level = level,
-                    style = style,
-                )
-                is ListNode -> createNode(
-                    modifier = childModifier
-                        .padding(start = style.levelIndent)
-                        .paddingHorizontal(style.padding),
-                    node = entry.node,
-                    styles = styles,
-                )
-            }
+    private fun LazyListScope.createListEntry(
+        modifier: Modifier,
+        entry: ListEntry,
+        level: Int,
+        isFirst: Boolean,
+        isLast: Boolean,
+        styles: ComposableStyles,
+    ) {
+        val style = styles.listBlock
+        val childModifier = modifier
+            .run { if (level == 0 && isFirst) paddingTop(style.padding) else this }
+            .run { if (level == 0 && isLast) paddingBottom(style.padding) else this }
+
+        when (entry) {
+            is ListItem -> createListItem(
+                modifier = childModifier.paddingHorizontal(style.padding),
+                node = entry,
+                level = level,
+                style = style,
+            )
+            is ListNode -> createNode(
+                modifier = childModifier
+                    .padding(start = style.levelIndent)
+                    .paddingHorizontal(style.padding),
+                node = entry.node,
+                styles = styles,
+            )
         }
     }
 

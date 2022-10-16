@@ -23,3 +23,5 @@ jobs:
         uses: android-actions/setup-android@v2.0.2
       - name: Assemble
         run: ./gradlew --no-daemon assembleDebug
+      - name: Detekt
+        run: ./gradlew --no-daemon detektDebug

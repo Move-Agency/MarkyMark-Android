@@ -29,7 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.m2mobi.markymark.MarkyMark.options
 import com.m2mobi.markymark.MarkyMark.theme
-import com.m2mobi.markymark.MarkyMarkConverter.convertToStableNodes
+import com.m2mobi.markymark.converter.MarkyMarkConverter.convertToStableNodes
 import com.m2mobi.markymark.model.StableNode
 import com.vladsch.flexmark.parser.Parser
 import com.vladsch.flexmark.util.ast.Document
