@@ -67,9 +67,9 @@ android {
 
     lint {
         xmlReport = true
-        xmlOutput = file("$buildDir/reports/lint-results-$displayName.xml")
+        xmlOutput = file("$buildDir/reports/lint/lint-results-$name.xml")
         htmlReport = true
-        htmlOutput = file("$buildDir/reports/lint-results-$displayName.html")
+        htmlOutput = file("$buildDir/reports/lint/lint-results-$name.html")
         textReport = false
     }
 }

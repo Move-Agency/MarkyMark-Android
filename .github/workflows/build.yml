@@ -41,4 +41,4 @@ jobs:
         with:
           name: 'Lint Results'
           path: | 
-            **/build/reports/lint-result-*.html
+            **/build/reports/lint/lint-result-*.html
