@@ -43,6 +43,14 @@ android {
             "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=${rootDir.absolutePath}/compose_metrics"
         )
     }
+
+    lint {
+        xmlReport = true
+        xmlOutput = file("$buildDir/reports/lint-results-$displayName.xml")
+        htmlReport = true
+        htmlOutput = file("$buildDir/reports/lint-results-$displayName.html")
+        textReport = false
+    }
 }
 
 dependencies {
