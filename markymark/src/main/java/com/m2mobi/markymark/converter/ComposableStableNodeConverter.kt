@@ -96,13 +96,13 @@ object ComposableStableNodeConverter {
     @Suppress("NestedBlockDepth")
     private fun List<StableNode>.bundleParagraphText(): ImmutableList<StableNode> {
         val returnList = mutableListOf<StableNode>()
-        var currentChildren = mutableListOf<AnnotatedStableNode>()
+        val currentChildren = mutableListOf<AnnotatedStableNode>()
         for (node in this) {
             when (node) {
                 is ComposableStableNode -> {
                     if (currentChildren.isNotEmpty()) {
                         returnList += AnnotatedStableNode.ParagraphText(currentChildren.toImmutableList())
-                        currentChildren = mutableListOf()
+                        currentChildren.clear()
                     }
                     returnList += node
                 }
