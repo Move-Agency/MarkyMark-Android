@@ -23,7 +23,11 @@ import com.m2mobi.markymark.converter.AnnotatedStableNodeConverter.unescapeHtml
 import com.m2mobi.markymark.converter.MarkyMarkConverter.convertToAnnotatedNodes
 import com.m2mobi.markymark.model.AnnotatedStableNode
 import com.m2mobi.markymark.model.ComposableStableNode
+import com.m2mobi.markymark.model.ImmutableList
 import com.m2mobi.markymark.model.StableNode
+import com.m2mobi.markymark.model.buildImmutableList
+import com.m2mobi.markymark.model.immutableListOf
+import com.m2mobi.markymark.model.toImmutableList
 import com.m2mobi.markymark.util.mapAsync
 import com.m2mobi.markymark.util.mapAsyncIndexed
 import com.vladsch.flexmark.ast.BlockQuote
@@ -83,21 +87,21 @@ object ComposableStableNodeConverter {
         return ComposableStableNode.Paragraph(children = convertParagraphChildren(paragraph.children))
     }
 
-    private suspend fun convertParagraphChildren(children: Iterable<Node>): List<StableNode> {
+    private suspend fun convertParagraphChildren(children: Iterable<Node>): ImmutableList<StableNode> {
         return children.mapAsync(::convertToStableNode)
             .filterNotNull()
             .bundleParagraphText()
     }
 
     @Suppress("NestedBlockDepth")
-    private fun List<StableNode>.bundleParagraphText(): List<StableNode> {
+    private fun List<StableNode>.bundleParagraphText(): ImmutableList<StableNode> {
         val returnList = mutableListOf<StableNode>()
         var currentChildren = mutableListOf<AnnotatedStableNode>()
         for (node in this) {
             when (node) {
                 is ComposableStableNode -> {
                     if (currentChildren.isNotEmpty()) {
-                        returnList += AnnotatedStableNode.ParagraphText(currentChildren)
+                        returnList += AnnotatedStableNode.ParagraphText(currentChildren.toImmutableList())
                         currentChildren = mutableListOf()
                     }
                     returnList += node
@@ -106,9 +110,9 @@ object ComposableStableNodeConverter {
             }
         }
         if (currentChildren.isNotEmpty()) {
-            returnList += AnnotatedStableNode.ParagraphText(currentChildren)
+            returnList += AnnotatedStableNode.ParagraphText(currentChildren.toImmutableList())
         }
-        return returnList
+        return returnList.toImmutableList()
     }
 
     private fun convertImageNode(image: Image): ComposableStableNode.Image {
@@ -156,7 +160,7 @@ object ComposableStableNodeConverter {
         return withContext(Dispatchers.Default) {
             val head = async { convertToTableRow(tableBlock.firstChild as TableHead) }
             val body = async {
-                (tableBlock.lastChild as? TableBody)?.let { convertToTableRows(it) } ?: emptyList()
+                (tableBlock.lastChild as? TableBody)?.let { convertToTableRows(it) }.orEmpty().toImmutableList()
             }
             ComposableStableNode.TableBlock(
                 head = head.await(),
@@ -175,9 +179,10 @@ object ComposableStableNodeConverter {
 
     private suspend fun convertToTableRows(
         nodes: Iterable<Node>
-    ): List<ComposableStableNode.TableRow> {
+    ): ImmutableList<ComposableStableNode.TableRow> {
         return nodes.filterIsInstance(TableRow::class.java)
             .mapAsync(::convertToTableRow)
+            .toImmutableList()
     }
 
     private suspend fun convertToTableRow(tableRow: TableRow): ComposableStableNode.TableRow {
@@ -185,6 +190,7 @@ object ComposableStableNodeConverter {
             tableRow.children
                 .filterIsInstance(TableCell::class.java)
                 .mapAsync(::convertToTableCell)
+                .toImmutableList()
         )
     }
 
@@ -206,17 +212,25 @@ object ComposableStableNodeConverter {
             ?.let { ComposableStableNode.ListBlock(level, convertListChildren(node.children, level)) }
     }
 
-    private suspend fun convertListChildren(nodes: Iterable<Node>, level: Int): List<ComposableStableNode.ListEntry> {
+    private suspend fun convertListChildren(
+        nodes: Iterable<Node>,
+        level: Int,
+    ): ImmutableList<ComposableStableNode.ListEntry> {
         return nodes.mapAsyncIndexed { index, item -> convertListItem(index + 1, item as ListItem, level) }
             .flatten()
+            .toImmutableList()
     }
 
-    private suspend fun convertListItem(index: Int, item: ListItem, level: Int): List<ComposableStableNode.ListEntry> {
+    private suspend fun convertListItem(
+        index: Int,
+        item: ListItem,
+        level: Int,
+    ): ImmutableList<ComposableStableNode.ListEntry> {
         val firstChild = item.firstChild
-        if (firstChild == null || !firstChild.hasChildren()) return emptyList()
+        if (firstChild == null || !firstChild.hasChildren()) return immutableListOf()
 
         val content = convertToAnnotatedNodes(firstChild.children)
-        return buildList {
+        return buildImmutableList {
             // Enforce the first item to parsed as a list item. There is no way in the Markdown spec it won't be and
             // this greatly simplifies displaying lists later.
             add(

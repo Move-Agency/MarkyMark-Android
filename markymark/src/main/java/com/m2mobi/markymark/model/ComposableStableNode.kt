@@ -52,7 +52,7 @@ sealed class ComposableStableNode : StableNode {
      */
     @Immutable
     data class Headline(
-        val children: List<AnnotatedStableNode>,
+        val children: ImmutableList<AnnotatedStableNode>,
         val level: Level,
     ) : ComposableStableNode() {
 
@@ -75,7 +75,7 @@ sealed class ComposableStableNode : StableNode {
      * See the [Markdown guide](https://www.markdownguide.org/basic-syntax#paragraphs-1).
      */
     @Immutable
-    data class Paragraph(val children: List<StableNode>) : ComposableStableNode()
+    data class Paragraph(val children: ImmutableList<StableNode>) : ComposableStableNode()
 
     /**
      * Represents a Markdown image. Mapped from [Image][com.vladsch.flexmark.ast.Image].
@@ -163,7 +163,7 @@ sealed class ComposableStableNode : StableNode {
      * For details see the [Markdown guide](https://www.markdownguide.org/basic-syntax#blockquotes-1).
      */
     @Immutable
-    data class BlockQuote(val children: List<StableNode>) : ComposableStableNode()
+    data class BlockQuote(val children: ImmutableList<StableNode>) : ComposableStableNode()
 
     /**
      * Represents a Markdown list. Mapped from [ListBlock][com.vladsch.flexmark.ast.ListBlock].
@@ -175,7 +175,7 @@ sealed class ComposableStableNode : StableNode {
     @Immutable
     data class ListBlock(
         val level: Int,
-        val children: List<ListEntry>,
+        val children: ImmutableList<ListEntry>,
     ) : ComposableStableNode()
 
     /**
@@ -198,7 +198,7 @@ sealed class ComposableStableNode : StableNode {
         @Immutable
         data class ListItem(
             val type: ListItemType,
-            val children: List<AnnotatedStableNode>,
+            val children: ImmutableList<AnnotatedStableNode>,
         ) : ListEntry()
 
         /**
@@ -290,7 +290,7 @@ sealed class ComposableStableNode : StableNode {
     @Immutable
     data class TableBlock(
         val head: TableRow,
-        val body: List<TableRow>,
+        val body: ImmutableList<TableRow>,
     ) : ComposableStableNode()
 
     /**
@@ -301,7 +301,7 @@ sealed class ComposableStableNode : StableNode {
      * For details see [TableBlock].
      */
     @Immutable
-    data class TableRow(val cells: List<TableCell>)
+    data class TableRow(val cells: ImmutableList<TableCell>)
 
     /**
      * Represents a Markdown table cell. Mapped from [TableCell][com.vladsch.flexmark.ext.tables.TableCell].
@@ -312,7 +312,7 @@ sealed class ComposableStableNode : StableNode {
      */
     @Immutable
     data class TableCell(
-        val children: List<AnnotatedStableNode>,
+        val children: ImmutableList<AnnotatedStableNode>,
         val alignment: Alignment,
     ) {
 

@@ -20,7 +20,9 @@ package com.m2mobi.markymark.converter
 
 import com.m2mobi.markymark.converter.ComposableStableNodeConverter.convertToStableNode
 import com.m2mobi.markymark.model.AnnotatedStableNode
+import com.m2mobi.markymark.model.ImmutableList
 import com.m2mobi.markymark.model.StableNode
+import com.m2mobi.markymark.model.toImmutableList
 import com.m2mobi.markymark.util.mapAsync
 import com.m2mobi.markymark.util.mapAsyncIndexed
 import com.vladsch.flexmark.util.ast.Document
@@ -40,17 +42,19 @@ object MarkyMarkConverter {
      * Convert [document] child [Node]s to [StableNode]s. This mapping happens as asynchronously as possible on the
      * [Dispatchers.Default] dispatcher. See [mapAsync] & [mapAsyncIndexed] for more details.
      */
-    suspend fun convertToStableNodes(document: Document): List<StableNode> {
+    suspend fun convertToStableNodes(document: Document): ImmutableList<StableNode> {
         return convertToStableNodes(document.children)
     }
 
-    internal suspend fun convertToStableNodes(nodes: Iterable<Node>): List<StableNode> {
+    internal suspend fun convertToStableNodes(nodes: Iterable<Node>): ImmutableList<StableNode> {
         return nodes.mapAsync(::convertToStableNode)
             .filterNotNull()
+            .toImmutableList()
     }
 
-    internal suspend fun convertToAnnotatedNodes(nodes: Iterable<Node>): List<AnnotatedStableNode> {
+    internal suspend fun convertToAnnotatedNodes(nodes: Iterable<Node>): ImmutableList<AnnotatedStableNode> {
         return nodes.mapAsync(AnnotatedStableNodeConverter::convertToAnnotatedNode)
             .filterNotNull()
+            .toImmutableList()
     }
 }

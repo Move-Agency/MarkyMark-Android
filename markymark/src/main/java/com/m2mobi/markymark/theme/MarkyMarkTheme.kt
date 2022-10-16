@@ -70,7 +70,9 @@ import com.m2mobi.markymark.model.ComposableStableNode.Paragraph
 import com.m2mobi.markymark.model.ComposableStableNode.Rule
 import com.m2mobi.markymark.model.ComposableStableNode.TableBlock
 import com.m2mobi.markymark.model.ComposableStableNode.TableCell
+import com.m2mobi.markymark.model.ImmutableList
 import com.m2mobi.markymark.model.StableNode
+import com.m2mobi.markymark.model.immutableListOf
 import com.m2mobi.markymark.theme.ListItemStyle.Companion.DefaultListItemIndicatorPadding
 import com.m2mobi.markymark.theme.ListItemStyle.Companion.DefaultListItemPadding
 import com.m2mobi.markymark.theme.ListItemStyle.Companion.DefaultListItemTextStyle
@@ -326,7 +328,7 @@ data class UnorderedListItemStyle(
     override val padding: Padding = DefaultListItemPadding,
     override val textStyle: TextStyle = DefaultListItemTextStyle,
     override val indicatorPadding: Padding = DefaultListItemIndicatorPadding,
-    val indicators: List<Indicator> = listOf(
+    val indicators: ImmutableList<Indicator> = immutableListOf(
         Indicator(shape = Oval),
         Indicator(shape = Triangle),
         Indicator(shape = Rectangle),

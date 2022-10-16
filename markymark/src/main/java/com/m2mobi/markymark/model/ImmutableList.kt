@@ -16,26 +16,19 @@
  * IN THE SOFTWARE.
  */
 
-package com.m2mobi.markymark.annotator
+package com.m2mobi.markymark.model
 
-import androidx.compose.runtime.Stable
-import androidx.compose.ui.text.AnnotatedString
-import com.m2mobi.markymark.model.AnnotatedStableNode
-import com.m2mobi.markymark.model.ImmutableList
-import com.m2mobi.markymark.theme.AnnotatedStyles
+import androidx.compose.runtime.Immutable
+import kotlin.experimental.ExperimentalTypeInference
 
-/**
- * The annotator is responsible for rendering [AnnotatedStableNode]s. See [DefaultMarkyMarkAnnotator] for the default
- * implementation.
- */
-@Stable
-interface MarkyMarkAnnotator {
+@Immutable
+data class ImmutableList<T>(private val list: List<T>) : List<T> by list
 
-    /**
-     * Create [AnnotatedString] for the [nodes].
-     */
-    fun annotate(
-        nodes: ImmutableList<AnnotatedStableNode>,
-        styles: AnnotatedStyles,
-    ): AnnotatedString
+fun <T> List<T>.toImmutableList(): ImmutableList<T> = ImmutableList(this)
+
+fun <T> immutableListOf(vararg items: T): ImmutableList<T> = listOf(*items).toImmutableList()
+
+@OptIn(ExperimentalTypeInference::class)
+inline fun <T> buildImmutableList(@BuilderInference builderAction: MutableList<T>.() -> Unit): ImmutableList<T> {
+    return buildList(builderAction).toImmutableList()
 }

@@ -27,12 +27,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import com.m2mobi.markymark.MarkyMark
 import com.m2mobi.markymark.MarkyMark.options
 import com.m2mobi.markymark.MarkyMark.theme
 import com.m2mobi.markymark.converter.MarkyMarkConverter.convertToStableNodes
+import com.m2mobi.markymark.model.ImmutableList
 import com.m2mobi.markymark.model.StableNode
+import com.m2mobi.markymark.model.immutableListOf
 import com.vladsch.flexmark.parser.Parser
-import com.vladsch.flexmark.util.ast.Document
 
 @Composable
 fun Markdown(
@@ -44,23 +46,10 @@ fun Markdown(
     val parser = remember(options) { Parser.Builder(options.flexmarkOptions).build() }
     val document = remember(parser, markdown) { parser.parse(markdown) }
 
-    Markdown(
-        modifier = modifier,
-        document = document,
-        contentPadding = contentPadding,
-    )
-}
-
-@Composable
-private fun Markdown(
-    document: Document,
-    modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(),
-) {
-    var nodes by remember { mutableStateOf<List<StableNode>>(emptyList()) }
+    var nodes by remember { mutableStateOf<ImmutableList<StableNode>>(immutableListOf()) }
     LaunchedEffect(document) { nodes = convertToStableNodes(document) }
 
-    val composer = options.composer
+    val composer = MarkyMark.options.composer
     val styles = theme.composableStyles
 
     LazyColumn(

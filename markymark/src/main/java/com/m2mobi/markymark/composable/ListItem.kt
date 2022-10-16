@@ -46,6 +46,7 @@ import com.m2mobi.markymark.model.ComposableStableNode.ListItemType
 import com.m2mobi.markymark.model.ComposableStableNode.ListItemType.Ordered
 import com.m2mobi.markymark.model.ComposableStableNode.ListItemType.Task
 import com.m2mobi.markymark.model.ComposableStableNode.ListItemType.Unordered
+import com.m2mobi.markymark.model.ImmutableList
 import com.m2mobi.markymark.theme.ListBlockStyle
 import com.m2mobi.markymark.theme.OrderedListItemStyle
 import com.m2mobi.markymark.theme.TaskListItemStyle
@@ -59,7 +60,7 @@ import com.m2mobi.markymark.theme.UnorderedListItemStyle.Indicator.Style
 @Composable
 internal fun ListItem(
     type: ListItemType,
-    children: List<AnnotatedStableNode>,
+    children: ImmutableList<AnnotatedStableNode>,
     blockStyle: ListBlockStyle,
     level: Int,
     modifier: Modifier = Modifier,

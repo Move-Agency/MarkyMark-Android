@@ -22,6 +22,7 @@ import android.util.Log
 import com.m2mobi.markymark.converter.MarkyMarkConverter.CONVERTER_TAG
 import com.m2mobi.markymark.converter.MarkyMarkConverter.convertToAnnotatedNodes
 import com.m2mobi.markymark.model.AnnotatedStableNode
+import com.m2mobi.markymark.model.immutableListOf
 import com.vladsch.flexmark.ast.AutoLink
 import com.vladsch.flexmark.ast.Code
 import com.vladsch.flexmark.ast.Emphasis
@@ -94,7 +95,7 @@ object AnnotatedStableNodeConverter {
     private fun convertAutoLinkNode(autoLink: AutoLink): AnnotatedStableNode.Link {
         val url = autoLink.url.unescapeHtml()
         return AnnotatedStableNode.Link(
-            children = listOf(AnnotatedStableNode.Text(url)),
+            children = immutableListOf(AnnotatedStableNode.Text(url)),
             url = url,
             title = null,
         )
