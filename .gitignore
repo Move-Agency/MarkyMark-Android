@@ -6,6 +6,7 @@
 .idea/modules
 .idea/*.xml
 .idea/.name
+.idea/.gitignore
 .DS_Store
 **/build
 /captures

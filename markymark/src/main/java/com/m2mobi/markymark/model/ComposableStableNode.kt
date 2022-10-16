@@ -57,11 +57,58 @@ sealed class ComposableStableNode : StableNode {
 
         enum class Level {
 
+            /**
+             * __Syntax:__
+             *
+             * ```markdown
+             * # Heading 1
+             * ```
+             */
             HEADING1,
+
+            /**
+             * __Syntax:__
+             *
+             * ```markdown
+             * ## Heading 2
+             * ```
+             */
             HEADING2,
+
+            /**
+             * __Syntax:__
+             *
+             * ```markdown
+             * ### Heading 3
+             * ```
+             */
             HEADING3,
+
+            /**
+             * __Syntax:__
+             *
+             * ```markdown
+             * #### Heading 4
+             * ```
+             */
             HEADING4,
+
+            /**
+             * __Syntax:__
+             *
+             * ```markdown
+             * ##### Heading 5
+             * ```
+             */
             HEADING5,
+
+            /**
+             * __Syntax:__
+             *
+             * ```markdown
+             * ###### Heading 6
+             * ```
+             */
             HEADING6,
         }
     }
