@@ -92,13 +92,13 @@ object ComposableStableNodeConverter {
     @Suppress("NestedBlockDepth")
     private fun List<StableNode>.bundleParagraphText(): List<StableNode> {
         val returnList = mutableListOf<StableNode>()
-        var currentChildren = mutableListOf<AnnotatedStableNode>()
+        val currentChildren = mutableListOf<AnnotatedStableNode>()
         for (node in this) {
             when (node) {
                 is ComposableStableNode -> {
                     if (currentChildren.isNotEmpty()) {
                         returnList += AnnotatedStableNode.ParagraphText(currentChildren)
-                        currentChildren = mutableListOf()
+                        currentChildren.clear()
                     }
                     returnList += node
                 }
@@ -156,7 +156,7 @@ object ComposableStableNodeConverter {
         return withContext(Dispatchers.Default) {
             val head = async { convertToTableRow(tableBlock.firstChild as TableHead) }
             val body = async {
-                (tableBlock.lastChild as? TableBody)?.let { convertToTableRows(it) } ?: emptyList()
+                (tableBlock.lastChild as? TableBody)?.let { convertToTableRows(it) }.orEmpty()
             }
             ComposableStableNode.TableBlock(
                 head = head.await(),
