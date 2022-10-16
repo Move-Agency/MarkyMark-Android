@@ -30,9 +30,9 @@ import com.m2mobi.markymark.theme.ImageStyle
 
 @Composable
 internal fun Image(
-    modifier: Modifier,
     node: Image,
     style: ImageStyle,
+    modifier: Modifier = Modifier,
 ) {
     if (node.title == null) {
         AsyncImage(
@@ -53,10 +53,10 @@ internal fun Image(
 
 @Composable
 private fun CaptionedImage(
-    modifier: Modifier,
     node: Image,
     title: String,
     style: ImageStyle,
+    modifier: Modifier = Modifier,
 ) {
     Column(modifier.padding(style.padding)) {
         AsyncImage(

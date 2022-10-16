@@ -39,6 +39,8 @@ subprojects {
 
     dependencies {
         detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:${Versions.DETEKT}")
+        detektPlugins("com.braisgabin.detekt:kotlin-compiler-wrapper:0.0.2")
+        detektPlugins("com.twitter.compose.rules:detekt:0.0.20")
     }
 
     tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {

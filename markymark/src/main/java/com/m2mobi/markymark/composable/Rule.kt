@@ -26,8 +26,8 @@ import com.m2mobi.markymark.theme.RuleStyle
 
 @Composable
 internal fun Rule(
-    modifier: Modifier,
     style: RuleStyle,
+    modifier: Modifier = Modifier,
 ) {
     Divider(
         modifier = modifier.padding(style.padding),

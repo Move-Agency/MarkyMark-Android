@@ -58,11 +58,11 @@ import com.m2mobi.markymark.theme.UnorderedListItemStyle.Indicator.Style
 
 @Composable
 internal fun ListItem(
-    modifier: Modifier,
     type: ListItemType,
     children: List<AnnotatedStableNode>,
     blockStyle: ListBlockStyle,
     level: Int,
+    modifier: Modifier = Modifier,
 ) {
     val style = when (type) {
         is Ordered -> blockStyle.orderedStyle

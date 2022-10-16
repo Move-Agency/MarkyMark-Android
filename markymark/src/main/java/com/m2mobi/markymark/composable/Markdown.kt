@@ -36,8 +36,8 @@ import com.vladsch.flexmark.util.ast.Document
 
 @Composable
 fun Markdown(
-    modifier: Modifier = Modifier,
     markdown: String,
+    modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(),
 ) {
     val options = options
@@ -53,8 +53,8 @@ fun Markdown(
 
 @Composable
 private fun Markdown(
-    modifier: Modifier = Modifier,
     document: Document,
+    modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(),
 ) {
     var nodes by remember { mutableStateOf<List<StableNode>>(emptyList()) }

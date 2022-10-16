@@ -26,9 +26,9 @@ import com.m2mobi.markymark.theme.HeadingLevelStyle
 
 @Composable
 internal fun Headline(
-    modifier: Modifier,
     node: ComposableStableNode.Headline,
     style: HeadingLevelStyle,
+    modifier: Modifier = Modifier,
 ) {
     TextNode(
         modifier = modifier.padding(style.padding),

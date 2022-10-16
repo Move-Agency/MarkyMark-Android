@@ -58,9 +58,9 @@ import kotlin.math.roundToInt
 
 @Composable
 internal fun TableBlock(
-    modifier: Modifier,
     node: TableBlock,
     style: TableBlockStyle,
+    modifier: Modifier = Modifier,
 ) {
     val measurePolicy = remember { TableBlockMeasurePolicy(style) }
     Layout(

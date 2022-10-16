@@ -28,9 +28,9 @@ import com.m2mobi.markymark.theme.CodeBlockStyle
 
 @Composable
 internal fun CodeBlock(
-    modifier: Modifier,
     node: CodeBlock,
     style: CodeBlockStyle,
+    modifier: Modifier = Modifier,
 ) {
     Text(
         modifier = modifier
