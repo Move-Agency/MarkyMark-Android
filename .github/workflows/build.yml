@@ -42,3 +42,8 @@ jobs:
           name: 'Lint Results'
           path: | 
             **/build/reports/lint/*.html
+      - uses: yutailang0119/action-android-lint@v3
+        with:
+          report-path: |
+            **/build/reports/lint/*.xml
+        continue-on-error: false
