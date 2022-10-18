@@ -47,12 +47,12 @@ import com.m2mobi.markymark.model.ComposableStableNode.ListEntry.ListNode
 import com.m2mobi.markymark.model.ComposableStableNode.Paragraph
 import com.m2mobi.markymark.model.ComposableStableNode.Rule
 import com.m2mobi.markymark.model.ComposableStableNode.TableBlock
-import com.m2mobi.markymark.model.ImmutableList
 import com.m2mobi.markymark.model.StableNode
-import com.m2mobi.markymark.model.immutableListOf
-import com.m2mobi.markymark.model.toImmutableList
 import com.m2mobi.markymark.theme.ComposableStyles
 import com.m2mobi.markymark.theme.ListBlockStyle
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableList
 
 /**
  * The default implementation of [MarkyMarkComposer]. All functions are open to allow customizing the rendering process.
@@ -182,7 +182,7 @@ open class DefaultMarkyMarkComposer : MarkyMarkComposer {
             modifier = modifier
                 .fillParentMaxWidth()
                 .padding(style.padding),
-            nodes = immutableListOf(node),
+            nodes = persistentListOf(node),
             style = style.textStyle,
         )
     }

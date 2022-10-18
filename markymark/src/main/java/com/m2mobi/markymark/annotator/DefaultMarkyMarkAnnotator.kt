@@ -33,8 +33,8 @@ import com.m2mobi.markymark.model.AnnotatedStableNode.Strikethrough
 import com.m2mobi.markymark.model.AnnotatedStableNode.Subscript
 import com.m2mobi.markymark.model.AnnotatedStableNode.Superscript
 import com.m2mobi.markymark.model.AnnotatedStableNode.Text
-import com.m2mobi.markymark.model.ImmutableList
 import com.m2mobi.markymark.theme.AnnotatedStyles
+import kotlinx.collections.immutable.ImmutableList
 
 open class DefaultMarkyMarkAnnotator : MarkyMarkAnnotator {
 

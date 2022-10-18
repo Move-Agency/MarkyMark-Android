@@ -20,6 +20,7 @@ package com.m2mobi.markymark.model
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
+import kotlinx.collections.immutable.ImmutableList
 
 @Stable
 @Suppress("MaxLineLength")

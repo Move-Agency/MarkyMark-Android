@@ -62,6 +62,8 @@ dependencies {
     implementation("androidx.compose.material3:material3:${Versions.MATERIAL}")
     debugImplementation("androidx.compose.ui:ui-tooling:${Versions.COMPOSE}")
 
+    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:${Versions.IMMUTABLE}")
+
     implementation("com.vladsch.flexmark:flexmark:${Versions.FLEXMARK}")
     implementation("com.vladsch.flexmark:flexmark-ext-autolink:${Versions.FLEXMARK}")
     implementation("com.vladsch.flexmark:flexmark-ext-gfm-strikethrough:${Versions.FLEXMARK}")

@@ -25,6 +25,7 @@ import com.m2mobi.markymark.model.ComposableStableNode.ListEntry.ListNode
 import com.m2mobi.markymark.model.ComposableStableNode.ListItemType.Ordered
 import com.m2mobi.markymark.model.ComposableStableNode.ListItemType.Task
 import com.m2mobi.markymark.model.ComposableStableNode.ListItemType.Unordered
+import kotlinx.collections.immutable.ImmutableList
 
 /**
  * Representation of a Markdown element which needs to be rendered as a Composable element. Marked [Stable] for compatibility

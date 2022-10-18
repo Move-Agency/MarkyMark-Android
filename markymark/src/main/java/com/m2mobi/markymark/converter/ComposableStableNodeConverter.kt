@@ -23,11 +23,7 @@ import com.m2mobi.markymark.converter.AnnotatedStableNodeConverter.unescapeHtml
 import com.m2mobi.markymark.converter.MarkyMarkConverter.convertToAnnotatedNodes
 import com.m2mobi.markymark.model.AnnotatedStableNode
 import com.m2mobi.markymark.model.ComposableStableNode
-import com.m2mobi.markymark.model.ImmutableList
 import com.m2mobi.markymark.model.StableNode
-import com.m2mobi.markymark.model.buildImmutableList
-import com.m2mobi.markymark.model.immutableListOf
-import com.m2mobi.markymark.model.toImmutableList
 import com.m2mobi.markymark.util.mapAsync
 import com.m2mobi.markymark.util.mapAsyncIndexed
 import com.vladsch.flexmark.ast.BlockQuote
@@ -47,6 +43,10 @@ import com.vladsch.flexmark.ext.tables.TableCell
 import com.vladsch.flexmark.ext.tables.TableHead
 import com.vladsch.flexmark.ext.tables.TableRow
 import com.vladsch.flexmark.util.ast.Node
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableList
+import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
@@ -227,10 +227,10 @@ object ComposableStableNodeConverter {
         level: Int,
     ): ImmutableList<ComposableStableNode.ListEntry> {
         val firstChild = item.firstChild
-        if (firstChild == null || !firstChild.hasChildren()) return immutableListOf()
+        if (firstChild == null || !firstChild.hasChildren()) return persistentListOf()
 
         val content = convertToAnnotatedNodes(firstChild.children)
-        return buildImmutableList {
+        return buildList {
             // Enforce the first item to parsed as a list item. There is no way in the Markdown spec it won't be and
             // this greatly simplifies displaying lists later.
             add(
@@ -245,7 +245,7 @@ object ComposableStableNodeConverter {
                 .mapAsync { convertListNode(node = it, level = level) }
                 .filterNotNull()
                 .let(::addAll)
-        }
+        }.toPersistentList()
     }
 
     private fun convertListItemType(index: Int, item: ListItem) = when (item) {
