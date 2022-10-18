@@ -52,7 +52,6 @@ import com.m2mobi.markymark.theme.ComposableStyles
 import com.m2mobi.markymark.theme.ListBlockStyle
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
-import kotlinx.collections.immutable.toImmutableList
 
 /**
  * The default implementation of [MarkyMarkComposer]. All functions are open to allow customizing the rendering process.
@@ -369,7 +368,7 @@ open class DefaultMarkyMarkComposer : MarkyMarkComposer {
         ListItem(
             modifier = modifier.fillParentMaxWidth(),
             type = node.type,
-            children = node.children.toImmutableList(),
+            children = node.children,
             blockStyle = style,
             level = level,
         )
