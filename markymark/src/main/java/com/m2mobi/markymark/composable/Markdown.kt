@@ -28,7 +28,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.m2mobi.markymark.MarkyMark
-import com.m2mobi.markymark.MarkyMark.options
 import com.m2mobi.markymark.MarkyMark.theme
 import com.m2mobi.markymark.converter.MarkyMarkConverter.convertToStableNodes
 import com.m2mobi.markymark.model.StableNode
@@ -42,7 +41,7 @@ fun Markdown(
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(),
 ) {
-    val options = options
+    val options = MarkyMark.options
     val parser = remember(options) { Parser.Builder(options.flexmarkOptions).build() }
     val document = remember(parser, markdown) { parser.parse(markdown) }
 

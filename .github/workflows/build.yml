@@ -25,9 +25,9 @@ jobs:
       - name: 'Setup Android SDK'
         uses: android-actions/setup-android@v2.0.2
       - name: 'Assemble'
-        run: ./gradlew assembleDebug
+        run: ./gradlew --no-daemon assembleDebug
       - name: 'Detekt'
-        run: ./gradlew detektDebug
+        run: ./gradlew --no-daemon detektDebug
       - name: 'Upload Detekt Report Artifacts'
         uses: actions/upload-artifact@v3
         with:
@@ -35,7 +35,7 @@ jobs:
           path: |
             **/build/reports/detekt/*.md
       - name: 'Android Lint'
-        run: ./gradlew lintDebug
+        run: ./gradlew --no-daemon lintDebug
       - name: 'Upload Lint Report Artifacts'
         uses: actions/upload-artifact@v3
         with:

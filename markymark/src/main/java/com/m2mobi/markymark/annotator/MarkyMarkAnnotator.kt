@@ -34,6 +34,7 @@ interface MarkyMarkAnnotator {
     /**
      * Create [AnnotatedString] for the [nodes].
      */
+    @Stable
     fun annotate(
         nodes: ImmutableList<AnnotatedStableNode>,
         styles: AnnotatedStyles,
