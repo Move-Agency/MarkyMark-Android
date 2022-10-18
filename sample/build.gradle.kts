@@ -78,6 +78,8 @@ dependencies {
 
     implementation(project(":markymark"))
 
+    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:${Versions.IMMUTABLE}")
+
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.activity:activity-compose:${Versions.COMPOSE_ACTIVITY}")
     implementation("androidx.compose.ui:ui:${Versions.COMPOSE}")
