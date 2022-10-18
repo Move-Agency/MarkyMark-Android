@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="MarkyMarkSource" pattern="file[MarkyMark-Android.sample.main]:java//*||file[MarkyMark-Android.markymark.main]:java//*||file[MarkyMark-Android]:LICENSE||file[MarkyMark-Android.buildSrc.main]:kotlin/Versions.kt" />
+</component>
