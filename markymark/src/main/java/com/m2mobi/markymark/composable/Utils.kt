@@ -23,13 +23,14 @@ import androidx.compose.ui.text.AnnotatedString
 import com.m2mobi.markymark.MarkyMark
 import com.m2mobi.markymark.MarkyMarkOptions
 import com.m2mobi.markymark.model.AnnotatedStableNode
+import com.m2mobi.markymark.model.ImmutableList
 
 /**
  * Utility function to convert [nodes] into an [AnnotatedString] using the [MarkyMarkOptions.annotator].
  */
 @Composable
 internal fun annotate(
-    nodes: List<AnnotatedStableNode>,
+    nodes: ImmutableList<AnnotatedStableNode>,
 ): AnnotatedString {
     val styles = MarkyMark.theme.annotatedStyles
     return MarkyMark.options.annotator.annotate(nodes = nodes, styles = styles)

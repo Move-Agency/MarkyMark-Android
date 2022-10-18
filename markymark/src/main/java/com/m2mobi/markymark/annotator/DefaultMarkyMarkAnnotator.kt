@@ -33,16 +33,17 @@ import com.m2mobi.markymark.model.AnnotatedStableNode.Strikethrough
 import com.m2mobi.markymark.model.AnnotatedStableNode.Subscript
 import com.m2mobi.markymark.model.AnnotatedStableNode.Superscript
 import com.m2mobi.markymark.model.AnnotatedStableNode.Text
+import com.m2mobi.markymark.model.ImmutableList
 import com.m2mobi.markymark.theme.AnnotatedStyles
 
 open class DefaultMarkyMarkAnnotator : MarkyMarkAnnotator {
 
-    override fun annotate(nodes: List<AnnotatedStableNode>, styles: AnnotatedStyles): AnnotatedString {
+    override fun annotate(nodes: ImmutableList<AnnotatedStableNode>, styles: AnnotatedStyles): AnnotatedString {
         return buildAnnotatedString { annotateChildren(nodes = nodes, styles = styles) }
     }
 
     protected open fun AnnotatedString.Builder.annotateChildren(
-        nodes: List<AnnotatedStableNode>,
+        nodes: ImmutableList<AnnotatedStableNode>,
         styles: AnnotatedStyles,
     ) {
         for (node in nodes) annotate(node = node, styles = styles)

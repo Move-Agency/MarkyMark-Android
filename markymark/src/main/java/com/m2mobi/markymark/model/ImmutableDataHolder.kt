@@ -16,26 +16,14 @@
  * IN THE SOFTWARE.
  */
 
-package com.m2mobi.markymark.annotator
+package com.m2mobi.markymark.model
 
-import androidx.compose.runtime.Stable
-import androidx.compose.ui.text.AnnotatedString
-import com.m2mobi.markymark.model.AnnotatedStableNode
-import com.m2mobi.markymark.model.ImmutableList
-import com.m2mobi.markymark.theme.AnnotatedStyles
+import androidx.compose.runtime.Immutable
+import com.vladsch.flexmark.util.data.DataHolder
 
-/**
- * The annotator is responsible for rendering [AnnotatedStableNode]s. See [DefaultMarkyMarkAnnotator] for the default
- * implementation.
- */
-@Stable
-interface MarkyMarkAnnotator {
+@Immutable
+data class ImmutableDataHolder(
+    private val dataSet: DataHolder,
+) : DataHolder by dataSet
 
-    /**
-     * Create [AnnotatedString] for the [nodes].
-     */
-    fun annotate(
-        nodes: ImmutableList<AnnotatedStableNode>,
-        styles: AnnotatedStyles,
-    ): AnnotatedString
-}
+fun DataHolder.toImmutableDataHolder(): ImmutableDataHolder = ImmutableDataHolder(this)

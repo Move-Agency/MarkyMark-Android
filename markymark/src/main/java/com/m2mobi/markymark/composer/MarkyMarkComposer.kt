@@ -22,6 +22,7 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
 import com.m2mobi.markymark.model.ComposableStableNode
+import com.m2mobi.markymark.model.ImmutableList
 import com.m2mobi.markymark.model.StableNode
 import com.m2mobi.markymark.theme.ComposableStyles
 
@@ -37,7 +38,7 @@ interface MarkyMarkComposer {
      */
     fun LazyListScope.createNodes(
         modifier: Modifier = Modifier,
-        nodes: List<StableNode>,
+        nodes: ImmutableList<StableNode>,
         styles: ComposableStyles,
     )
 }

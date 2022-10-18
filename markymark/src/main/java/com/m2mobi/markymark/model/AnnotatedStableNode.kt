@@ -29,7 +29,7 @@ sealed class AnnotatedStableNode : StableNode {
      * Represents Markdown text containing other formatting.
      */
     @Immutable
-    data class ParagraphText(val children: List<AnnotatedStableNode>) : AnnotatedStableNode()
+    data class ParagraphText(val children: ImmutableList<AnnotatedStableNode>) : AnnotatedStableNode()
 
     /**
      * Represents Markdown text without other formatting.
@@ -50,7 +50,7 @@ sealed class AnnotatedStableNode : StableNode {
      * For more details see the [Markdown guide](https://www.markdownguide.org/basic-syntax#bold).
      */
     @Immutable
-    data class Bold(val children: List<AnnotatedStableNode>) : AnnotatedStableNode()
+    data class Bold(val children: ImmutableList<AnnotatedStableNode>) : AnnotatedStableNode()
 
     /**
      * Represents Markdown text with italic formatting. Mapped from [Emphasis][com.vladsch.flexmark.ast.Emphasis].
@@ -65,7 +65,7 @@ sealed class AnnotatedStableNode : StableNode {
      * For more details see the [Markdown guide](https://www.markdownguide.org/basic-syntax#italic).
      */
     @Immutable
-    data class Italic(val children: List<AnnotatedStableNode>) : AnnotatedStableNode()
+    data class Italic(val children: ImmutableList<AnnotatedStableNode>) : AnnotatedStableNode()
 
     /**
      * Represents Github Flavoured Markdown struck out text. Mapped from [Striketrough][com.vladsch.flexmark.ext.gfm.strikethrough.Strikethrough].
@@ -79,7 +79,7 @@ sealed class AnnotatedStableNode : StableNode {
      * For more details see the [Github Flavoured Markdown guide](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#styling-text).
      */
     @Immutable
-    data class Strikethrough(val children: List<AnnotatedStableNode>) : AnnotatedStableNode()
+    data class Strikethrough(val children: ImmutableList<AnnotatedStableNode>) : AnnotatedStableNode()
 
     /**
      * Represents Markdown text with inline code formatting. Mapped from [Code][com.vladsch.flexmark.ast.Code].
@@ -93,7 +93,7 @@ sealed class AnnotatedStableNode : StableNode {
      * For more details see the [Markdown guide](https://www.markdownguide.org/basic-syntax#code).
      */
     @Immutable
-    data class Code(val children: List<AnnotatedStableNode>) : AnnotatedStableNode()
+    data class Code(val children: ImmutableList<AnnotatedStableNode>) : AnnotatedStableNode()
 
     /**
      * Represents Markdown text with link formatting. Mapped from [Link][com.vladsch.flexmark.ast.Link] or
@@ -112,7 +112,7 @@ sealed class AnnotatedStableNode : StableNode {
      */
     @Immutable
     data class Link(
-        val children: List<AnnotatedStableNode>,
+        val children: ImmutableList<AnnotatedStableNode>,
         val url: String,
         val title: String?,
     ) : AnnotatedStableNode()
@@ -150,7 +150,7 @@ sealed class AnnotatedStableNode : StableNode {
      * For more details see the [Markdown guide](https://www.markdownguide.org/extended-syntax/#subscript).
      */
     @Immutable
-    data class Subscript(val children: List<AnnotatedStableNode>) : AnnotatedStableNode()
+    data class Subscript(val children: ImmutableList<AnnotatedStableNode>) : AnnotatedStableNode()
 
     /**
      * Represents Markdown text with superscript formatting. Mapped from [Superscript][com.vladsch.flexmark.ext.superscript.Superscript].
@@ -164,5 +164,5 @@ sealed class AnnotatedStableNode : StableNode {
      * For more details see the [Markdown guide](https://www.markdownguide.org/extended-syntax/#superscript).
      */
     @Immutable
-    data class Superscript(val children: List<AnnotatedStableNode>) : AnnotatedStableNode()
+    data class Superscript(val children: ImmutableList<AnnotatedStableNode>) : AnnotatedStableNode()
 }

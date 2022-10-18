@@ -27,12 +27,13 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import com.m2mobi.markymark.model.AnnotatedStableNode
+import com.m2mobi.markymark.model.ImmutableList
 
 internal const val TAG_LINK = "TAG_LINK"
 
 @Composable
 internal fun TextNode(
-    nodes: List<AnnotatedStableNode>,
+    nodes: ImmutableList<AnnotatedStableNode>,
     style: TextStyle,
     modifier: Modifier = Modifier,
     onTextLayout: (TextLayoutResult) -> Unit = {},

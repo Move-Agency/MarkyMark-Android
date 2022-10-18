@@ -47,7 +47,10 @@ import com.m2mobi.markymark.model.ComposableStableNode.ListEntry.ListNode
 import com.m2mobi.markymark.model.ComposableStableNode.Paragraph
 import com.m2mobi.markymark.model.ComposableStableNode.Rule
 import com.m2mobi.markymark.model.ComposableStableNode.TableBlock
+import com.m2mobi.markymark.model.ImmutableList
 import com.m2mobi.markymark.model.StableNode
+import com.m2mobi.markymark.model.immutableListOf
+import com.m2mobi.markymark.model.toImmutableList
 import com.m2mobi.markymark.theme.ComposableStyles
 import com.m2mobi.markymark.theme.ListBlockStyle
 
@@ -111,7 +114,7 @@ open class DefaultMarkyMarkComposer : MarkyMarkComposer {
 
     override fun LazyListScope.createNodes(
         modifier: Modifier,
-        nodes: List<StableNode>,
+        nodes: ImmutableList<StableNode>,
         styles: ComposableStyles,
     ) {
         for (node in nodes) createNode(modifier = modifier, node = node, styles = styles)
@@ -179,7 +182,7 @@ open class DefaultMarkyMarkComposer : MarkyMarkComposer {
             modifier = modifier
                 .fillParentMaxWidth()
                 .padding(style.padding),
-            nodes = listOf(node),
+            nodes = immutableListOf(node),
             style = style.textStyle,
         )
     }
@@ -237,7 +240,7 @@ open class DefaultMarkyMarkComposer : MarkyMarkComposer {
     @Suppress("ComplexMethod", "NestedBlockDepth")
     private fun LazyListScope.createQuoteListBlock(
         modifier: Modifier,
-        entries: List<ListEntry>,
+        entries: ImmutableList<ListEntry>,
         styles: ComposableStyles,
         isTop: Boolean,
         isBottom: Boolean,
@@ -311,7 +314,7 @@ open class DefaultMarkyMarkComposer : MarkyMarkComposer {
 
     protected open fun LazyListScope.createListEntries(
         modifier: Modifier,
-        entries: List<ListEntry>,
+        entries: ImmutableList<ListEntry>,
         level: Int,
         styles: ComposableStyles,
     ) {
@@ -366,7 +369,7 @@ open class DefaultMarkyMarkComposer : MarkyMarkComposer {
         ListItem(
             modifier = modifier.fillParentMaxWidth(),
             type = node.type,
-            children = node.children,
+            children = node.children.toImmutableList(),
             blockStyle = style,
             level = level,
         )

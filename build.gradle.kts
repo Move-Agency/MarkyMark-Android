@@ -59,4 +59,5 @@ subprojects {
 
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
+    delete(file("$rootProject/compose-metrics"))
 }

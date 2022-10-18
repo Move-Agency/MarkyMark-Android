@@ -24,6 +24,8 @@ import com.m2mobi.markymark.annotator.DefaultMarkyMarkAnnotator
 import com.m2mobi.markymark.annotator.MarkyMarkAnnotator
 import com.m2mobi.markymark.composer.DefaultMarkyMarkComposer
 import com.m2mobi.markymark.composer.MarkyMarkComposer
+import com.m2mobi.markymark.model.ImmutableDataHolder
+import com.m2mobi.markymark.model.toImmutableDataHolder
 import com.vladsch.flexmark.ext.autolink.AutolinkExtension
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughSubscriptExtension
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListExtension
@@ -32,7 +34,6 @@ import com.vladsch.flexmark.ext.tables.TablesExtension
 import com.vladsch.flexmark.parser.Parser
 import com.vladsch.flexmark.parser.Parser.EXTENSIONS
 import com.vladsch.flexmark.parser.Parser.ParserExtension
-import com.vladsch.flexmark.util.data.DataHolder
 import com.vladsch.flexmark.util.data.MutableDataSet
 
 /**
@@ -46,7 +47,7 @@ import com.vladsch.flexmark.util.data.MutableDataSet
  */
 @Stable
 data class MarkyMarkOptions(
-    val flexmarkOptions: DataHolder,
+    val flexmarkOptions: ImmutableDataHolder,
     val composer: MarkyMarkComposer,
     val annotator: MarkyMarkAnnotator,
 )
@@ -76,8 +77,7 @@ fun createDefaultFlexmarkOptions() = MutableDataSet().apply {
         SuperscriptExtension.create(),
         TablesExtension.create(),
     )
-    toImmutable()
-}
+}.toImmutableDataHolder()
 
 /**
  * Utility function for adding [ParserExtension].
