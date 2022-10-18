@@ -32,9 +32,9 @@ internal const val TAG_LINK = "TAG_LINK"
 
 @Composable
 internal fun TextNode(
-    modifier: Modifier = Modifier,
     nodes: List<AnnotatedStableNode>,
     style: TextStyle,
+    modifier: Modifier = Modifier,
     onTextLayout: (TextLayoutResult) -> Unit = {},
 ) {
     val text = annotate(nodes = nodes)

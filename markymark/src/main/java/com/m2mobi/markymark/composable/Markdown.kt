@@ -29,15 +29,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.m2mobi.markymark.MarkyMark.options
 import com.m2mobi.markymark.MarkyMark.theme
-import com.m2mobi.markymark.MarkyMarkConverter.convertToStableNodes
+import com.m2mobi.markymark.converter.MarkyMarkConverter.convertToStableNodes
 import com.m2mobi.markymark.model.StableNode
 import com.vladsch.flexmark.parser.Parser
 import com.vladsch.flexmark.util.ast.Document
 
 @Composable
 fun Markdown(
-    modifier: Modifier = Modifier,
     markdown: String,
+    modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(),
 ) {
     val options = options
@@ -53,8 +53,8 @@ fun Markdown(
 
 @Composable
 private fun Markdown(
-    modifier: Modifier = Modifier,
     document: Document,
+    modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(),
 ) {
     var nodes by remember { mutableStateOf<List<StableNode>>(emptyList()) }

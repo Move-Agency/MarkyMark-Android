@@ -58,9 +58,9 @@ import kotlin.math.roundToInt
 
 @Composable
 internal fun TableBlock(
-    modifier: Modifier,
     node: TableBlock,
     style: TableBlockStyle,
+    modifier: Modifier = Modifier,
 ) {
     val measurePolicy = remember { TableBlockMeasurePolicy(style) }
     Layout(
@@ -107,6 +107,7 @@ private fun DrawScope.drawBodyDividers(
     drawRowDividers(rowHeights = rowHeights, style = style)
 }
 
+@Suppress("NestedBlockDepth")
 private fun DrawScope.drawColumnDividers(
     columnWidths: Map<Int, Int>,
     style: TableBlockStyle,
@@ -128,6 +129,7 @@ private fun DrawScope.drawColumnDividers(
     }
 }
 
+@Suppress("NestedBlockDepth")
 private fun DrawScope.drawRowDividers(
     rowHeights: Map<Int, Int>,
     style: TableBlockStyle,
@@ -216,6 +218,7 @@ class TableBlockMeasurePolicy(
     var measuredColumnWidths by mutableStateOf(emptyMap<Int, Int>())
     var measuredRowHeights by mutableStateOf(emptyMap<Int, Int>())
 
+    @Suppress("LongMethod")
     override fun MeasureScope.measure(measurables: List<Measurable>, constraints: Constraints): MeasureResult {
         val columnWidths = mutableMapOf<Int, Int>()
         val rowHeights = mutableMapOf<Int, Int>()

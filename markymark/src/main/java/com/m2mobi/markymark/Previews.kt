@@ -44,6 +44,7 @@ internal fun Preview() {
  * Contains all syntax supported by MarkyMark. Made public so you can include it in a debug screen and verify your
  * custom [MarkyMarkTheme], [MarkyMarkComposer], or [MarkyMarkAnnotator].
  */
+@Suppress("MaxLineLength")
 const val PREVIEW_MARKDOWN =
     """
 # Supported Markdown Showcase
