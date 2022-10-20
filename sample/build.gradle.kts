@@ -64,11 +64,21 @@ android {
             "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=${rootDir.absolutePath}/compose_metrics"
         )
     }
+
+    lint {
+        xmlReport = true
+        xmlOutput = file("$buildDir/reports/lint/lint-results-$name.xml")
+        htmlReport = true
+        htmlOutput = file("$buildDir/reports/lint/lint-results-$name.html")
+        textReport = false
+    }
 }
 
 dependencies {
 
     implementation(project(":markymark"))
+
+    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:${Versions.IMMUTABLE}")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.activity:activity-compose:${Versions.COMPOSE_ACTIVITY}")

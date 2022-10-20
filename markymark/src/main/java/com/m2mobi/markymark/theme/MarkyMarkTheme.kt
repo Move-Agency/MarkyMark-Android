@@ -70,9 +70,7 @@ import com.m2mobi.markymark.model.ComposableStableNode.Paragraph
 import com.m2mobi.markymark.model.ComposableStableNode.Rule
 import com.m2mobi.markymark.model.ComposableStableNode.TableBlock
 import com.m2mobi.markymark.model.ComposableStableNode.TableCell
-import com.m2mobi.markymark.model.ImmutableList
 import com.m2mobi.markymark.model.StableNode
-import com.m2mobi.markymark.model.immutableListOf
 import com.m2mobi.markymark.theme.ListItemStyle.Companion.DefaultListItemIndicatorPadding
 import com.m2mobi.markymark.theme.ListItemStyle.Companion.DefaultListItemPadding
 import com.m2mobi.markymark.theme.ListItemStyle.Companion.DefaultListItemTextStyle
@@ -81,6 +79,8 @@ import com.m2mobi.markymark.theme.UnorderedListItemStyle.Indicator.Shape.Oval
 import com.m2mobi.markymark.theme.UnorderedListItemStyle.Indicator.Shape.Rectangle
 import com.m2mobi.markymark.theme.UnorderedListItemStyle.Indicator.Shape.Triangle
 import com.m2mobi.markymark.theme.UnorderedListItemStyle.Indicator.Style.Fill
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 val LocalMarkyMarkTheme = staticCompositionLocalOf { MarkyMarkTheme() }
 
@@ -328,7 +328,7 @@ data class UnorderedListItemStyle(
     override val padding: Padding = DefaultListItemPadding,
     override val textStyle: TextStyle = DefaultListItemTextStyle,
     override val indicatorPadding: Padding = DefaultListItemIndicatorPadding,
-    val indicators: ImmutableList<Indicator> = immutableListOf(
+    val indicators: ImmutableList<Indicator> = persistentListOf(
         Indicator(shape = Oval),
         Indicator(shape = Triangle),
         Indicator(shape = Rectangle),

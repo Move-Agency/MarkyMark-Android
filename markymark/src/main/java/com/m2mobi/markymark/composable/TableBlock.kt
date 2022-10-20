@@ -62,7 +62,7 @@ internal fun TableBlock(
     style: TableBlockStyle,
     modifier: Modifier = Modifier,
 ) {
-    val measurePolicy = remember { TableBlockMeasurePolicy(style) }
+    val measurePolicy = remember(style) { TableBlockMeasurePolicy(style) }
     Layout(
         modifier = modifier
             .padding(style.padding)

@@ -27,7 +27,6 @@ import androidx.compose.ui.text.font.FontStyle.Companion.Italic
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.m2mobi.markymark.model.immutableListOf
 import com.m2mobi.markymark.sample.ui.theme.ColorPalette.M2Black
 import com.m2mobi.markymark.sample.ui.theme.ColorPalette.M2Blue
 import com.m2mobi.markymark.sample.ui.theme.ColorPalette.M2Gray
@@ -64,6 +63,7 @@ import com.m2mobi.markymark.theme.UnorderedListItemStyle.Indicator.Shape.Oval
 import com.m2mobi.markymark.theme.UnorderedListItemStyle.Indicator.Shape.Rectangle
 import com.m2mobi.markymark.theme.UnorderedListItemStyle.Indicator.Shape.Triangle
 import com.m2mobi.markymark.theme.UnorderedListItemStyle.Indicator.Style.Stroke
+import kotlinx.collections.immutable.persistentListOf
 
 private val SampleMarkyMarkTheme = MarkyMarkTheme(
     composableStyles = ComposableStyles(
@@ -95,7 +95,7 @@ private val SampleMarkyMarkTheme = MarkyMarkTheme(
             orderedStyle = OrderedListItemStyle(textStyle = Body),
             unorderedStyle = UnorderedListItemStyle(
                 textStyle = Body,
-                indicators = immutableListOf(
+                indicators = persistentListOf(
                     Indicator(
                         // Diamond
                         color = M2Orange,

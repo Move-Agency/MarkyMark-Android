@@ -22,7 +22,6 @@ import android.util.Log
 import com.m2mobi.markymark.converter.MarkyMarkConverter.CONVERTER_TAG
 import com.m2mobi.markymark.converter.MarkyMarkConverter.convertToAnnotatedNodes
 import com.m2mobi.markymark.model.AnnotatedStableNode
-import com.m2mobi.markymark.model.immutableListOf
 import com.vladsch.flexmark.ast.AutoLink
 import com.vladsch.flexmark.ast.Code
 import com.vladsch.flexmark.ast.Emphasis
@@ -39,6 +38,7 @@ import com.vladsch.flexmark.ext.superscript.Superscript
 import com.vladsch.flexmark.util.ast.Node
 import com.vladsch.flexmark.util.sequence.BasedSequence
 import com.vladsch.flexmark.util.sequence.Escaping
+import kotlinx.collections.immutable.persistentListOf
 
 @Suppress("TooManyFunctions")
 object AnnotatedStableNodeConverter {
@@ -95,7 +95,7 @@ object AnnotatedStableNodeConverter {
     private fun convertAutoLinkNode(autoLink: AutoLink): AnnotatedStableNode.Link {
         val url = autoLink.url.unescapeHtml()
         return AnnotatedStableNode.Link(
-            children = immutableListOf(AnnotatedStableNode.Text(url)),
+            children = persistentListOf(AnnotatedStableNode.Text(url)),
             url = url,
             title = null,
         )

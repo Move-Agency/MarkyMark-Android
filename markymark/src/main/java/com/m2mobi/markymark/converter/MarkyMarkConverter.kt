@@ -20,13 +20,13 @@ package com.m2mobi.markymark.converter
 
 import com.m2mobi.markymark.converter.ComposableStableNodeConverter.convertToStableNode
 import com.m2mobi.markymark.model.AnnotatedStableNode
-import com.m2mobi.markymark.model.ImmutableList
 import com.m2mobi.markymark.model.StableNode
-import com.m2mobi.markymark.model.toImmutableList
 import com.m2mobi.markymark.util.mapAsync
 import com.m2mobi.markymark.util.mapAsyncIndexed
 import com.vladsch.flexmark.util.ast.Document
 import com.vladsch.flexmark.util.ast.Node
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.Dispatchers
 
 /**

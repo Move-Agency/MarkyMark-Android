@@ -31,6 +31,8 @@ object Versions {
 
     const val GRADLE_PLUGIN = "7.3.0"
 
+    const val IMMUTABLE = "0.3.5"
+
     const val COMPOSE = "1.3.0-beta03"
     const val COMPOSE_ACTIVITY = "1.6.0"
     const val ACCOMPANIST = "0.26.4-beta"

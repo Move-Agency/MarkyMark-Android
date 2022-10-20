@@ -28,13 +28,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.m2mobi.markymark.MarkyMark
-import com.m2mobi.markymark.MarkyMark.options
 import com.m2mobi.markymark.MarkyMark.theme
 import com.m2mobi.markymark.converter.MarkyMarkConverter.convertToStableNodes
-import com.m2mobi.markymark.model.ImmutableList
 import com.m2mobi.markymark.model.StableNode
-import com.m2mobi.markymark.model.immutableListOf
 import com.vladsch.flexmark.parser.Parser
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun Markdown(
@@ -42,11 +41,11 @@ fun Markdown(
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(),
 ) {
-    val options = options
+    val options = MarkyMark.options
     val parser = remember(options) { Parser.Builder(options.flexmarkOptions).build() }
     val document = remember(parser, markdown) { parser.parse(markdown) }
 
-    var nodes by remember { mutableStateOf<ImmutableList<StableNode>>(immutableListOf()) }
+    var nodes by remember { mutableStateOf<ImmutableList<StableNode>>(persistentListOf()) }
     LaunchedEffect(document) { nodes = convertToStableNodes(document) }
 
     val composer = MarkyMark.options.composer

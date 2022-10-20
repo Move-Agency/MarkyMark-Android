@@ -43,6 +43,14 @@ android {
             "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=${rootDir.absolutePath}/compose_metrics"
         )
     }
+
+    lint {
+        xmlReport = true
+        xmlOutput = file("$buildDir/reports/lint/lint-results-$name.xml")
+        htmlReport = true
+        htmlOutput = file("$buildDir/reports/lint/lint-results-$name.html")
+        textReport = false
+    }
 }
 
 dependencies {
@@ -53,6 +61,8 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview:${Versions.COMPOSE}")
     implementation("androidx.compose.material3:material3:${Versions.MATERIAL}")
     debugImplementation("androidx.compose.ui:ui-tooling:${Versions.COMPOSE}")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:${Versions.IMMUTABLE}")
 
     implementation("com.vladsch.flexmark:flexmark:${Versions.FLEXMARK}")
     implementation("com.vladsch.flexmark:flexmark-ext-autolink:${Versions.FLEXMARK}")

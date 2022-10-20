@@ -27,7 +27,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import com.m2mobi.markymark.model.AnnotatedStableNode
-import com.m2mobi.markymark.model.ImmutableList
+import kotlinx.collections.immutable.ImmutableList
 
 internal const val TAG_LINK = "TAG_LINK"
 

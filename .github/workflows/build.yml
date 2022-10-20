@@ -1,4 +1,4 @@
-name: Build
+name: 'Build'
 
 on:
   pull_request:
@@ -10,18 +10,40 @@ on:
 
 jobs:
   build:
+    concurrency:
+      group: build-${{ github.ref }}
+      cancel-in-progress: true
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: 'Checkout'
         uses: actions/checkout@v3.1.0
-      - name: Setup JDK
+      - name: 'Setup JDK'
         uses: actions/setup-java@v3.5.1
         with:
           java-version: 11
           distribution: temurin
-      - name: Setup Android SDK
+      - name: 'Setup Android SDK'
         uses: android-actions/setup-android@v2.0.2
-      - name: Assemble
+      - name: 'Assemble'
         run: ./gradlew --no-daemon assembleDebug
-      - name: Detekt
+      - name: 'Detekt'
         run: ./gradlew --no-daemon detektDebug
+      - name: 'Upload Detekt Report Artifacts'
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'Detekt Results'
+          path: |
+            **/build/reports/detekt/*.md
+      - name: 'Android Lint'
+        run: ./gradlew --no-daemon lintDebug
+      - name: 'Upload Lint Report Artifacts'
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'Lint Results'
+          path: | 
+            **/build/reports/lint/*.html
+      - uses: yutailang0119/action-android-lint@v3
+        with:
+          report-path: |
+            **/build/reports/lint/*.xml
+        continue-on-error: false

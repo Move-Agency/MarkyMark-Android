@@ -18,6 +18,7 @@
 
 package com.m2mobi.markymark.annotator
 
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 import com.m2mobi.markymark.composable.TAG_LINK
@@ -33,11 +34,13 @@ import com.m2mobi.markymark.model.AnnotatedStableNode.Strikethrough
 import com.m2mobi.markymark.model.AnnotatedStableNode.Subscript
 import com.m2mobi.markymark.model.AnnotatedStableNode.Superscript
 import com.m2mobi.markymark.model.AnnotatedStableNode.Text
-import com.m2mobi.markymark.model.ImmutableList
 import com.m2mobi.markymark.theme.AnnotatedStyles
+import kotlinx.collections.immutable.ImmutableList
 
+@Stable
 open class DefaultMarkyMarkAnnotator : MarkyMarkAnnotator {
 
+    @Stable
     override fun annotate(nodes: ImmutableList<AnnotatedStableNode>, styles: AnnotatedStyles): AnnotatedString {
         return buildAnnotatedString { annotateChildren(nodes = nodes, styles = styles) }
     }

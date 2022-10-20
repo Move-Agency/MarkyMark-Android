@@ -23,7 +23,7 @@ import androidx.compose.ui.text.AnnotatedString
 import com.m2mobi.markymark.MarkyMark
 import com.m2mobi.markymark.MarkyMarkOptions
 import com.m2mobi.markymark.model.AnnotatedStableNode
-import com.m2mobi.markymark.model.ImmutableList
+import kotlinx.collections.immutable.ImmutableList
 
 /**
  * Utility function to convert [nodes] into an [AnnotatedString] using the [MarkyMarkOptions.annotator].

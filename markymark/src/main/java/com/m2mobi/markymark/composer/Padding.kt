@@ -22,6 +22,7 @@ package com.m2mobi.markymark.composer
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -41,6 +42,7 @@ data class Padding(
 /**
  * See [Padding].
  */
+@Stable
 fun Padding(horizontal: Dp = 0.dp, vertical: Dp = 0.dp) = Padding(
     start = horizontal,
     top = vertical,
@@ -51,6 +53,7 @@ fun Padding(horizontal: Dp = 0.dp, vertical: Dp = 0.dp) = Padding(
 /**
  * See [Padding].
  */
+@Stable
 fun Padding(all: Dp = 0.dp) = Padding(
     start = all,
     top = all,
@@ -61,6 +64,7 @@ fun Padding(all: Dp = 0.dp) = Padding(
 /**
  * See [Padding].
  */
+@Stable
 fun Modifier.padding(padding: Padding) = padding(
     start = padding.start,
     top = padding.top,
@@ -71,29 +75,35 @@ fun Modifier.padding(padding: Padding) = padding(
 /**
  * See [Padding].
  */
+@Stable
 fun Modifier.paddingStart(padding: Padding) = padding(start = padding.start)
 
 /**
  * See [Padding].
  */
+@Stable
 fun Modifier.paddingTop(padding: Padding) = padding(top = padding.top)
 
 /**
  * See [Padding].
  */
+@Stable
 fun Modifier.paddingEnd(padding: Padding) = padding(end = padding.end)
 
 /**
  * See [Padding].
  */
+@Stable
 fun Modifier.paddingBottom(padding: Padding) = padding(bottom = padding.bottom)
 
 /**
  * See [Padding].
  */
+@Stable
 fun Modifier.paddingHorizontal(padding: Padding) = padding(start = padding.start, end = padding.end)
 
 /**
  * See [Padding].
  */
+@Stable
 fun Modifier.paddingVertical(padding: Padding) = padding(top = padding.top, bottom = padding.bottom)

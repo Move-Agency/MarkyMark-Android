@@ -21,8 +21,8 @@ package com.m2mobi.markymark.annotator
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.text.AnnotatedString
 import com.m2mobi.markymark.model.AnnotatedStableNode
-import com.m2mobi.markymark.model.ImmutableList
 import com.m2mobi.markymark.theme.AnnotatedStyles
+import kotlinx.collections.immutable.ImmutableList
 
 /**
  * The annotator is responsible for rendering [AnnotatedStableNode]s. See [DefaultMarkyMarkAnnotator] for the default
@@ -34,6 +34,7 @@ interface MarkyMarkAnnotator {
     /**
      * Create [AnnotatedString] for the [nodes].
      */
+    @Stable
     fun annotate(
         nodes: ImmutableList<AnnotatedStableNode>,
         styles: AnnotatedStyles,
