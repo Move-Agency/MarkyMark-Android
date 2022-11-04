@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.m2mobi.markymark.sample"
+    namespace = "com.moveagency.markymark.sample"
     compileSdk = Versions.TARGET_SDK
 
     defaultConfig {
