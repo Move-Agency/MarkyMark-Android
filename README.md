@@ -1,7 +1,7 @@
 # MarkyMark-Android
 
-*MarkyMark is a library created, used and maintained by M2mobi, for the parsing of Markdown text and rendering it as
-Android Jetpack Compose UI elements.*
+*MarkyMark is a library created, used and maintained by [Move](https://www.moveagency.com/), for the parsing of Markdown 
+text and rendering it as Android Jetpack Compose UI elements.*
 
 ## Usage
 

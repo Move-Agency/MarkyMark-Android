@@ -103,10 +103,10 @@ sealed class AnnotatedStableNode : StableNode {
      * __Syntax:__
      *
      * ```markdown
-     * [text](https://www.m2mobi.com/ "title")
-     * [text](https://www.m2mobi.com/)
-     * <https://www.m2mobi.com/>
-     * https://www.m2mobi.com
+     * [text](https://www.moveagency.com/ "title")
+     * [text](https://www.moveagency.com/)
+     * <https://www.moveagency.com/>
+     * https://www.moveagency.com/
      * ```
      *
      * For more details see the [Markdown guide](https://www.markdownguide.org/basic-syntax#code).
@@ -124,8 +124,8 @@ sealed class AnnotatedStableNode : StableNode {
      * __Syntax:__
      *
      * ```markdown
-     * <info@m2mobi.com>
-     * jobs@m2mobi.com
+     * <info@moveagency.com>
+     * jobs@moveagency.com
      * ```
      *
      * For more details see the [Markdown guide](https://www.markdownguide.org/basic-syntax#urls-and-email-addresses).
