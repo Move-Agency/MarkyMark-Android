@@ -52,32 +52,15 @@ import com.moveagency.markymark.annotator.DefaultMarkyMarkAnnotator
 import com.moveagency.markymark.composer.DefaultMarkyMarkComposer
 import com.moveagency.markymark.composer.Padding
 import com.moveagency.markymark.model.AnnotatedStableNode
-import com.moveagency.markymark.model.AnnotatedStableNode.Bold
-import com.moveagency.markymark.model.AnnotatedStableNode.Code
-import com.moveagency.markymark.model.AnnotatedStableNode.Italic
-import com.moveagency.markymark.model.AnnotatedStableNode.Link
-import com.moveagency.markymark.model.AnnotatedStableNode.Strikethrough
-import com.moveagency.markymark.model.AnnotatedStableNode.Subscript
-import com.moveagency.markymark.model.AnnotatedStableNode.Superscript
+import com.moveagency.markymark.model.AnnotatedStableNode.*
 import com.moveagency.markymark.model.ComposableStableNode
-import com.moveagency.markymark.model.ComposableStableNode.BlockQuote
-import com.moveagency.markymark.model.ComposableStableNode.CodeBlock
-import com.moveagency.markymark.model.ComposableStableNode.Headline
-import com.moveagency.markymark.model.ComposableStableNode.Image
-import com.moveagency.markymark.model.ComposableStableNode.ListBlock
-import com.moveagency.markymark.model.ComposableStableNode.ListItemType
-import com.moveagency.markymark.model.ComposableStableNode.Paragraph
-import com.moveagency.markymark.model.ComposableStableNode.Rule
-import com.moveagency.markymark.model.ComposableStableNode.TableBlock
-import com.moveagency.markymark.model.ComposableStableNode.TableCell
+import com.moveagency.markymark.model.ComposableStableNode.*
 import com.moveagency.markymark.model.StableNode
 import com.moveagency.markymark.theme.ListItemStyle.Companion.DefaultListItemIndicatorPadding
 import com.moveagency.markymark.theme.ListItemStyle.Companion.DefaultListItemPadding
 import com.moveagency.markymark.theme.ListItemStyle.Companion.DefaultListItemTextStyle
 import com.moveagency.markymark.theme.TextNodeStyle.Companion.BodyTextStyle
-import com.moveagency.markymark.theme.UnorderedListItemStyle.Indicator.Shape.Oval
-import com.moveagency.markymark.theme.UnorderedListItemStyle.Indicator.Shape.Rectangle
-import com.moveagency.markymark.theme.UnorderedListItemStyle.Indicator.Shape.Triangle
+import com.moveagency.markymark.theme.UnorderedListItemStyle.Indicator.Shape.*
 import com.moveagency.markymark.theme.UnorderedListItemStyle.Indicator.Style.Fill
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -238,26 +221,61 @@ data class BlockQuoteStyle(
  */
 @Immutable
 data class TableBlockStyle(
-    val padding: Padding = Padding(),
+    val padding: Padding = Padding(4.dp),
     val cellMinWidth: Dp = 0.dp,
     val cellMaxWidth: Dp = Dp.Infinity,
     val cellMinHeight: Dp = 0.dp,
     val cellMaxHeight: Dp = Dp.Infinity,
     val headerStyle: TableCellStyle = TableCellStyle(background = LightGray),
     val bodyStyle: TableCellStyle = TableCellStyle(background = Transparent),
-    val outlineStyle: TableDividerStyle = TableDividerStyle(
-        thickness = 3.dp,
-        color = Black,
+    val outlineDividerStyles: OutlineDividerStyles = OutlineDividerStyles(
+        all = TableDividerStyle(
+            thickness = 3.dp,
+            color = Black,
+        ),
     ),
     val headerDividerStyle: TableDividerStyle = TableDividerStyle(
         thickness = 2.dp,
         color = DarkGray,
     ),
-    val bodyDividerStyle: TableDividerStyle = TableDividerStyle(
-        thickness = 1.dp,
-        color = Gray,
+    val bodyDividerStyles: BodyDividerStyles = BodyDividerStyles(
+        all = TableDividerStyle(
+            thickness = 1.dp,
+            color = Gray,
+        ),
     ),
 )
+
+/**
+ * Theming attributes used when rendering the outline dividers of a table.
+ */
+@Immutable
+data class OutlineDividerStyles(
+    val left: TableDividerStyle = TableDividerStyle(),
+    val top: TableDividerStyle = TableDividerStyle(),
+    val right: TableDividerStyle = TableDividerStyle(),
+    val bottom: TableDividerStyle = TableDividerStyle(),
+) {
+
+    constructor(
+        horizontal: TableDividerStyle = TableDividerStyle(),
+        vertical: TableDividerStyle = TableDividerStyle(),
+    ) : this(left = horizontal, top = vertical, right = horizontal, bottom = vertical)
+
+    constructor(all: TableDividerStyle) : this(all, all, all, all)
+}
+
+/**
+ * Theming attributes used when rendering the body dividers of a table.
+ */
+@Immutable
+data class BodyDividerStyles(
+    val horizontal: TableDividerStyle = TableDividerStyle(),
+    val vertical: TableDividerStyle = TableDividerStyle(),
+) {
+
+    constructor(all: TableDividerStyle) : this(all, all)
+}
 
 /**
  * Theming attributes used when rendering [TableCell]s. [padding] is the spacing around the text of a cell but with the
@@ -267,7 +285,7 @@ data class TableBlockStyle(
 data class TableCellStyle(
     val padding: Padding = Padding(all = 4.dp),
     val textStyle: TextStyle = BodyTextStyle,
-    val background: Color,
+    val background: Color = Transparent,
 )
 
 /**
@@ -275,8 +293,8 @@ data class TableCellStyle(
  */
 @Immutable
 data class TableDividerStyle(
-    val thickness: Dp,
-    val color: Color,
+    val thickness: Dp = Dp.Unspecified,
+    val color: Color = Color.Unspecified,
 )
 
 /**

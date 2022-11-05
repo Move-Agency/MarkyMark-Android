@@ -18,39 +18,27 @@
 
 package com.moveagency.markymark.composable
 
+import androidx.annotation.Px
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.layout.Measurable
-import androidx.compose.ui.layout.MeasurePolicy
-import androidx.compose.ui.layout.MeasureResult
-import androidx.compose.ui.layout.MeasureScope
-import androidx.compose.ui.layout.Placeable
-import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.layout.*
 import androidx.compose.ui.text.style.TextAlign.Companion.Center
 import androidx.compose.ui.text.style.TextAlign.Companion.End
 import androidx.compose.ui.text.style.TextAlign.Companion.Start
-import androidx.compose.ui.unit.Constraints
-import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.*
 import com.moveagency.markymark.composer.padding
-import com.moveagency.markymark.model.ComposableStableNode.TableBlock
-import com.moveagency.markymark.model.ComposableStableNode.TableCell
-import com.moveagency.markymark.model.ComposableStableNode.TableCell.Alignment.CENTER
-import com.moveagency.markymark.model.ComposableStableNode.TableCell.Alignment.END
-import com.moveagency.markymark.model.ComposableStableNode.TableCell.Alignment.START
-import com.moveagency.markymark.model.ComposableStableNode.TableRow
+import com.moveagency.markymark.model.ComposableStableNode.*
+import com.moveagency.markymark.model.ComposableStableNode.TableCell.Alignment.*
+import com.moveagency.markymark.theme.OutlineDividerStyles
 import com.moveagency.markymark.theme.TableBlockStyle
 import com.moveagency.markymark.theme.TableCellStyle
 import com.moveagency.markymark.theme.TableDividerStyle
@@ -93,9 +81,9 @@ private fun DrawScope.drawDividers(
     )
     drawHeaderDivider(
         style = style.headerDividerStyle,
-        yOffset = rowHeights.getValue(0) + style.outlineStyle.thickness.toPx(),
+        yOffset = rowHeights.getValue(0) + toSafePx(style.outlineDividerStyles.top.thickness),
     )
-    drawOutlines(style.outlineStyle)
+    drawOutlines(style.outlineDividerStyles)
 }
 
 private fun DrawScope.drawBodyDividers(
@@ -112,17 +100,20 @@ private fun DrawScope.drawColumnDividers(
     columnWidths: Map<Int, Int>,
     style: TableBlockStyle,
 ) {
-    val outlineThickness = style.outlineStyle.thickness.toPx()
-    val bodyDividerThickness = style.bodyDividerStyle.thickness.toPx()
+    val dividerStyle = style.bodyDividerStyles.vertical
+    if (dividerStyle.isNotWorthDrawing) return
+
+    val leftOutlineThickness = toSafePx(style.outlineDividerStyles.left.thickness)
+    val bodyDividerThickness = toSafePx(dividerStyle.thickness)
     for (column in 1 until columnWidths.size) {
-        var x = outlineThickness
+        var x = leftOutlineThickness
         for (i in 0 until column) {
             if (i > 0) x += bodyDividerThickness
             x += columnWidths.getValue(i)
         }
 
         drawRect(
-            color = style.bodyDividerStyle.color,
+            color = dividerStyle.color,
             topLeft = Offset(x = x, y = 0F),
             size = Size(width = bodyDividerThickness, height = size.height),
         )
@@ -134,18 +125,21 @@ private fun DrawScope.drawRowDividers(
     rowHeights: Map<Int, Int>,
     style: TableBlockStyle,
 ) {
-    val outlineThickness = style.outlineStyle.thickness.toPx()
-    val headerDividerThickness = style.headerDividerStyle.thickness.toPx()
-    val bodyDividerThickness = style.bodyDividerStyle.thickness.toPx()
+    val dividerStyle = style.bodyDividerStyles.horizontal
+    if (dividerStyle.isNotWorthDrawing) return
+
+    val topOutlineThickness = toSafePx(style.outlineDividerStyles.top.thickness)
+    val headerDividerThickness = toSafePx(style.headerDividerStyle.thickness)
+    val bodyDividerThickness = toSafePx(dividerStyle.thickness)
     for (row in 2 until rowHeights.size) {
-        var y = outlineThickness + headerDividerThickness
+        var y = topOutlineThickness + headerDividerThickness
         for (i in 0 until row) {
             if (i > 1) y += bodyDividerThickness
             y += rowHeights.getValue(i)
         }
 
         drawRect(
-            color = style.bodyDividerStyle.color,
+            color = dividerStyle.color,
             topLeft = Offset(x = 0F, y = y),
             size = Size(width = size.width, height = bodyDividerThickness),
         )
@@ -153,61 +147,78 @@ private fun DrawScope.drawRowDividers(
 }
 
 private fun DrawScope.drawHeaderDivider(style: TableDividerStyle, yOffset: Float) {
+    if (style.isNotWorthDrawing) return
+
     drawRect(
         color = style.color,
         topLeft = Offset(x = 0F, y = yOffset),
         size = Size(
             width = size.width,
-            height = style.thickness.toPx(),
+            height = toSafePx(style.thickness),
         )
     )
 }
 
-private fun DrawScope.drawOutlines(style: TableDividerStyle) {
-    val thickness = style.thickness.toPx()
-
+private fun DrawScope.drawOutlines(style: OutlineDividerStyles) {
     // left
-    drawRect(
-        color = style.color,
-        topLeft = Offset(
-            x = 0F,
-            y = size.height - thickness,
-        ),
+    val leftThickness = toSafePx(style.left.thickness)
+    drawOutline(
+        style = style.left,
         size = Size(
             width = size.width,
-            height = thickness,
+            height = leftThickness,
+        ),
+        topLeft = Offset(
+            x = 0F,
+            y = size.height - leftThickness,
         ),
     )
 
     // top
-    drawRect(
-        color = style.color,
+    val topThickness = toSafePx(style.top.thickness)
+    drawOutline(
+        style = style.top,
         size = Size(
             width = size.width,
-            height = thickness,
+            height = topThickness,
         ),
     )
 
     // right
-    drawRect(
-        color = style.color,
+    drawOutline(
+        style = style.right,
         size = Size(
-            width = thickness,
+            width = toSafePx(style.right.thickness),
             height = size.height,
         ),
     )
 
     // bottom
-    drawRect(
-        color = style.color,
-        topLeft = Offset(
-            x = size.width - thickness,
-            y = 0F,
-        ),
+    val bottomThickness = toSafePx(style.bottom.thickness)
+    drawOutline(
+        style = style.bottom,
         size = Size(
-            width = thickness,
+            width = bottomThickness,
             height = size.height,
         ),
+        topLeft = Offset(
+            x = size.width - bottomThickness,
+            y = 0F,
+        ),
+    )
+}
+
+private fun DrawScope.drawOutline(
+    style: TableDividerStyle,
+    size: Size,
+    topLeft: Offset = Offset.Zero,
+) {
+    if (style.isNotWorthDrawing) return
+
+    drawRect(
+        color = style.color,
+        topLeft = topLeft,
+        size = size,
     )
 }
 
@@ -250,38 +261,43 @@ class TableBlockMeasurePolicy(
         measuredColumnWidths = columnWidths
         measuredRowHeights = rowHeights
 
-        val outlineThickness = style.outlineStyle.thickness.toPx()
-        val headerDividerThickness = style.headerDividerStyle.thickness.toPx()
-        val bodyDividerThickness = style.bodyDividerStyle.thickness.toPx()
+        val leftOutlineThickness = toSafePx(style.outlineDividerStyles.left.thickness)
+        val topOutlineThickness = toSafePx(style.outlineDividerStyles.top.thickness)
+        val rightOutlineThickness = toSafePx(style.outlineDividerStyles.right.thickness)
+        val bottomOutlineThickness = toSafePx(style.outlineDividerStyles.bottom.thickness)
+        val headerDividerThickness = toSafePx(style.headerDividerStyle.thickness)
+        val bodyHorizontalThickness = toSafePx(style.bodyDividerStyles.horizontal.thickness)
+        val bodyVerticalThickness = toSafePx(style.bodyDividerStyles.vertical.thickness)
 
-        val outlineSum = outlineThickness * 2
+        val outlineHorizontalSum = topOutlineThickness + bottomOutlineThickness
+        val outlineVerticalSum = leftOutlineThickness + rightOutlineThickness
 
         val columnSum = columnWidths.values.sum()
-        val columnBodySum = bodyDividerThickness * (columnWidths.size - 1)
-        val width = columnSum + columnBodySum + outlineSum
+        val columnBodySum = bodyVerticalThickness * (columnWidths.size - 1)
+        val width = columnSum + columnBodySum + outlineVerticalSum
 
         val rowSum = rowHeights.values.sum()
-        val rowBodySum = bodyDividerThickness * (rowHeights.size - 2)
-        val height = rowSum + rowBodySum + headerDividerThickness + outlineSum
+        val rowBodySum = bodyHorizontalThickness * (rowHeights.size - 2)
+        val height = rowSum + rowBodySum + headerDividerThickness + outlineHorizontalSum
 
         return layout(width.roundToInt(), height.roundToInt()) {
             for ((spec, placeable) in placeableCells) {
                 val column = spec.column
                 val row = spec.row
-                var x = outlineThickness
+                var x = leftOutlineThickness
                 for (i in 0 until column) {
                     if (i < columnWidths.size - 1) {
-                        x += bodyDividerThickness
+                        x += bodyVerticalThickness
                     }
                     x += columnWidths.getValue(i)
                 }
-                var y = outlineThickness
+                var y = topOutlineThickness
                 for (i in 0 until row) {
                     if (i == 0) {
                         y += headerDividerThickness
                     }
                     if (i > 0 && i < rowHeights.size - 1) {
-                        y += bodyDividerThickness
+                        y += bodyHorizontalThickness
                     }
                     y += rowHeights.getValue(i)
                 }
@@ -351,3 +367,9 @@ private data class PlaceableTableCell(
     val spec: TableCellSpec,
     val placeable: Placeable,
 )
+
+@Px
+private fun Density.toSafePx(dp: Dp): Float = if (dp == Dp.Unspecified) 0F else dp.toPx()
+
+private val TableDividerStyle.isNotWorthDrawing
+    get() = color == Transparent || color == Color.Unspecified || thickness == Dp.Unspecified || thickness == 0.dp
