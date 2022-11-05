@@ -19,12 +19,10 @@
 package com.moveagency.markymark
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.moveagency.markymark.annotator.MarkyMarkAnnotator
 import com.moveagency.markymark.composable.Markdown
 import com.moveagency.markymark.composer.MarkyMarkComposer
@@ -36,7 +34,6 @@ internal fun Preview() {
     Markdown(
         modifier = Modifier.background(Color.White),
         markdown = PREVIEW_MARKDOWN,
-        contentPadding = PaddingValues(16.dp),
     )
 }
 
@@ -121,6 +118,7 @@ __*Bold & Italic*__
 
 > Writing clean code is what you must do in order to call yourself a professional.
 > There is no reasonable excuse for doing anything less then your best.
+>
 > ~ Clean Code by Robert C. Martin (title page)
 
 ### Line Breaks
@@ -135,6 +133,7 @@ __*Bold & Italic*__
 ### Inline Formatting
 
 > *“A towel, [The Hitchhiker's Guide to the Galaxy] says, is about the most massively useful thing an interstellar hitchhiker can have. Partly it has great practical value. You can wrap it around you for warmth as you bound across the cold moons of Jaglan Beta; you can lie on it on the brilliant marble-sanded beaches of Santraginus V, inhaling the heady sea vapors; you can sleep under it beneath the stars which shine so redly on the desert world of Kakrafoon; use it to sail a miniraft down the slow heavy River Moth; wet it for use in hand-to-hand-combat; wrap it round your head to ward off noxious fumes or avoid the gaze of the Ravenous Bugblatter Beast of Traal (such a mind-boggingly stupid animal, it assumes that if you can't see it, it can't see you); you can wave your towel in emergencies as a distress signal, and of course dry yourself off with it if it still seems to be clean enough.”*
+> 
 > ~ Hitchhiker's Guide to the Galaxy by Douglas Adams
 
 ### Nested

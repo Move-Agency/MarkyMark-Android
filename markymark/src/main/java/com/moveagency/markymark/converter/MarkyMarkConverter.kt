@@ -18,9 +18,10 @@
 
 package com.moveagency.markymark.converter
 
+import com.moveagency.markymark.converter.AnnotatedStableNodeConverter.convertToAnnotatedNode
 import com.moveagency.markymark.converter.ComposableStableNodeConverter.convertToStableNode
 import com.moveagency.markymark.model.AnnotatedStableNode
-import com.moveagency.markymark.model.StableNode
+import com.moveagency.markymark.model.ComposableStableNode
 import com.moveagency.markymark.util.mapAsync
 import com.moveagency.markymark.util.mapAsyncIndexed
 import com.vladsch.flexmark.util.ast.Document
@@ -30,7 +31,7 @@ import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.Dispatchers
 
 /**
- * This object contains the logic for converting the AST produced by Flexmark into an presentation level representation
+ * This object contains the logic for converting the AST produced by Flexmark into a presentation level representation
  * which is compatible with compose.
  */
 @Suppress("TooManyFunctions")
@@ -42,18 +43,18 @@ object MarkyMarkConverter {
      * Convert [document] child [Node]s to [StableNode]s. This mapping happens as asynchronously as possible on the
      * [Dispatchers.Default] dispatcher. See [mapAsync] & [mapAsyncIndexed] for more details.
      */
-    suspend fun convertToStableNodes(document: Document): ImmutableList<StableNode> {
-        return convertToStableNodes(document.children)
+    suspend fun convertToStableNodes(document: Document): ImmutableList<ComposableStableNode> {
+        return convertToStableNodes(nodes = document.children, level = 0)
     }
 
-    internal suspend fun convertToStableNodes(nodes: Iterable<Node>): ImmutableList<StableNode> {
-        return nodes.mapAsync(::convertToStableNode)
+    internal suspend fun convertToStableNodes(nodes: Iterable<Node>, level: Int): ImmutableList<ComposableStableNode> {
+        return nodes.mapAsync { convertToStableNode(node = it, level = level) }
             .filterNotNull()
             .toImmutableList()
     }
 
     internal suspend fun convertToAnnotatedNodes(nodes: Iterable<Node>): ImmutableList<AnnotatedStableNode> {
-        return nodes.mapAsync(AnnotatedStableNodeConverter::convertToAnnotatedNode)
+        return nodes.mapAsync(::convertToAnnotatedNode)
             .filterNotNull()
             .toImmutableList()
     }

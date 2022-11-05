@@ -24,7 +24,7 @@ import kotlinx.collections.immutable.ImmutableList
 
 @Stable
 @Suppress("MaxLineLength")
-sealed class AnnotatedStableNode : StableNode {
+sealed class AnnotatedStableNode {
 
     /**
      * Represents Markdown text containing other formatting.

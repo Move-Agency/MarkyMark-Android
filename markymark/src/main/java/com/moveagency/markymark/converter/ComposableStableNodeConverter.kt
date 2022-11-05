@@ -23,25 +23,11 @@ import com.moveagency.markymark.converter.AnnotatedStableNodeConverter.unescapeH
 import com.moveagency.markymark.converter.MarkyMarkConverter.convertToAnnotatedNodes
 import com.moveagency.markymark.model.AnnotatedStableNode
 import com.moveagency.markymark.model.ComposableStableNode
-import com.moveagency.markymark.model.StableNode
 import com.moveagency.markymark.util.mapAsync
 import com.moveagency.markymark.util.mapAsyncIndexed
-import com.vladsch.flexmark.ast.BlockQuote
-import com.vladsch.flexmark.ast.FencedCodeBlock
-import com.vladsch.flexmark.ast.Heading
-import com.vladsch.flexmark.ast.Image
-import com.vladsch.flexmark.ast.IndentedCodeBlock
-import com.vladsch.flexmark.ast.ListBlock
-import com.vladsch.flexmark.ast.ListItem
-import com.vladsch.flexmark.ast.OrderedListItem
-import com.vladsch.flexmark.ast.Paragraph
-import com.vladsch.flexmark.ast.ThematicBreak
+import com.vladsch.flexmark.ast.*
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItem
-import com.vladsch.flexmark.ext.tables.TableBlock
-import com.vladsch.flexmark.ext.tables.TableBody
-import com.vladsch.flexmark.ext.tables.TableCell
-import com.vladsch.flexmark.ext.tables.TableHead
-import com.vladsch.flexmark.ext.tables.TableRow
+import com.vladsch.flexmark.ext.tables.*
 import com.vladsch.flexmark.util.ast.Node
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -55,24 +41,25 @@ import kotlinx.coroutines.withContext
 object ComposableStableNodeConverter {
 
     @Suppress("ComplexMethod")
-    internal suspend fun convertToStableNode(node: Node): StableNode? = when (node) {
-        is Heading -> convertHeadingNode(node)
-        is ThematicBreak -> ComposableStableNode.Rule
-        is Paragraph -> convertParagraphNode(node)
-        is Image -> convertImageNode(node)
-        is FencedCodeBlock -> convertFencedCodeBlockNode(node)
-        is IndentedCodeBlock -> convertIndentedCodeBlockNode(node)
-        is BlockQuote -> convertBlockQuoteNode(node)
-        is TableBlock -> convertTableBlockNode(node)
-        is ListBlock -> convertListBlockNode(node)
-        else -> convertToAnnotatedNode(node)
+    internal suspend fun convertToStableNode(node: Node, level: Int): ComposableStableNode? = when (node) {
+        is Heading -> convertHeadingNode(heading = node, level = level)
+        is ThematicBreak -> ComposableStableNode.Rule(level)
+        is Paragraph -> convertParagraphNode(paragraph = node, level = level)
+        is Image -> convertImageNode(image = node, level = level)
+        is FencedCodeBlock -> convertFencedCodeBlockNode(fencedCodeBlock = node, level = level)
+        is IndentedCodeBlock -> convertIndentedCodeBlockNode(indentedCodeBlock = node, level = level)
+        is BlockQuote -> convertBlockQuoteNode(blockQuote = node, level = level)
+        is TableBlock -> convertTableBlockNode(tableBlock = node, level = level)
+        is ListBlock -> convertListBlockNode(listBlock = node, level = level)
+        else -> convertTextNode(node = node, level = level)
     }
 
     @Suppress("MagicNumber")
-    private suspend fun convertHeadingNode(heading: Heading): ComposableStableNode.Headline {
+    private suspend fun convertHeadingNode(heading: Heading, level: Int): ComposableStableNode.Headline {
         return ComposableStableNode.Headline(
+            level = level,
             children = convertToAnnotatedNodes(heading.children),
-            level = when (heading.level) {
+            headingLevel = when (heading.level) {
                 1 -> ComposableStableNode.Headline.Level.HEADING1
                 2 -> ComposableStableNode.Headline.Level.HEADING2
                 3 -> ComposableStableNode.Headline.Level.HEADING3
@@ -83,55 +70,76 @@ object ComposableStableNodeConverter {
         )
     }
 
-    private suspend fun convertParagraphNode(paragraph: Paragraph): ComposableStableNode.Paragraph {
-        return ComposableStableNode.Paragraph(children = convertParagraphChildren(paragraph.children))
+    private suspend fun convertParagraphNode(paragraph: Paragraph, level: Int): ComposableStableNode.Paragraph {
+        return ComposableStableNode.Paragraph(
+            level = level,
+            children = convertParagraphChildren(children = paragraph.children, level = level + 1)
+        )
     }
 
-    private suspend fun convertParagraphChildren(children: Iterable<Node>): ImmutableList<StableNode> {
-        return children.mapAsync(::convertToStableNode)
+    private suspend fun convertParagraphChildren(
+        children: Iterable<Node>,
+        level: Int,
+    ): ImmutableList<ComposableStableNode> {
+        return children.mapAsync { convertToStableNode(node = it, level = level) }
             .filterNotNull()
-            .bundleParagraphText()
+            .bundleParagraphText(level)
     }
 
     @Suppress("NestedBlockDepth")
-    private fun List<StableNode>.bundleParagraphText(): ImmutableList<StableNode> {
-        val returnList = mutableListOf<StableNode>()
+    private fun List<ComposableStableNode>.bundleParagraphText(level: Int): ImmutableList<ComposableStableNode> {
+        val returnList = mutableListOf<ComposableStableNode>()
         val currentChildren = mutableListOf<AnnotatedStableNode>()
         for (node in this) {
-            when (node) {
-                is ComposableStableNode -> {
-                    if (currentChildren.isNotEmpty()) {
-                        returnList += AnnotatedStableNode.ParagraphText(currentChildren.toImmutableList())
-                        currentChildren.clear()
-                    }
-                    returnList += node
+            if (node is ComposableStableNode.TextNode) {
+                currentChildren += node.text
+            } else {
+                if (currentChildren.isNotEmpty()) {
+                    returnList += currentChildren.bundleIntoTextNode(level)
+                    currentChildren.clear()
                 }
-                is AnnotatedStableNode -> currentChildren += node
+                returnList += node
             }
         }
         if (currentChildren.isNotEmpty()) {
-            returnList += AnnotatedStableNode.ParagraphText(currentChildren.toImmutableList())
+            returnList += currentChildren.bundleIntoTextNode(level)
         }
         return returnList.toImmutableList()
     }
 
-    private fun convertImageNode(image: Image): ComposableStableNode.Image {
+    private fun List<AnnotatedStableNode>.bundleIntoTextNode(level: Int): ComposableStableNode.TextNode {
+        return ComposableStableNode.TextNode(
+            level = level,
+            text = AnnotatedStableNode.ParagraphText(toImmutableList()),
+        )
+    }
+
+    private fun convertImageNode(image: Image, level: Int): ComposableStableNode.Image {
         return ComposableStableNode.Image(
+            level = level,
             url = image.url.unescapeHtml(),
             altText = image.text.unescapeHtml().takeUnless { it.isBlank() },
             title = image.title.unescapeHtml().takeUnless { it.isBlank() },
         )
     }
 
-    private fun convertFencedCodeBlockNode(fencedCodeBlock: FencedCodeBlock): ComposableStableNode.CodeBlock {
+    private fun convertFencedCodeBlockNode(
+        level: Int,
+        fencedCodeBlock: FencedCodeBlock,
+    ): ComposableStableNode.CodeBlock {
         return ComposableStableNode.CodeBlock(
+            level = level,
             content = fencedCodeBlock.firstChild?.chars?.unescapeHtml().orEmpty().trimEnd(),
             language = fencedCodeBlock.info.unescapeHtml(),
         )
     }
 
-    private fun convertIndentedCodeBlockNode(indentedCodeBlock: IndentedCodeBlock): ComposableStableNode.CodeBlock {
+    private fun convertIndentedCodeBlockNode(
+        level: Int,
+        indentedCodeBlock: IndentedCodeBlock
+    ): ComposableStableNode.CodeBlock {
         return ComposableStableNode.CodeBlock(
+            level = level,
             content = indentedCodeBlock.chars.unescapeHtml().lines().mapIndexed { index, line ->
                 if (index == 0) line else line.dropIndent()
             }.joinToString("\n").trimEnd(),
@@ -152,17 +160,21 @@ object ComposableStableNodeConverter {
         }
     }
 
-    private suspend fun convertBlockQuoteNode(blockQuote: BlockQuote): ComposableStableNode.BlockQuote {
-        return ComposableStableNode.BlockQuote(children = MarkyMarkConverter.convertToStableNodes(blockQuote.children))
+    private suspend fun convertBlockQuoteNode(blockQuote: BlockQuote, level: Int): ComposableStableNode.BlockQuote {
+        return ComposableStableNode.BlockQuote(
+            level = level,
+            children = MarkyMarkConverter.convertToStableNodes(nodes = blockQuote.children, level = level + 1)
+        )
     }
 
-    private suspend fun convertTableBlockNode(tableBlock: TableBlock): ComposableStableNode {
+    private suspend fun convertTableBlockNode(tableBlock: TableBlock, level: Int): ComposableStableNode {
         return withContext(Dispatchers.Default) {
             val head = async { convertToTableRow(tableBlock.firstChild as TableHead) }
             val body = async {
                 (tableBlock.lastChild as? TableBody)?.let { convertToTableRows(it) }.orEmpty().toImmutableList()
             }
             ComposableStableNode.TableBlock(
+                level = level,
                 head = head.await(),
                 body = body.await(),
             )
@@ -177,9 +189,7 @@ object ComposableStableNodeConverter {
         return convertToTableRows(tableBody.children)
     }
 
-    private suspend fun convertToTableRows(
-        nodes: Iterable<Node>
-    ): ImmutableList<ComposableStableNode.TableRow> {
+    private suspend fun convertToTableRows(nodes: Iterable<Node>): ImmutableList<ComposableStableNode.TableRow> {
         return nodes.filterIsInstance(TableRow::class.java)
             .mapAsync(::convertToTableRow)
             .toImmutableList()
@@ -206,25 +216,42 @@ object ComposableStableNodeConverter {
         )
     }
 
-    private suspend fun convertListBlockNode(node: ListBlock, level: Int = 0): ComposableStableNode.ListBlock? {
-        return convertListChildren(node.children, level)
+    private suspend fun convertListBlockNode(
+        listBlock: ListBlock,
+        level: Int,
+        indentLevel: Int = 0,
+    ): ComposableStableNode.ListBlock? {
+        return convertListChildren(nodes = listBlock.children, level = level + 1, indentLevel = indentLevel)
             .takeUnless { it.isEmpty() }
-            ?.let { ComposableStableNode.ListBlock(level, convertListChildren(node.children, level)) }
+            ?.let {
+                ComposableStableNode.ListBlock(
+                    level = level,
+                    indentLevel = indentLevel,
+                    children = it,
+                )
+            }
     }
 
     private suspend fun convertListChildren(
         nodes: Iterable<Node>,
         level: Int,
+        indentLevel: Int,
     ): ImmutableList<ComposableStableNode.ListEntry> {
-        return nodes.mapAsyncIndexed { index, item -> convertListItem(index + 1, item as ListItem, level) }
-            .flatten()
-            .toImmutableList()
+        return nodes.mapAsyncIndexed { index, item ->
+            convertListItem(
+                index = index + 1,
+                item = item as ListItem,
+                level = level,
+                indentLevel = indentLevel,
+            )
+        }.flatten().toImmutableList()
     }
 
     private suspend fun convertListItem(
         index: Int,
         item: ListItem,
         level: Int,
+        indentLevel: Int,
     ): ImmutableList<ComposableStableNode.ListEntry> {
         val firstChild = item.firstChild
         if (firstChild == null || !firstChild.hasChildren()) return persistentListOf()
@@ -242,7 +269,7 @@ object ComposableStableNodeConverter {
 
             item.children
                 .drop(1) // Drop first child as we converted that to list item above
-                .mapAsync { convertListNode(node = it, level = level) }
+                .mapAsync { convertListNode(node = it, level = level, indentLevel = indentLevel) }
                 .filterNotNull()
                 .let(::addAll)
         }.toPersistentList()
@@ -254,9 +281,14 @@ object ComposableStableNodeConverter {
         else -> ComposableStableNode.ListItemType.Unordered
     }
 
-    private suspend fun convertListNode(node: Node, level: Int) = when (node) {
-        is ListBlock -> convertListBlockNode(node, level + 1)
+    private suspend fun convertListNode(node: Node, level: Int, indentLevel: Int) = when (node) {
+        is ListBlock -> convertListBlockNode(listBlock = node, level = level, indentLevel = indentLevel + 1)
             ?.let(ComposableStableNode.ListEntry::ListNode)
-        else -> convertToStableNode(node)?.let(ComposableStableNode.ListEntry::ListNode)
+        else -> convertToStableNode(node = node, level = level + 1)
+            ?.let(ComposableStableNode.ListEntry::ListNode)
+    }
+
+    private suspend fun convertTextNode(node: Node, level: Int): ComposableStableNode.TextNode? {
+        return convertToAnnotatedNode(node)?.let { ComposableStableNode.TextNode(level = level, text = it) }
     }
 }

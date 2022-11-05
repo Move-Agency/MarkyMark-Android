@@ -22,21 +22,15 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.add
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.systemBars
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.graphics.Color.Companion.White
-import androidx.compose.ui.unit.Dp
 import androidx.core.view.WindowCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.moveagency.markymark.PREVIEW_MARKDOWN
 import com.moveagency.markymark.composable.Markdown
 import com.moveagency.markymark.sample.ui.theme.SampleTheme
-import com.moveagency.markymark.sample.ui.theme.Spacing
 
 class MainActivity : ComponentActivity() {
 
@@ -62,13 +56,9 @@ class MainActivity : ComponentActivity() {
                 Markdown(
                     modifier = Modifier.background(White),
                     markdown = PREVIEW_MARKDOWN,
-                    contentPadding = WindowInsets.systemBars
-                        .add(WindowInsets(all = Spacing.x2))
-                        .asPaddingValues(),
                 )
             }
         }
     }
 
-    private fun WindowInsets(all: Dp) = WindowInsets(left = all, top = all, right = all, bottom = all)
 }

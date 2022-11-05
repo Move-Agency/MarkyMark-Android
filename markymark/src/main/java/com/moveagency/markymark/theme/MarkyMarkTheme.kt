@@ -55,7 +55,6 @@ import com.moveagency.markymark.model.AnnotatedStableNode
 import com.moveagency.markymark.model.AnnotatedStableNode.*
 import com.moveagency.markymark.model.ComposableStableNode
 import com.moveagency.markymark.model.ComposableStableNode.*
-import com.moveagency.markymark.model.StableNode
 import com.moveagency.markymark.theme.ListItemStyle.Companion.DefaultListItemIndicatorPadding
 import com.moveagency.markymark.theme.ListItemStyle.Companion.DefaultListItemPadding
 import com.moveagency.markymark.theme.ListItemStyle.Companion.DefaultListItemTextStyle
@@ -94,6 +93,7 @@ data class MarkyMarkTheme(
  */
 @Immutable
 data class ComposableStyles(
+    val screenPadding: Padding = Padding(16.dp),
     val headings: HeadingsStyle = HeadingsStyle(),
     val image: ImageStyle = ImageStyle(),
     val paragraph: ParagraphStyle = ParagraphStyle(),

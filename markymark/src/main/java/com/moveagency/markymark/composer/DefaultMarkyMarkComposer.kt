@@ -23,11 +23,11 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.ui.Modifier
 import com.moveagency.markymark.composable.*
 import com.moveagency.markymark.model.AnnotatedStableNode
+import com.moveagency.markymark.model.ComposableStableNode
 import com.moveagency.markymark.model.ComposableStableNode.*
 import com.moveagency.markymark.model.ComposableStableNode.Headline.Level.*
 import com.moveagency.markymark.model.ComposableStableNode.ListEntry.ListItem
 import com.moveagency.markymark.model.ComposableStableNode.ListEntry.ListNode
-import com.moveagency.markymark.model.StableNode
 import com.moveagency.markymark.theme.ComposableStyles
 import com.moveagency.markymark.theme.ListBlockStyle
 import kotlinx.collections.immutable.ImmutableList
@@ -41,7 +41,7 @@ open class DefaultMarkyMarkComposer : MarkyMarkComposer {
     @Suppress("ComplexMethod", "LongMethod")
     protected open fun LazyListScope.createNode(
         modifier: Modifier,
-        node: StableNode,
+        node: ComposableStableNode,
         styles: ComposableStyles,
     ) = when (node) {
         is Headline -> createHeadline(
@@ -84,7 +84,7 @@ open class DefaultMarkyMarkComposer : MarkyMarkComposer {
             level = node.level,
             styles = styles,
         )
-        is AnnotatedStableNode -> createTextNode(
+        is TextNode -> createTextNode(
             modifier = modifier,
             node = node,
             styles = styles,
@@ -93,22 +93,33 @@ open class DefaultMarkyMarkComposer : MarkyMarkComposer {
 
     override fun LazyListScope.createNodes(
         modifier: Modifier,
-        nodes: ImmutableList<StableNode>,
+        nodes: ImmutableList<ComposableStableNode>,
         styles: ComposableStyles,
     ) {
-        for (node in nodes) createNode(modifier = modifier, node = node, styles = styles)
+        for ((index, node) in nodes.withIndex()) {
+            createNode(
+                modifier = modifier.screenPadding(
+                    isRootLevel = node.isRootLevel,
+                    isFirst = index == 0,
+                    isLast = index == nodes.lastIndex,
+                    screenPadding = styles.screenPadding,
+                ),
+                node = node,
+                styles = styles,
+            )
+        }
     }
 
     protected open fun LazyListScope.createHeadline(
         modifier: Modifier,
         node: Headline,
         styles: ComposableStyles,
-    ) = item(contentType = "${Headline::class.qualifiedName}.${node.level.name}") {
+    ) = item(contentType = "${Headline::class.qualifiedName}.${node.headingLevel.name}") {
         val headingStyles = styles.headings
         Headline(
             modifier = modifier.fillParentMaxWidth(),
             node = node,
-            style = when (node.level) {
+            style = when (node.headingLevel) {
                 HEADING1 -> headingStyles.heading1
                 HEADING2 -> headingStyles.heading2
                 HEADING3 -> headingStyles.heading3
@@ -153,7 +164,7 @@ open class DefaultMarkyMarkComposer : MarkyMarkComposer {
 
     protected open fun LazyListScope.createTextNode(
         modifier: Modifier,
-        node: AnnotatedStableNode,
+        node: TextNode,
         styles: ComposableStyles,
     ) = item(contentType = AnnotatedStableNode::class.qualifiedName) {
         val style = styles.textNode
@@ -161,7 +172,7 @@ open class DefaultMarkyMarkComposer : MarkyMarkComposer {
             modifier = modifier
                 .fillParentMaxWidth()
                 .padding(style.padding),
-            nodes = persistentListOf(node),
+            nodes = persistentListOf(node.text),
             style = style.textStyle,
         )
     }
@@ -259,7 +270,7 @@ open class DefaultMarkyMarkComposer : MarkyMarkComposer {
 
     private fun LazyListScope.createQuoteChild(
         modifier: Modifier,
-        node: StableNode,
+        node: ComposableStableNode,
         styles: ComposableStyles,
         isTop: Boolean,
         isBottom: Boolean,
@@ -352,5 +363,20 @@ open class DefaultMarkyMarkComposer : MarkyMarkComposer {
             blockStyle = style,
             level = level,
         )
+    }
+
+    private fun Modifier.screenPadding(
+        isRootLevel: Boolean,
+        isFirst: Boolean,
+        isLast: Boolean,
+        screenPadding: Padding,
+    ): Modifier {
+        return if (isRootLevel) {
+            paddingHorizontal(screenPadding)
+                .run { if (isFirst) paddingTop(screenPadding) else this }
+                .run { if (isLast) paddingBottom(screenPadding) else this }
+        } else {
+            this
+        }
     }
 }
