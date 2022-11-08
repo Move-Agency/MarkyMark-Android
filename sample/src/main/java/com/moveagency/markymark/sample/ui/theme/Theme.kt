@@ -63,6 +63,7 @@ private val SampleMarkyMarkTheme = MarkyMarkTheme(
             textStyle = Body.copy(fontFamily = Monospace),
         ),
         blockQuote = BlockQuoteStyle(
+            innerPadding = Padding(horizontal = Spacing.x1),
             indicatorTint = M2Orange,
             background = Transparent,
         ),
@@ -115,7 +116,10 @@ private val SampleMarkyMarkTheme = MarkyMarkTheme(
                 )
             ),
         ),
-        textNode = TextNodeStyle(textStyle = Body),
+        textNode = TextNodeStyle(
+            padding = Padding(vertical = Spacing.x1),
+            textStyle = Body,
+        ),
     ),
     annotatedStyles = AnnotatedStyles(
         linkStyle = SpanStyle(color = M2Blue),

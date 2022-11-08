@@ -18,19 +18,16 @@
 
 package com.moveagency.markymark.composable
 
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import com.moveagency.markymark.MarkyMark
 import com.moveagency.markymark.MarkyMark.theme
 import com.moveagency.markymark.converter.MarkyMarkConverter.convertToStableNodes
-import com.moveagency.markymark.model.StableNode
+import com.moveagency.markymark.model.ComposableStableNode
 import com.vladsch.flexmark.parser.Parser
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -39,13 +36,13 @@ import kotlinx.collections.immutable.persistentListOf
 fun Markdown(
     markdown: String,
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(),
+    windowInsets: WindowInsets = WindowInsets.systemBars,
 ) {
     val options = MarkyMark.options
     val parser = remember(options) { Parser.Builder(options.flexmarkOptions).build() }
     val document = remember(parser, markdown) { parser.parse(markdown) }
 
-    var nodes by remember { mutableStateOf<ImmutableList<StableNode>>(persistentListOf()) }
+    var nodes by remember { mutableStateOf<ImmutableList<ComposableStableNode>>(persistentListOf()) }
     LaunchedEffect(document) { nodes = convertToStableNodes(document) }
 
     val composer = MarkyMark.options.composer
@@ -53,7 +50,7 @@ fun Markdown(
 
     LazyColumn(
         modifier = modifier,
-        contentPadding = contentPadding,
+        contentPadding = windowInsets.asPaddingValues(),
     ) {
         composer.run {
             createNodes(

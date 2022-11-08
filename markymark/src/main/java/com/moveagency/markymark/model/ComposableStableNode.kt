@@ -22,9 +22,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import com.moveagency.markymark.model.ComposableStableNode.ListEntry.ListItem
 import com.moveagency.markymark.model.ComposableStableNode.ListEntry.ListNode
-import com.moveagency.markymark.model.ComposableStableNode.ListItemType.Ordered
-import com.moveagency.markymark.model.ComposableStableNode.ListItemType.Task
-import com.moveagency.markymark.model.ComposableStableNode.ListItemType.Unordered
+import com.moveagency.markymark.model.ComposableStableNode.ListItemType.*
 import kotlinx.collections.immutable.ImmutableList
 
 /**
@@ -33,7 +31,12 @@ import kotlinx.collections.immutable.ImmutableList
  */
 @Stable
 @Suppress("MaxLineLength")
-sealed class ComposableStableNode : StableNode {
+sealed class ComposableStableNode {
+
+    abstract val level: Int
+
+    val isRootLevel: Boolean
+        get() = level == 0
 
     /**
      * Represents a Markdown headline. Mapped from [Heading][com.vladsch.flexmark.ast.Heading].
@@ -53,8 +56,9 @@ sealed class ComposableStableNode : StableNode {
      */
     @Immutable
     data class Headline(
+        override val level: Int,
         val children: ImmutableList<AnnotatedStableNode>,
-        val level: Level,
+        val headingLevel: Level,
     ) : ComposableStableNode() {
 
         enum class Level {
@@ -123,7 +127,10 @@ sealed class ComposableStableNode : StableNode {
      * See the [Markdown guide](https://www.markdownguide.org/basic-syntax#paragraphs-1).
      */
     @Immutable
-    data class Paragraph(val children: ImmutableList<StableNode>) : ComposableStableNode()
+    data class Paragraph(
+        override val level: Int,
+        val children: ImmutableList<ComposableStableNode>
+    ) : ComposableStableNode()
 
     /**
      * Represents a Markdown image. Mapped from [Image][com.vladsch.flexmark.ast.Image].
@@ -141,6 +148,7 @@ sealed class ComposableStableNode : StableNode {
      */
     @Immutable
     data class Image(
+        override val level: Int,
         val url: String,
         val altText: String?,
         val title: String?,
@@ -160,7 +168,7 @@ sealed class ComposableStableNode : StableNode {
      * For details see the [Markdown guide](https://www.markdownguide.org/basic-syntax#horizontal-rules).
      */
     @Immutable
-    object Rule : ComposableStableNode()
+    data class Rule(override val level: Int) : ComposableStableNode()
 
     /**
      * Represents a Markdown code block. Mapped from [CodeBlock][com.vladsch.flexmark.ast.CodeBlock].
@@ -195,6 +203,7 @@ sealed class ComposableStableNode : StableNode {
      */
     @Immutable
     data class CodeBlock(
+        override val level: Int,
         val content: String,
         val language: String?,
     ) : ComposableStableNode()
@@ -211,7 +220,10 @@ sealed class ComposableStableNode : StableNode {
      * For details see the [Markdown guide](https://www.markdownguide.org/basic-syntax#blockquotes-1).
      */
     @Immutable
-    data class BlockQuote(val children: ImmutableList<StableNode>) : ComposableStableNode()
+    data class BlockQuote(
+        override val level: Int,
+        val children: ImmutableList<ComposableStableNode>,
+    ) : ComposableStableNode()
 
     /**
      * Represents a Markdown list. Mapped from [ListBlock][com.vladsch.flexmark.ast.ListBlock].
@@ -222,7 +234,8 @@ sealed class ComposableStableNode : StableNode {
      */
     @Immutable
     data class ListBlock(
-        val level: Int,
+        override val level: Int,
+        val indentLevel: Int,
         val children: ImmutableList<ListEntry>,
     ) : ComposableStableNode()
 
@@ -257,7 +270,7 @@ sealed class ComposableStableNode : StableNode {
          * For details see the [Markdown guide](https://www.markdownguide.org/basic-syntax#adding-elements-in-lists).
          */
         @Immutable
-        data class ListNode(val node: StableNode) : ListEntry()
+        data class ListNode(val node: ComposableStableNode) : ListEntry()
     }
 
     /**
@@ -337,6 +350,7 @@ sealed class ComposableStableNode : StableNode {
      */
     @Immutable
     data class TableBlock(
+        override val level: Int,
         val head: TableRow,
         val body: ImmutableList<TableRow>,
     ) : ComposableStableNode()
@@ -371,4 +385,13 @@ sealed class ComposableStableNode : StableNode {
             END,
         }
     }
+
+    /**
+     * A wrapper for a "free floating" annotated node.
+     */
+    @Immutable
+    data class TextNode(
+        override val level: Int,
+        val text: AnnotatedStableNode,
+    ) : ComposableStableNode()
 }

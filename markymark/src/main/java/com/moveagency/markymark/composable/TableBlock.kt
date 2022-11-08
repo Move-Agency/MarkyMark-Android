@@ -52,9 +52,10 @@ internal fun TableBlock(
 ) {
     val measurePolicy = remember(style) { TableBlockMeasurePolicy(style) }
     Layout(
-        modifier = modifier
-            .padding(style.padding)
+        modifier = Modifier
             .horizontalScroll(rememberScrollState())
+            .then(modifier)
+            .padding(style.padding)
             .drawWithCache {
                 onDrawBehind {
                     drawDividers(
