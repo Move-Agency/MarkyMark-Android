@@ -396,47 +396,61 @@ __________________________________
 
 ## Links
 
-[link text](https://m2mobi.com)
+[link text](https://www.moveagency.com/)
 
 ### Titles
 
-[link text](https://m2mobi.com "link title")
+[link text](https://www.moveagency.com/ "link title")
 
 ### Quick
 
-<https://m2mobi.com>
+<https://www.moveagency.com/>
 
 ### Formatting
 
-**[link text](https://m2mobi.com)**
+**[link text](https://www.moveagency.com/)**
 
-*[link text](https://m2mobi.com)*
+*[link text](https://www.moveagency.com/)*
 
-~~[link text](https://m2mobi.com)~~
+~~[link text](https://www.moveagency.com/)~~
 
 ### Email
 
 #### Normal
 
-info@m2mobi.com
+info@moveagency.com
 
 #### Quick
 
-<jobs@m2mobi.com>
+<jobs@moveagency.com>
 
 ## Images
 
-![The M2mobi logo with a plane an airport gate in the background](https://images.ctfassets.net/ansk9uzxz5vi/GYbfnnKmhEspT1locU3Ci/f94ad67a2c3b24ca450c0c7d6abfc02e/20200903_-_Header_mailchimp_forms.jpg?w=1920&fl=progressive&q=90)
+![A photo showing the internal reveal of the new company name on a screen in the background, Move, in the foreground confetti and employees can be seen](https://global-uploads.webflow.com/6315fa597257024bb7fea6c4/635f950391fa6db43eea3a18_c7572a87-7f89-415a-923b-fefae1e85d7d.webp)
 
 ### Titles
 
-![M2mobi X Move4Mobile](https://images.ctfassets.net/ansk9uzxz5vi/6HVHauIuDfmNUZ6EAXrKzh/60306a730a622280ef149abc6090db1c/header_1932x720-3.jpg?w=1920&fl=progressive&q=90 "Figure 1. The new post merger website banner")
+![A photo of the outside of the Move Amsterdam office](https://global-uploads.webflow.com/6315fa597257021d73fea691/632c47a8e4e4c81d8c461997_contact-header.webp "Figure 1. The Move Amsterdam office (3rd floor)")
 
 ## Tables
 
-| *__Contact Details__* | *Amsterdam*                                                            | *Zwolle*                                                              |
-|:----------------------|:----------------------------------------------------------------------:|:---------------------------------------------------------------------:|
-| __Address__           | [Moermanskkade 313 1013 BC Amsterdam](https://goo.gl/maps/Unsqk9KsUNt) | [Hanzelaan 351 8017 JM Zwolle](https://goo.gl/maps/DRUj1ynsJL2exqH4A) |
-| __Phone number__      | [+31 20 354 0259](tel:+31203540259)                                    | [038-7601750](tel:038-7601750)                                        |
-| __Email address__     | [info@m2mobi.com](mailto:info@m2mobi.com)                              | [info@move4mobile.com](mailto:info@move4mobile.com)                   |
+| __Move Amsterdam__                           | __Move Lisbon__                                  | __Move Zwolle__                              |
+|:---------------------------------------------|:-------------------------------------------------|:---------------------------------------------|
+| Moermanskade 313                             | Av. Fontes Pereira de Melo 14                    | Hanzelaan 351                                |
+| 1013 BC Amsterdam                            | 1050-121 Lisboa                                  | 8017 JM Zwolle                               |
+| Netherlands                                  | Portugal                                         | Netherlands                                  |
+| [+31 (0)20 - 354 0259](tel:+31(0)20-3540259) | [+31 (0)20 - 354 0259](tel:+31(0)20-3540259)     | [+31 (0)38 - 760 1750](tel:+31(0)38-7601750) |
+| [Route](https://tinyurl.com/move-amsterdam)  | [Route](https://tinyurl.com/move-portugal)       | [Route](tinyurl.com/move-zwolle)             |
+
+| __New Business__    |
+|:--------------------|
+| info@moveagency.com |
+
+| __Press & Communication__ |
+|:--------------------------|
+| marketing@moveagency.com  |
+
+| __Vacancies__       |
+|:--------------------|
+| jobs@moveagency.com |
     """
