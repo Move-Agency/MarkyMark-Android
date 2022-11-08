@@ -20,16 +20,16 @@ package com.moveagency.markymark.sample.ui.theme
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontFamily.Companion.Monospace
 import androidx.compose.ui.text.font.FontStyle.Companion.Italic
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.moveagency.markymark.composer.Padding
 import com.moveagency.markymark.sample.ui.theme.ColorPalette.M2Black
 import com.moveagency.markymark.sample.ui.theme.ColorPalette.M2Blue
-import com.moveagency.markymark.sample.ui.theme.ColorPalette.M2Gray
 import com.moveagency.markymark.sample.ui.theme.ColorPalette.M2LightGray
 import com.moveagency.markymark.sample.ui.theme.ColorPalette.M2Orange
 import com.moveagency.markymark.sample.ui.theme.Typography.Body
@@ -39,29 +39,10 @@ import com.moveagency.markymark.sample.ui.theme.Typography.Heading3
 import com.moveagency.markymark.sample.ui.theme.Typography.Heading4
 import com.moveagency.markymark.sample.ui.theme.Typography.Heading5
 import com.moveagency.markymark.sample.ui.theme.Typography.Heading6
-import com.moveagency.markymark.theme.AnnotatedStyles
-import com.moveagency.markymark.theme.BlockQuoteStyle
-import com.moveagency.markymark.theme.CodeBlockStyle
-import com.moveagency.markymark.theme.ComposableStyles
-import com.moveagency.markymark.theme.HeadingLevelStyle
-import com.moveagency.markymark.theme.HeadingsStyle
-import com.moveagency.markymark.theme.ImageStyle
-import com.moveagency.markymark.theme.ListBlockStyle
-import com.moveagency.markymark.theme.LocalMarkyMarkTheme
-import com.moveagency.markymark.theme.MarkyMarkTheme
-import com.moveagency.markymark.theme.OrderedListItemStyle
-import com.moveagency.markymark.theme.RuleStyle
-import com.moveagency.markymark.theme.TableBlockStyle
-import com.moveagency.markymark.theme.TableCellStyle
-import com.moveagency.markymark.theme.TableDividerStyle
-import com.moveagency.markymark.theme.TaskListItemStyle
+import com.moveagency.markymark.theme.*
 import com.moveagency.markymark.theme.TaskListItemStyle.Tints
-import com.moveagency.markymark.theme.TextNodeStyle
-import com.moveagency.markymark.theme.UnorderedListItemStyle
 import com.moveagency.markymark.theme.UnorderedListItemStyle.Indicator
-import com.moveagency.markymark.theme.UnorderedListItemStyle.Indicator.Shape.Oval
-import com.moveagency.markymark.theme.UnorderedListItemStyle.Indicator.Shape.Rectangle
-import com.moveagency.markymark.theme.UnorderedListItemStyle.Indicator.Shape.Triangle
+import com.moveagency.markymark.theme.UnorderedListItemStyle.Indicator.Shape.*
 import com.moveagency.markymark.theme.UnorderedListItemStyle.Indicator.Style.Stroke
 import kotlinx.collections.immutable.persistentListOf
 
@@ -83,13 +64,21 @@ private val SampleMarkyMarkTheme = MarkyMarkTheme(
         ),
         blockQuote = BlockQuoteStyle(
             indicatorTint = M2Orange,
-            background = Color.Transparent,
+            background = Transparent,
         ),
         tableBlock = TableBlockStyle(
-            headerStyle = TableCellStyle(background = M2LightGray),
-            outlineStyle = TableDividerStyle(thickness = 3.dp, color = M2Black),
-            headerDividerStyle = TableDividerStyle(thickness = 2.dp, color = M2Orange),
-            bodyDividerStyle = TableDividerStyle(thickness = 1.dp, color = M2Gray),
+            padding = Padding(vertical = Spacing.x1),
+            headerStyle = TableCellStyle(
+                padding = Padding(),
+                textStyle = Heading5,
+            ),
+            bodyStyle = TableCellStyle(padding = Padding()),
+            outlineDividerStyles = OutlineDividerStyles(),
+            headerDividerStyle = TableDividerStyle(thickness = Spacing.x0_25),
+            bodyDividerStyles = BodyDividerStyles(
+                horizontal = TableDividerStyle(thickness = Spacing.x0_25),
+                vertical = TableDividerStyle(thickness = Spacing.x4),
+            )
         ),
         listBlock = ListBlockStyle(
             orderedStyle = OrderedListItemStyle(textStyle = Body),

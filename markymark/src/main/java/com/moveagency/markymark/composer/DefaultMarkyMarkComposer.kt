@@ -21,32 +21,12 @@ package com.moveagency.markymark.composer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.ui.Modifier
-import com.moveagency.markymark.composable.CodeBlock
-import com.moveagency.markymark.composable.Headline
-import com.moveagency.markymark.composable.Image
-import com.moveagency.markymark.composable.ListItem
-import com.moveagency.markymark.composable.Rule
-import com.moveagency.markymark.composable.TableBlock
-import com.moveagency.markymark.composable.TextNode
-import com.moveagency.markymark.composable.blockQuoteItem
+import com.moveagency.markymark.composable.*
 import com.moveagency.markymark.model.AnnotatedStableNode
-import com.moveagency.markymark.model.ComposableStableNode.BlockQuote
-import com.moveagency.markymark.model.ComposableStableNode.CodeBlock
-import com.moveagency.markymark.model.ComposableStableNode.Headline
-import com.moveagency.markymark.model.ComposableStableNode.Headline.Level.HEADING1
-import com.moveagency.markymark.model.ComposableStableNode.Headline.Level.HEADING2
-import com.moveagency.markymark.model.ComposableStableNode.Headline.Level.HEADING3
-import com.moveagency.markymark.model.ComposableStableNode.Headline.Level.HEADING4
-import com.moveagency.markymark.model.ComposableStableNode.Headline.Level.HEADING5
-import com.moveagency.markymark.model.ComposableStableNode.Headline.Level.HEADING6
-import com.moveagency.markymark.model.ComposableStableNode.Image
-import com.moveagency.markymark.model.ComposableStableNode.ListBlock
-import com.moveagency.markymark.model.ComposableStableNode.ListEntry
+import com.moveagency.markymark.model.ComposableStableNode.*
+import com.moveagency.markymark.model.ComposableStableNode.Headline.Level.*
 import com.moveagency.markymark.model.ComposableStableNode.ListEntry.ListItem
 import com.moveagency.markymark.model.ComposableStableNode.ListEntry.ListNode
-import com.moveagency.markymark.model.ComposableStableNode.Paragraph
-import com.moveagency.markymark.model.ComposableStableNode.Rule
-import com.moveagency.markymark.model.ComposableStableNode.TableBlock
 import com.moveagency.markymark.model.StableNode
 import com.moveagency.markymark.theme.ComposableStyles
 import com.moveagency.markymark.theme.ListBlockStyle
@@ -305,7 +285,7 @@ open class DefaultMarkyMarkComposer : MarkyMarkComposer {
         styles: ComposableStyles,
     ) = item(contentType = TableBlock::class.qualifiedName) {
         TableBlock(
-            modifier = modifier.fillParentMaxWidth(),
+            modifier = modifier,
             node = node,
             style = styles.tableBlock,
         )
