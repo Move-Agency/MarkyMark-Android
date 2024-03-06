@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.moveagency.markymark"
+    namespace = Versions.NAMESPACE
     compileSdk = Versions.TARGET_SDK
 
     defaultConfig {
@@ -34,8 +34,18 @@ android {
         kotlinCompilerExtensionVersion = Versions.KOTLIN_COMPILER_EXTENSION
     }
 
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+
+    kotlin {
+        jvmToolchain(Versions.JVM.toString().toInt())
+    }
+
     kotlinOptions {
-        jvmTarget = Versions.JVM.toString()
         freeCompilerArgs = freeCompilerArgs + listOf(
             "-P",
             "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=${rootDir.absolutePath}/compose_metrics",
@@ -53,14 +63,42 @@ android {
     }
 }
 
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("mavenRelease") {
+                groupId = Versions.NAMESPACE
+                version = Versions.VERSION_NAME
+                from(components.getByName("release"))
+                pom {
+                    name.set("MarkyMark-Android")
+                    description.set("Library for converting Markdown to Android Jetpack Compose elements")
+                    url.set("https://git.m2mobi.com/projects/ML/repos/m2utility/browse")
+                    licenses {
+                        license {
+                            name.set("The MIT License (MIT)")
+                            url.set("https://raw.githubusercontent.com/Move-Agency/MarkyMark-Android/v3/develop/LICENSE")
+                        }
+                    }
+                    organization {
+                        name.set("Move Agency")
+                        url.set("https://www.moveagency.com/")
+                    }
+                }
+            }
+        }
+    }
+}
+
 dependencies {
+    implementation(platform("androidx.compose:compose-bom:2024.02.01"))
 
-    implementation("androidx.appcompat:appcompat:1.5.1")
+    implementation("androidx.appcompat:appcompat:1.6.1")
 
-    implementation("androidx.compose.ui:ui:${Versions.COMPOSE}")
-    implementation("androidx.compose.ui:ui-tooling-preview:${Versions.COMPOSE}")
-    implementation("androidx.compose.material3:material3:${Versions.MATERIAL}")
-    debugImplementation("androidx.compose.ui:ui-tooling:${Versions.COMPOSE}")
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.material3:material3")
+    debugImplementation("androidx.compose.ui:ui-tooling")
 
     implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:${Versions.IMMUTABLE}")
 

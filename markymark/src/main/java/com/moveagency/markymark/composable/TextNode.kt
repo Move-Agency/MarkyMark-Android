@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Move
+ * Copyright © 2024 Move
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the “Software”), to deal in the Software without restriction, including without limitation
@@ -26,7 +26,7 @@ import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
-import com.moveagency.markymark.model.AnnotatedStableNode
+import com.moveagency.markymark.model.annotated.AnnotatedStableNode
 import kotlinx.collections.immutable.ImmutableList
 
 internal const val TAG_LINK = "TAG_LINK"

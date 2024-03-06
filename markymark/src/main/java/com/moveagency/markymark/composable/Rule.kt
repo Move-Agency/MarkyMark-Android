@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Move
+ * Copyright © 2024 Move
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the “Software”), to deal in the Software without restriction, including without limitation
@@ -18,7 +18,9 @@
 
 package com.moveagency.markymark.composable
 
-import androidx.compose.material3.Divider
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.moveagency.markymark.composer.padding
@@ -28,10 +30,9 @@ import com.moveagency.markymark.theme.RuleStyle
 internal fun Rule(
     style: RuleStyle,
     modifier: Modifier = Modifier,
-) {
-    Divider(
-        modifier = modifier.padding(style.padding),
-        thickness = style.thickness,
-        color = style.color,
-    )
-}
+) = Spacer(
+    modifier = modifier
+        .padding(style.padding)
+        .height(style.thickness)
+        .background(style.color)
+)

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Move
+ * Copyright © 2024 Move
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the “Software”), to deal in the Software without restriction, including without limitation
@@ -16,54 +16,70 @@
  * IN THE SOFTWARE.
  */
 
+@file:OptIn(ExperimentalTextApi::class)
+
 package com.moveagency.markymark.sample.ui.theme
 
+import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily.Companion.SansSerif
+import androidx.compose.ui.text.font.FontStyle.Companion.Italic
 import androidx.compose.ui.text.font.FontWeight.Companion.Bold
+import androidx.compose.ui.text.font.FontWeight.Companion.Light
+import androidx.compose.ui.text.font.FontWeight.Companion.Normal
 import androidx.compose.ui.text.font.FontWeight.Companion.SemiBold
 import androidx.compose.ui.unit.sp
-import com.moveagency.markymark.sample.ui.theme.ColorPalette.M2Black
-import com.moveagency.markymark.sample.ui.theme.ColorPalette.M2Gray
-import com.moveagency.markymark.sample.ui.theme.Font.Monteserrat
+import com.moveagency.markymark.sample.ui.theme.Font.SpaceGrotesk
 
 object Typography {
 
-    private val HeadingBase = TextStyle(fontFamily = Monteserrat)
-    val Heading1 = HeadingBase + TextStyle(
-        fontSize = 52.sp,
-        color = M2Black,
-        fontWeight = Bold,
+    private val BaseStyle = TextStyle(fontFamily = SpaceGrotesk)
+
+    val Heading1 = BaseStyle.copy(
+        fontSize = 48.sp,
+        lineHeight = 64.sp,
+        fontWeight = Normal,
     )
-    val Heading2 = HeadingBase + TextStyle(
+    val Heading2 = BaseStyle.copy(
+        fontSize = 40.sp,
+        lineHeight = 56.sp,
+        fontWeight = Normal,
+    )
+    val Heading3 = BaseStyle.copy(
         fontSize = 32.sp,
-        color = M2Black,
+        lineHeight = 48.sp,
+        fontWeight = Normal,
+    )
+    val Heading4 = BaseStyle.copy(
+        fontSize = 24.sp,
+        lineHeight = 40.sp,
         fontWeight = Bold,
     )
-    val Heading3 = HeadingBase + TextStyle(
-        fontSize = 26.sp,
-        color = M2Black,
+    val Heading5 = BaseStyle.copy(
+        fontSize = 20.sp,
+        lineHeight = 28.sp,
         fontWeight = Bold,
     )
-    val Heading4 = HeadingBase + TextStyle(
-        fontSize = 22.sp,
-        color = M2Gray,
-        fontWeight = SemiBold,
-    )
-    val Heading5 = HeadingBase + TextStyle(
-        fontSize = 18.sp,
-        color = M2Gray,
-        fontWeight = SemiBold,
-    )
-    val Heading6 = HeadingBase + TextStyle(
+    val Heading6 = BaseStyle.copy(
         fontSize = 16.sp,
-        color = M2Gray,
-        fontWeight = SemiBold,
+        lineHeight = 32.sp,
+        fontWeight = Bold,
     )
 
-    val Body = TextStyle(
-        fontSize = 18.sp,
-        fontFamily = SansSerif,
-        color = M2Black,
+    val Caption = BaseStyle.copy(
+        fontSize = 12.sp,
+        fontStyle = Italic,
+        fontWeight = Light,
+        lineHeight = 16.sp,
+    )
+
+    val Body = BaseStyle.copy(
+        fontSize = 16.sp,
+        lineHeight = 24.sp,
+    )
+
+    val TableHeader = BaseStyle.copy(
+        fontSize = 20.sp,
+        lineHeight = 28.sp,
+        fontWeight = SemiBold,
     )
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Move
+ * Copyright © 2024 Move
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the “Software”), to deal in the Software without restriction, including without limitation
@@ -25,11 +25,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
@@ -41,19 +37,15 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.coerceAtLeast
 import androidx.compose.ui.unit.dp
 import com.moveagency.markymark.composer.padding
-import com.moveagency.markymark.model.AnnotatedStableNode
-import com.moveagency.markymark.model.ComposableStableNode.ListItemType
-import com.moveagency.markymark.model.ComposableStableNode.ListItemType.Ordered
-import com.moveagency.markymark.model.ComposableStableNode.ListItemType.Task
-import com.moveagency.markymark.model.ComposableStableNode.ListItemType.Unordered
+import com.moveagency.markymark.model.annotated.AnnotatedStableNode
+import com.moveagency.markymark.model.composable.ListBlock.ListItemType
+import com.moveagency.markymark.model.composable.ListBlock.ListItemType.*
 import com.moveagency.markymark.theme.ListBlockStyle
 import com.moveagency.markymark.theme.OrderedListItemStyle
 import com.moveagency.markymark.theme.TaskListItemStyle
 import com.moveagency.markymark.theme.UnorderedListItemStyle
 import com.moveagency.markymark.theme.UnorderedListItemStyle.Indicator
-import com.moveagency.markymark.theme.UnorderedListItemStyle.Indicator.Shape.Oval
-import com.moveagency.markymark.theme.UnorderedListItemStyle.Indicator.Shape.Rectangle
-import com.moveagency.markymark.theme.UnorderedListItemStyle.Indicator.Shape.Triangle
+import com.moveagency.markymark.theme.UnorderedListItemStyle.Indicator.Shape.*
 import com.moveagency.markymark.theme.UnorderedListItemStyle.Indicator.Style
 import kotlinx.collections.immutable.ImmutableList
 
@@ -62,7 +54,7 @@ internal fun ListItem(
     type: ListItemType,
     children: ImmutableList<AnnotatedStableNode>,
     blockStyle: ListBlockStyle,
-    level: Int,
+    indentLevel: Int,
     modifier: Modifier = Modifier,
 ) {
     val style = when (type) {
@@ -81,7 +73,7 @@ internal fun ListItem(
             )
             is Unordered -> UnorderedIndicator(
                 firstLinePos = firstLinePos,
-                level = level,
+                level = indentLevel,
                 style = blockStyle.unorderedStyle,
             )
             is Task -> TaskIndicator(

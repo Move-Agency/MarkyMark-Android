@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Move
+ * Copyright © 2024 Move
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the “Software”), to deal in the Software without restriction, including without limitation
@@ -22,18 +22,7 @@ import androidx.compose.runtime.Stable
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 import com.moveagency.markymark.composable.TAG_LINK
-import com.moveagency.markymark.model.AnnotatedStableNode
-import com.moveagency.markymark.model.AnnotatedStableNode.Bold
-import com.moveagency.markymark.model.AnnotatedStableNode.Code
-import com.moveagency.markymark.model.AnnotatedStableNode.EmailLink
-import com.moveagency.markymark.model.AnnotatedStableNode.Italic
-import com.moveagency.markymark.model.AnnotatedStableNode.Link
-import com.moveagency.markymark.model.AnnotatedStableNode.ParagraphText
-import com.moveagency.markymark.model.AnnotatedStableNode.SoftLineBreak
-import com.moveagency.markymark.model.AnnotatedStableNode.Strikethrough
-import com.moveagency.markymark.model.AnnotatedStableNode.Subscript
-import com.moveagency.markymark.model.AnnotatedStableNode.Superscript
-import com.moveagency.markymark.model.AnnotatedStableNode.Text
+import com.moveagency.markymark.model.annotated.*
 import com.moveagency.markymark.theme.AnnotatedStyles
 import kotlinx.collections.immutable.ImmutableList
 

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Move
+ * Copyright © 2024 Move
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the “Software”), to deal in the Software without restriction, including without limitation
@@ -25,7 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale.Companion.FillWidth
 import coil.compose.AsyncImage
 import com.moveagency.markymark.composer.padding
-import com.moveagency.markymark.model.ComposableStableNode.Image
+import com.moveagency.markymark.model.composable.Image
 import com.moveagency.markymark.theme.ImageStyle
 
 @Composable

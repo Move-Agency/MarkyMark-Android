@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Move
+ * Copyright © 2024 Move
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the “Software”), to deal in the Software without restriction, including without limitation
@@ -21,7 +21,7 @@ package com.moveagency.markymark.composer
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
-import com.moveagency.markymark.model.ComposableStableNode
+import com.moveagency.markymark.model.composable.ComposableStableNode
 import com.moveagency.markymark.theme.ComposableStyles
 import kotlinx.collections.immutable.ImmutableList
 

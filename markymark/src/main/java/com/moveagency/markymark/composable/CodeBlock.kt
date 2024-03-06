@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Move
+ * Copyright © 2024 Move
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the “Software”), to deal in the Software without restriction, including without limitation
@@ -19,11 +19,16 @@
 package com.moveagency.markymark.composable
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.isSpecified
 import com.moveagency.markymark.composer.padding
-import com.moveagency.markymark.model.ComposableStableNode.CodeBlock
+import com.moveagency.markymark.model.composable.CodeBlock
 import com.moveagency.markymark.theme.CodeBlockStyle
 
 @Composable
@@ -31,11 +36,16 @@ internal fun CodeBlock(
     node: CodeBlock,
     style: CodeBlockStyle,
     modifier: Modifier = Modifier,
+) = Row(
+    modifier = Modifier
+        .horizontalScroll(rememberScrollState())
+        .then(modifier)
 ) {
     Text(
-        modifier = modifier
+        modifier = Modifier
             .padding(style.outerPadding)
-            .background(style.background)
+            .clip(style.shape)
+            .then(if (style.background.isSpecified) Modifier.background(style.background) else Modifier)
             .padding(style.innerPadding),
         style = style.textStyle,
         text = node.content,

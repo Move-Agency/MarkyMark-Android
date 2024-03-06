@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Move
+ * Copyright © 2024 Move
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the “Software”), to deal in the Software without restriction, including without limitation
@@ -22,9 +22,16 @@ import androidx.compose.ui.graphics.Color
 
 object ColorPalette {
 
-    val M2Black = Color(0xFF231F20)
-    val M2Gray = Color(0xFF3C4146)
-    val M2LightGray = Color(0xFFF7F8F9)
-    val M2Orange = Color(0xFFFFAA41)
-    val M2Blue = Color(0xFF3CA0F0)
+    val OrbYellow = Color(0xFFE1FF01)
+    val FirstAndBeyondRed = Color(0xFFFC3D21)
+    val LekkerLila = Color(0xFFE0C0FC)
+    val OceanBlue = Color(0xFFBCCFD8)
+
+    val White = Color(0xFFFFFFFF)
+    val WarmLightGrey = Color(0xFFEDEDE5)
+    val WarmGrey = Color(0xFFD5D5D0)
+
+    val Black = Color(0xFF000000)
+    val Grey = Color(0xFF71716D)
+    val LightGrey = Color(0xFF9F9F97)
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Move
+ * Copyright © 2024 Move
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the “Software”), to deal in the Software without restriction, including without limitation
@@ -33,16 +33,16 @@ import com.moveagency.markymark.theme.MarkyMarkTheme
 internal fun Preview() {
     Markdown(
         modifier = Modifier.background(Color.White),
-        markdown = PREVIEW_MARKDOWN,
+        markdown = PreviewMarkdown,
     )
 }
 
 /**
  * Contains all syntax supported by MarkyMark. Made public so you can include it in a debug screen and verify your
- * custom [MarkyMarkTheme], [MarkyMarkComposer], or [MarkyMarkAnnotator].
+ * custom [MarkyMarkTheme], [MarkyMarkComposer], or [MarkyMarkAnnotator]. See the sample for details.
  */
 @Suppress("MaxLineLength")
-const val PREVIEW_MARKDOWN =
+const val PreviewMarkdown =
     """
 # Supported Markdown Showcase
 
@@ -68,13 +68,13 @@ You can also just add normal, simple paragraphs to your hearts content.
 
 Want blank lines? That's fine too!
 
-### Superscript & Subscript
+### Superscript and Subscript
 
-We can do superscript too see: 60m^2^, also subscript: H~2~O
+We can do superscript too see: 60m^2^, also subscript: C~6~H~12~O~16~
 
 ### Emojis
 
-You can use emojis 😀 (utf-8 encoded).
+You can use emojis 😀 (UTF-8 encoded).
 
 ## Emphasis
 
@@ -94,15 +94,15 @@ __Bold__
 
 ### Both
 
-***Bold & Italic***
+***Bold and Italic***
 
-___Bold & Italic___
+___Bold and Italic___
 
 ### Both *(Mixed)*
 
-__*Bold & Italic*__
+__*Bold and Italic*__
 
-**_Bold & Italic_**
+**_Bold and Italic_**
 
 ## Block Quotes
 
@@ -112,40 +112,40 @@ __*Bold & Italic*__
   Deny thy father, and refuse thy name;
   Or, if thou wilt not, be but sworn my love,
   And I'll no longer be a Capulet.
-  ~ Juliet Capulet (Romeo and Juliet by William Shakespear)
+  __~ Juliet Capulet (Romeo and Juliet by William Shakespear)__
 
 ### Multiple `>`
 
 > Writing clean code is what you must do in order to call yourself a professional.
 > There is no reasonable excuse for doing anything less then your best.
 >
-> ~ Clean Code by Robert C. Martin (title page)
+> __~ Clean Code by Robert C. Martin (title page)__
 
 ### Line Breaks
 
-> "Realy, Hagrid, if you are holding out for universal popularity, I'm afraid you will be in this cabin for a very long time" said Dumbledore, now peering sternly over his half-moon spectacles. "Not a week has passed, since I became Headmaster of this school, when I haven't had atleast one owl complaining about the way I run it. But what should I do? Barricade myself in my study and refuse to talk to anybody?"
-> "Yeh - yeh're not half-giant!" said Hagrid croakily.
-> "Hagrid, look what I've got for relatives!" Harry said furiously. "Look at the Dursleys!"
-> "An excellent point" said Professor Dumbledore. "My own brother, Aberforth, was prosecuted for practising inappropriate charms on a goat. It was all over the papers, but did Aberforth hide? No, he did not! He held his head high and went about his business as usual! Of course, I'm not entirely sure he can read, so that may not have been bravery..."
+> ‘Realy, Hagrid, if you are holding out for universal popularity, I'm afraid you will be in this cabin for a very long time’ said Dumbledore, now peering sternly over his half-moon spectacles. ‘Not a week has passed, since I became Headmaster of this school, when I haven't had atleast one owl complaining about the way I run it. But what should I do? Barricade myself in my study and refuse to talk to anybody?’
+> ‘Yeh - yeh're not half-giant!’ said Hagrid croakily.
+> ‘Hagrid, look what I've got for relatives!’ Harry said furiously. ‘Look at the Dursleys!’
+> ‘An excellent point" said Professor Dumbledore. ‘My own brother, Aberforth, was prosecuted for practising inappropriate charms on a goat. It was all over the papers, but did Aberforth hide? No, he did not! He held his head high and went about his business as usual! Of course, I'm not entirely sure he can read, so that may not have been bravery...’
 >
-> ~ Harry Potter and the Goblet of Fire by J.K. Rowling (Chapter 24. Rita Skeeter's Scoop)
+> __~ Harry Potter and the Goblet of Fire by J.K. Rowling (Chapter 24. Rita Skeeter's Scoop)__
 
 ### Inline Formatting
 
-> *“A towel, [The Hitchhiker's Guide to the Galaxy] says, is about the most massively useful thing an interstellar hitchhiker can have. Partly it has great practical value. You can wrap it around you for warmth as you bound across the cold moons of Jaglan Beta; you can lie on it on the brilliant marble-sanded beaches of Santraginus V, inhaling the heady sea vapors; you can sleep under it beneath the stars which shine so redly on the desert world of Kakrafoon; use it to sail a miniraft down the slow heavy River Moth; wet it for use in hand-to-hand-combat; wrap it round your head to ward off noxious fumes or avoid the gaze of the Ravenous Bugblatter Beast of Traal (such a mind-boggingly stupid animal, it assumes that if you can't see it, it can't see you); you can wave your towel in emergencies as a distress signal, and of course dry yourself off with it if it still seems to be clean enough.”*
+> *‘A towel, [The Hitchhiker's Guide to the Galaxy] says, is about the most massively useful thing an interstellar hitchhiker can have. Partly it has great practical value. You can wrap it around you for warmth as you bound across the cold moons of Jaglan Beta; you can lie on it on the brilliant marble-sanded beaches of Santraginus V, inhaling the heady sea vapors; you can sleep under it beneath the stars which shine so redly on the desert world of Kakrafoon; use it to sail a miniraft down the slow heavy River Moth; wet it for use in hand-to-hand-combat; wrap it round your head to ward off noxious fumes or avoid the gaze of the Ravenous Bugblatter Beast of Traal (such a mind-boggingly stupid animal, it assumes that if you can't see it, it can't see you); you can wave your towel in emergencies as a distress signal, and of course dry yourself off with it if it still seems to be clean enough.’*
 > 
-> ~ Hitchhiker's Guide to the Galaxy by Douglas Adams
+> __~ Hitchhiker's Guide to the Galaxy by Douglas Adams__
 
 ### Nested
 
 > Svoboda slipped in through the door as Rudy left.
-> "Hey Jazz" Svoboda pulled up a chair and sat beside the bed. "Doc says you're doing great!"
-> "Hey Svobo. sorry about the chloroform
-> "Eh, no biggy." He shrugged.
-> "I'm guessing the rest of town isn't as forgiving?"
-> "People don't seem that mad. Well, some are. But most aren't."
-> "Seriously?" I said. "I knocked the whole town out."
-> He wiggled his hand. "That wasn't just you. There were a lot of engineering failures. Like:
+> ‘Hey Jazz’ Svoboda pulled up a chair and sat beside the bed. ‘Doc says you're doing great!’
+> ‘Hey Svobo. sorry about the chloroform’
+> ‘Eh, no biggy.’ He shrugged.
+> ‘I'm guessing the rest of town isn't as forgiving?’
+> ‘People don't seem that mad. Well, some are. But most aren't.’
+> ‘Seriously?’ I said. ‘I knocked the whole town out.’
+> He wiggled his hand. ‘That wasn't just you. There were a lot of engineering failures. Like:
 >
 > > Why aren't there detectors in the air pipeline for complex toxins?
 >
@@ -155,32 +155,32 @@ __*Bold & Italic*__
 >
 > > Why is Life Support centralized instead of having a separate zone for each bubble?
 > 
-> These are the questions people are asking."
-> He put his hand on my arm. "I'm just glad you're okay."
+> These are the questions people are asking.’
+> He put his hand on my arm. ‘I'm just glad you're okay.’
 > I put my hand on his. The effect was kinda lost with all the bandaging.
-> "Anyway," he said. "The whole thing gave me a chance to bond with your dad"
-> "Really?"
-> "Yeah!" he said. "After we woke up we formed a two-man team to check on my neighbors. It was cool. He bought me a beer afterward."
-> I widened my eyes. "Dad... bought a beer?"
-> "For me, yeah. He drank juice. We spend an hour talking about metallurgy! Awesome guy."
+> ‘Anyway,’ he said. ‘The whole thing gave me a chance to bond with your dad’
+> ‘Really?’
+> ‘Yeah!’ he said. ‘After we woke up we formed a two-man team to check on my neighbors. It was cool. He bought me a beer afterward.’
+> I widened my eyes. ‘Dad... bought a beer?’
+> ‘For me, yeah. He drank juice. We spend an hour talking about metallurgy! Awesome guy.’
 > I tried to imagine Dad and Svoboda hanging out. I failed.
-> "Awesome guy," Svoboda repeated, a little quieter this time. His smile faded.
-> "Svobo?" I said.
-> He looked down. "Are you... leaving Jazz? Are they going to deport you? I'd hate that."
-> I put my mittened hand on his shoulder. "It'll be all right. I'm not going anywhere."
-> "You sure?"
-> "Yeah, I have a plan"
-> "A plan?" He looked concerned. "Your plans are... uh... should I hide somewhere?"
-> I laughed. "Not this time"
-> "Okay..." He was clearly not convinced. "But how are you going to get out of this one? Like... you knocked out the *whole town*."
-> I smiled at him. "Don't worry. I got this."
-> "Okay, good." He leaned down and kissed my cheek, almost as an afterthought. I had no idea what possessed him to do that-- honestly I didn't think he had it in him. His bravery didn't last long though. Once he realized what he'd done, his face became a mask of terror. "Oh shit! I'm sorry! I wasn't thinking--"
-> I laughed. The look in the poor guy's eyes... I couldn't help it. "Relax Svobo. It's just a peck on the cheek. It's nothing to get worked up about."
-> "R-Right. Yeah."
+> ‘Awesome guy,’ Svoboda repeated, a little quieter this time. His smile faded.
+> ‘Svobo?’ I said.
+> He looked down. ‘Are you... leaving Jazz? Are they going to deport you? I'd hate that.’
+> I put my mittened hand on his shoulder. ‘It'll be all right. I'm not going anywhere.’
+> ‘You sure?’
+> ‘Yeah, I have a plan’
+> ‘A plan?’ He looked concerned. ‘Your plans are... uh... should I hide somewhere?’
+> I laughed. ‘Not this time’
+> ‘Okay...’ He was clearly not convinced. ‘But how are you going to get out of this one? Like... you knocked out the *whole town*.’
+> I smiled at him. ‘Don't worry. I got this.’
+> ‘Okay, good.’ He leaned down and kissed my cheek, almost as an afterthought. I had no idea what possessed him to do that-- honestly I didn't think he had it in him. His bravery didn't last long though. Once he realized what he'd done, his face became a mask of terror. ‘Oh shit! I'm sorry! I wasn't thinking--’
+> I laughed. The look in the poor guy's eyes... I couldn't help it. ‘Relax Svobo. It's just a peck on the cheek. It's nothing to get worked up about.’
+> ‘R-Right. Yeah.’
 > I put my hand on the nape of his neck, pulled his head to mine, and kissed him full on the lips. A good, long kiss with no ambiguity. When we disengaged, he looked hopelessly confused.
-> "Now *that*," I said. "*That* you can get worked up about."
+> ‘Now *that*,’ I said. ‘*That* you can get worked up about.’
 >
-> ~ Artemis by Andy Weir
+> __~ Artemis by Andy Weir__
 
 ## Lists
 
@@ -405,21 +405,23 @@ __________________________________
 
 <https://www.moveagency.com/>
 
+### Auto
+
+<https://www.moveagency.com/>
+
 ### Formatting
 
 **[link text](https://www.moveagency.com/)**
 
 *[link text](https://www.moveagency.com/)*
 
-~~[link text](https://www.moveagency.com/)~~
+## Email
 
-### Email
-
-#### Normal
+### Auto
 
 info@moveagency.com
 
-#### Quick
+### Quick
 
 <jobs@moveagency.com>
 

@@ -37,8 +37,8 @@ android {
         targetCompatibility = Versions.JVM
     }
 
-    kotlinOptions {
-        jvmTarget = Versions.JVM.toString()
+    kotlin {
+        jvmToolchain(Versions.JVM.toString().toInt())
     }
 
     buildFeatures {
@@ -75,17 +75,18 @@ android {
 }
 
 dependencies {
+    implementation(platform("androidx.compose:compose-bom:2024.02.01"))
 
     implementation(project(":markymark"))
 
     implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:${Versions.IMMUTABLE}")
 
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.activity:activity-compose:${Versions.COMPOSE_ACTIVITY}")
-    implementation("androidx.compose.ui:ui:${Versions.COMPOSE}")
-    implementation("androidx.compose.ui:ui-tooling-preview:${Versions.COMPOSE}")
-    implementation("androidx.compose.material3:material3:${Versions.MATERIAL}")
-    debugImplementation("androidx.compose.ui:ui-tooling:${Versions.COMPOSE}")
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.material3:material3")
+    debugImplementation("androidx.compose.ui:ui-tooling")
 
     implementation("com.google.accompanist:accompanist-systemuicontroller:${Versions.ACCOMPANIST}")
 }

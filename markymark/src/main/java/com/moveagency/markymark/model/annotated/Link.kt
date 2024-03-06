@@ -1,0 +1,46 @@
+/*
+ * Copyright © 2024 Move
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the “Software”), to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
+ * to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of
+ * the Software.
+ *
+ * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+ * THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ * IN THE SOFTWARE.
+ */
+
+package com.moveagency.markymark.model.annotated
+
+import androidx.compose.runtime.Immutable
+import com.moveagency.markymark.model.NodeMetadata
+import kotlinx.collections.immutable.ImmutableList
+
+/**
+ * Represents Markdown text with link formatting. Mapped from [Link][com.vladsch.flexmark.ast.Link] or
+ * [AutoLink][com.vladsch.flexmark.ast.AutoLink].
+ *
+ * __Syntax:__
+ *
+ * ```markdown
+ * [text](https://www.moveagency.com/ "title")
+ * [text](https://www.moveagency.com/)
+ * <https://www.moveagency.com/>
+ * https://www.moveagency.com/
+ * ```
+ *
+ * For more details see the [Markdown guide](https://www.markdownguide.org/basic-syntax#code).
+ */
+@Immutable
+data class Link(
+    override val metadata: NodeMetadata,
+    val children: ImmutableList<AnnotatedStableNode>,
+    val url: String,
+    val title: String?,
+) : AnnotatedStableNode()

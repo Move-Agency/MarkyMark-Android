@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Move
+ * Copyright © 2024 Move
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the “Software”), to deal in the Software without restriction, including without limitation
@@ -18,47 +18,46 @@
 
 package com.moveagency.markymark.sample
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
-import androidx.compose.runtime.DisposableEffect
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color.Companion.Transparent
-import androidx.compose.ui.graphics.Color.Companion.White
-import androidx.core.view.WindowCompat
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.moveagency.markymark.PREVIEW_MARKDOWN
+import com.moveagency.markymark.PreviewMarkdown
 import com.moveagency.markymark.composable.Markdown
+import com.moveagency.markymark.sample.ui.theme.ColorPalette.Black
+import com.moveagency.markymark.sample.ui.theme.ColorPalette.WarmLightGrey
 import com.moveagency.markymark.sample.ui.theme.SampleTheme
 
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.auto(
+                lightScrim = Color.TRANSPARENT,
+                darkScrim = Color.TRANSPARENT,
+            ),
+            navigationBarStyle = SystemBarStyle.auto(
+                lightScrim = Color.TRANSPARENT,
+                darkScrim = Color.TRANSPARENT,
+            ),
+        )
         super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContent {
             SampleTheme {
-                val systemUIController = rememberSystemUiController()
-                DisposableEffect(systemUIController) {
-                    systemUIController.setSystemBarsColor(
-                        color = Transparent,
-                        darkIcons = true,
-                        isNavigationBarContrastEnforced = false,
-                    )
-
-                    onDispose {
-                        // no-op
-                    }
-                }
-
+                val isDarkTheme = isSystemInDarkTheme()
+                val background = remember(isDarkTheme) { if (isDarkTheme) Black else WarmLightGrey }
                 Markdown(
-                    modifier = Modifier.background(White),
-                    markdown = PREVIEW_MARKDOWN,
+                    modifier = Modifier.background(background),
+                    markdown = PreviewMarkdown,
                 )
             }
         }
     }
-
 }

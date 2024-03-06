@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Move
+ * Copyright © 2024 Move
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the “Software”), to deal in the Software without restriction, including without limitation
@@ -16,29 +16,30 @@
  * IN THE SOFTWARE.
  */
 
-import org.gradle.api.JavaVersion.VERSION_11
+import org.gradle.api.JavaVersion
 
 object Versions {
 
-    const val VERSION_CODE = 3_000
+    const val VERSION_CODE = 3_001
+    const val VERSION_NAME = "3.0.0-alpha02"
 
-    const val KOTLIN = "1.7.10"
-    val JVM = VERSION_11
+    const val NAMESPACE = "com.moveagency.markymark"
+
+    const val KOTLIN = "1.9.22"
+    val JVM = JavaVersion.VERSION_17
     const val MIN_SDK = 24
-    const val TARGET_SDK = 33
+    const val TARGET_SDK = 34
 
     const val DETEKT = "1.21.0"
 
-    const val GRADLE_PLUGIN = "7.3.0"
+    const val GRADLE_PLUGIN = "8.1.4"
 
     const val IMMUTABLE = "0.3.5"
 
-    const val COMPOSE = "1.3.0-beta03"
-    const val COMPOSE_ACTIVITY = "1.6.0"
-    const val ACCOMPANIST = "0.26.4-beta"
-    const val KOTLIN_COMPILER_EXTENSION = "1.3.1"
-    const val COIL_KT = "2.2.1"
-    const val MATERIAL = "1.0.0-beta03"
+    const val COMPOSE_ACTIVITY = "1.8.2"
+    const val ACCOMPANIST = "0.32.0"
+    const val KOTLIN_COMPILER_EXTENSION = "1.5.8"
+    const val COIL_KT = "2.5.0"
 
-    const val FLEXMARK = "0.64.0"
+    const val FLEXMARK = "0.64.8"
 }

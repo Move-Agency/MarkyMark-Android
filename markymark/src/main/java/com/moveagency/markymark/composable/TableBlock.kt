@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Move
+ * Copyright © 2024 Move
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the “Software”), to deal in the Software without restriction, including without limitation
@@ -36,8 +36,10 @@ import androidx.compose.ui.text.style.TextAlign.Companion.End
 import androidx.compose.ui.text.style.TextAlign.Companion.Start
 import androidx.compose.ui.unit.*
 import com.moveagency.markymark.composer.padding
-import com.moveagency.markymark.model.ComposableStableNode.*
-import com.moveagency.markymark.model.ComposableStableNode.TableCell.Alignment.*
+import com.moveagency.markymark.model.composable.TableBlock
+import com.moveagency.markymark.model.composable.TableBlock.TableCell
+import com.moveagency.markymark.model.composable.TableBlock.TableCell.Alignment.*
+import com.moveagency.markymark.model.composable.TableBlock.TableRow
 import com.moveagency.markymark.theme.OutlineDividerStyles
 import com.moveagency.markymark.theme.TableBlockStyle
 import com.moveagency.markymark.theme.TableCellStyle

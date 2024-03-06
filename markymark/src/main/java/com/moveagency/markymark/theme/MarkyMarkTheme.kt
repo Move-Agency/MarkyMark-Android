@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Move
+ * Copyright © 2024 Move
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the “Software”), to deal in the Software without restriction, including without limitation
@@ -21,6 +21,8 @@
 package com.moveagency.markymark.theme
 
 import androidx.annotation.FloatRange
+import androidx.compose.foundation.shape.CornerBasedShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -33,6 +35,8 @@ import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawscope.DrawStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -51,10 +55,10 @@ import androidx.compose.ui.unit.sp
 import com.moveagency.markymark.annotator.DefaultMarkyMarkAnnotator
 import com.moveagency.markymark.composer.DefaultMarkyMarkComposer
 import com.moveagency.markymark.composer.Padding
-import com.moveagency.markymark.model.AnnotatedStableNode
-import com.moveagency.markymark.model.AnnotatedStableNode.*
-import com.moveagency.markymark.model.ComposableStableNode
-import com.moveagency.markymark.model.ComposableStableNode.*
+import com.moveagency.markymark.model.annotated.AnnotatedStableNode
+import com.moveagency.markymark.model.annotated.AnnotatedStableNode.*
+import com.moveagency.markymark.model.composable.ComposableStableNode
+import com.moveagency.markymark.model.composable.ComposableStableNode.*
 import com.moveagency.markymark.theme.ListItemStyle.Companion.DefaultListItemIndicatorPadding
 import com.moveagency.markymark.theme.ListItemStyle.Companion.DefaultListItemPadding
 import com.moveagency.markymark.theme.ListItemStyle.Companion.DefaultListItemTextStyle
@@ -65,6 +69,7 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
 val LocalMarkyMarkTheme = staticCompositionLocalOf { MarkyMarkTheme() }
+val LocalBackgroundColor = staticCompositionLocalOf { Color.Unspecified }
 
 /**
  * Theming attributes used when rendering [StableNode]s with [DefaultMarkyMarkComposer.createNodes]. The
@@ -193,6 +198,7 @@ data class CodeBlockStyle(
     val innerPadding: Padding = Padding(all = 8.dp),
     val outerPadding: Padding = Padding(start = 8.dp),
     val background: Color = LightGray,
+    val shape: Shape = RectangleShape,
     val textStyle: TextStyle = TextStyle(fontFamily = Monospace),
 )
 
@@ -207,7 +213,8 @@ data class BlockQuoteStyle(
     val outerPadding: Padding = Padding(start = 12.dp, top = 2.dp, bottom = 2.dp),
     val indicatorThickness: Dp = 2.dp,
     val indicatorTint: Color = Blue,
-    val background: Color = LightGray,
+    val backgrounds: ImmutableList<Color> = persistentListOf(LightGray),
+    val shape: CornerBasedShape = RoundedCornerShape(0.dp),
 )
 
 /**
