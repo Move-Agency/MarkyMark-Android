@@ -23,7 +23,8 @@ import com.moveagency.markymark.model.NodeMetadata
 import kotlinx.collections.immutable.ImmutableList
 
 /**
- * Represents Markdown text with superscript formatting. Mapped from [Superscript][com.vladsch.flexmark.ext.superscript.Superscript].
+ * Represents Markdown text with superscript formatting. Mapped from
+ * [Superscript][com.vladsch.flexmark.ext.superscript.Superscript].
  *
  * __Syntax:__
  *
