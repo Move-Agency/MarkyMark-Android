@@ -16,30 +16,13 @@
  * IN THE SOFTWARE.
  */
 
-import org.gradle.api.JavaVersion
+object BuildConstants {
 
-object Versions {
+    const val VersionCode = 3_001
+    const val VersionName = "3.0.0-alpha02"
 
-    const val VERSION_CODE = 3_001
-    const val VERSION_NAME = "3.0.0-alpha02"
+    const val Namespace = "com.moveagency.markymark"
 
-    const val NAMESPACE = "com.moveagency.markymark"
-
-    const val KOTLIN = "1.9.22"
-    val JVM = JavaVersion.VERSION_17
-    const val MIN_SDK = 24
-    const val TARGET_SDK = 34
-
-    const val DETEKT = "1.21.0"
-
-    const val GRADLE_PLUGIN = "8.1.4"
-
-    const val IMMUTABLE = "0.3.5"
-
-    const val COMPOSE_ACTIVITY = "1.8.2"
-    const val ACCOMPANIST = "0.32.0"
-    const val KOTLIN_COMPILER_EXTENSION = "1.5.8"
-    const val COIL_KT = "2.5.0"
-
-    const val FLEXMARK = "0.64.8"
+    const val MinSdk = 24
+    const val TargetSdk = 34
 }

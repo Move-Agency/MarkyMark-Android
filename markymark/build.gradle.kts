@@ -1,18 +1,18 @@
 @file:Suppress("UnstableApiUsage")
 
 plugins {
-    id("com.android.library")
-    kotlin("android")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.detekt)
     id("maven-publish")
 }
 
 android {
-    namespace = Versions.NAMESPACE
-    compileSdk = Versions.TARGET_SDK
+    namespace = BuildConstants.Namespace
+    compileSdk = BuildConstants.TargetSdk
 
     defaultConfig {
-        minSdk = Versions.MIN_SDK
-        targetSdk = Versions.TARGET_SDK
+        minSdk = BuildConstants.MinSdk
     }
 
     buildTypes {
@@ -21,17 +21,12 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = Versions.JVM
-        targetCompatibility = Versions.JVM
-    }
-
     buildFeatures {
         compose = true
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.KOTLIN_COMPILER_EXTENSION
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 
     publishing {
@@ -42,7 +37,7 @@ android {
     }
 
     kotlin {
-        jvmToolchain(Versions.JVM.toString().toInt())
+        jvmToolchain(libs.versions.jvm.get().toInt())
     }
 
     kotlinOptions {
@@ -56,9 +51,9 @@ android {
 
     lint {
         xmlReport = true
-        xmlOutput = file("$buildDir/reports/lint/lint-results-$name.xml")
+        xmlOutput = file("${layout.buildDirectory}/reports/lint/lint-results-$name.xml")
         htmlReport = true
-        htmlOutput = file("$buildDir/reports/lint/lint-results-$name.html")
+        htmlOutput = file("${layout.buildDirectory}/reports/lint/lint-results-$name.html")
         textReport = false
     }
 }
@@ -67,8 +62,8 @@ afterEvaluate {
     publishing {
         publications {
             create<MavenPublication>("mavenRelease") {
-                groupId = Versions.NAMESPACE
-                version = Versions.VERSION_NAME
+                groupId = BuildConstants.Namespace
+                version = BuildConstants.VersionName
                 from(components.getByName("release"))
                 pom {
                     name.set("MarkyMark-Android")
@@ -91,24 +86,23 @@ afterEvaluate {
 }
 
 dependencies {
-    implementation(platform("androidx.compose:compose-bom:2024.02.01"))
+    implementation(libs.appcompat)
 
-    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.tooling.preview)
+    debugImplementation(libs.compose.ui.tooling)
+    implementation(libs.compose.material3)
 
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    debugImplementation("androidx.compose.ui:ui-tooling")
+    implementation(libs.immutable.collections)
 
-    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:${Versions.IMMUTABLE}")
+    implementation(libs.flexmark)
+    implementation(libs.flexmark.autolink)
+    implementation(libs.flexmark.gfm.strikethrough)
+    implementation(libs.flexmark.gfm.tasklist)
+    implementation(libs.flexmark.superscript)
+    implementation(libs.flexmark.tables)
 
-    implementation("com.vladsch.flexmark:flexmark:${Versions.FLEXMARK}")
-    implementation("com.vladsch.flexmark:flexmark-ext-autolink:${Versions.FLEXMARK}")
-    implementation("com.vladsch.flexmark:flexmark-ext-gfm-strikethrough:${Versions.FLEXMARK}")
-    implementation("com.vladsch.flexmark:flexmark-ext-gfm-tasklist:${Versions.FLEXMARK}")
-    implementation("com.vladsch.flexmark:flexmark-ext-superscript:${Versions.FLEXMARK}")
-    implementation("com.vladsch.flexmark:flexmark-ext-tables:${Versions.FLEXMARK}")
-
-    implementation("io.coil-kt:coil:${Versions.COIL_KT}")
-    implementation("io.coil-kt:coil-compose:${Versions.COIL_KT}")
+    implementation(libs.coil)
+    implementation(libs.coil.compose)
 }
