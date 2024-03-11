@@ -4,7 +4,7 @@ on:
   pull_request:
   push:
     branches:
-      - 'development'
+      - '**develop'
       - 'master'
       - 'release/**'
 
@@ -31,7 +31,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
         with:
           dependency-graph: generate-and-submit
-      - name: 'Configure Ram'
+      - name: 'Configure Gradle Properties'
         run: echo 'org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=2g -XX:+HeapDumpOnOutOfMemoryError' >> local.properties
       - name: 'Assemble'
         run: ./gradlew assembleDebug
