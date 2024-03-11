@@ -23,7 +23,8 @@ import com.moveagency.markymark.model.NodeMetadata
 import kotlinx.collections.immutable.ImmutableList
 
 /**
- * Represents Github Flavoured Markdown struck out text. Mapped from [Striketrough][com.vladsch.flexmark.ext.gfm.strikethrough.Strikethrough].
+ * Represents Github Flavoured Markdown struck out text. Mapped from
+ * [Striketrough][com.vladsch.flexmark.ext.gfm.strikethrough.Strikethrough].
  *
  * __Syntax:__
  *

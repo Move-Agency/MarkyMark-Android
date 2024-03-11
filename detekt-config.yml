@@ -127,6 +127,8 @@ style:
     ignoreCompanionObjectPropertyDeclaration: true
   SerialVersionUIDInSerializableClass:
     active: false
+  MaxLineLength:
+    excludeCommentStatements: true
 
 TwitterCompose:
   CompositionLocalAllowlist:
