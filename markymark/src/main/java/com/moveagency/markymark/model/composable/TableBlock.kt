@@ -69,9 +69,9 @@ data class TableBlock(
 
         enum class Alignment {
 
-            START,
-            CENTER,
-            END,
+            Start,
+            Center,
+            End,
         }
     }
 }

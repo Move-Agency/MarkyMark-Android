@@ -38,7 +38,6 @@ import androidx.compose.ui.unit.*
 import com.moveagency.markymark.composer.padding
 import com.moveagency.markymark.model.composable.TableBlock
 import com.moveagency.markymark.model.composable.TableBlock.TableCell
-import com.moveagency.markymark.model.composable.TableBlock.TableCell.Alignment.*
 import com.moveagency.markymark.model.composable.TableBlock.TableRow
 import com.moveagency.markymark.theme.OutlineDividerStyles
 import com.moveagency.markymark.theme.TableBlockStyle
@@ -346,9 +345,9 @@ private fun TableCell(
     nodes = cell.children,
     style = style.textStyle.copy(
         textAlign = when (cell.alignment) {
-            START -> Start
-            CENTER -> Center
-            END -> End
+            Start -> Start
+            Center -> Center
+            End -> End
         },
     ),
 )

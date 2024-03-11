@@ -102,12 +102,6 @@ style:
     methods:
       - 'kotlin.io.println'
       - 'kotlin.io.print'
-      - 'android.util.Log.wtf'
-      - 'android.util.Log.e'
-      - 'android.util.Log.w'
-      - 'android.util.Log.d'
-      - 'android.util.Log.i'
-      - 'android.util.Log.v'
   MandatoryBracesIfStatements:
     active: true
   MandatoryBracesLoops:

@@ -173,14 +173,14 @@ object ComposableStableNodeConverter {
         )
     }
 
-    private const val NUM_SPACES_IN_TAB = 4
+    private const val NumSpacesInTab = 4
 
     private fun String.dropIndent(): String {
         var indentsDropped = 0
         return dropWhile {
             // Because FlexMark only removes the first line's indent but not the others we have to do it here.
             val shouldDrop = (it == '\t' && indentsDropped == 0) ||
-                (it == ' ' && indentsDropped < NUM_SPACES_IN_TAB)
+                (it == ' ' && indentsDropped < NumSpacesInTab)
             if (shouldDrop) indentsDropped++
             shouldDrop
         }
@@ -266,9 +266,9 @@ object ComposableStableNodeConverter {
         return TableBlock.TableCell(
             children = convertToAnnotatedNodes(metadata = metadata, nodes = tableCell.children),
             alignment = when (tableCell.alignment) {
-                FlexTableCell.Alignment.LEFT -> TableBlock.TableCell.Alignment.START
-                FlexTableCell.Alignment.CENTER -> TableBlock.TableCell.Alignment.CENTER
-                FlexTableCell.Alignment.RIGHT -> TableBlock.TableCell.Alignment.END
+                FlexTableCell.Alignment.LEFT -> TableBlock.TableCell.Alignment.Start
+                FlexTableCell.Alignment.CENTER -> TableBlock.TableCell.Alignment.Center
+                FlexTableCell.Alignment.RIGHT -> TableBlock.TableCell.Alignment.End
             }
         )
     }

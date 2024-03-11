@@ -19,7 +19,7 @@
 package com.moveagency.markymark.converter
 
 import android.util.Log
-import com.moveagency.markymark.converter.MarkyMarkConverter.CONVERTER_TAG
+import com.moveagency.markymark.converter.MarkyMarkConverter.ConverterTag
 import com.moveagency.markymark.converter.MarkyMarkConverter.convertToAnnotatedNodes
 import com.moveagency.markymark.model.NodeMetadata
 import com.moveagency.markymark.model.annotated.*
@@ -55,7 +55,7 @@ object AnnotatedStableNodeConverter {
         is FlexSuperscript -> convertSuperscriptNode(metadata, node)
         is TextBase -> convertTextBaseNode(metadata, node)
         else -> {
-            Log.w(CONVERTER_TAG, "Found unknown node, $node")
+            Log.w(ConverterTag, "Found unknown node, $node")
             null
         }
     }
