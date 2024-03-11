@@ -46,7 +46,8 @@ data class ListBlock(
      *
      * __Syntax:__
      *
-     * For details see [ListItem], [ListNode], and the [Markdown guide](https://www.markdownguide.org/basic-syntax#lists-1).
+     * For details see [ListItem], [ListNode], and the
+     * [Markdown guide](https://www.markdownguide.org/basic-syntax#lists-1).
      */
     @Stable
     sealed class ListEntry {
@@ -86,7 +87,8 @@ data class ListBlock(
     sealed class ListItemType {
 
         /**
-         * Represents an ordered Markdown list item. Mapped from [OrderedListItem][com.vladsch.flexmark.ast.OrderedListItem].
+         * Represents an ordered Markdown list item. Mapped from
+         * [OrderedListItem][com.vladsch.flexmark.ast.OrderedListItem].
          *
          * __Syntax:__
          *
@@ -102,7 +104,8 @@ data class ListBlock(
         data class Ordered(val index: Int) : ListItemType()
 
         /**
-         * Represents an unordered Markdown list item. Mapped from [UnorderedListItem][com.vladsch.flexmark.ast.BulletListItem].
+         * Represents an unordered Markdown list item. Mapped from
+         * [UnorderedListItem][com.vladsch.flexmark.ast.BulletListItem].
          *
          * __Syntax:__
          *
@@ -120,7 +123,8 @@ data class ListBlock(
         object Unordered : ListItemType()
 
         /**
-         * Represents a Github Flavoured Markdown task list item. Mapped from [TaskListItem][com.vladsch.flexmark.ext.gfm.tasklist.TaskListItem].
+         * Represents a Github Flavoured Markdown task list item. Mapped from
+         * [TaskListItem][com.vladsch.flexmark.ext.gfm.tasklist.TaskListItem].
          *
          * __Syntax:__
          *
