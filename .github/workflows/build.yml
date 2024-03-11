@@ -32,7 +32,7 @@ jobs:
         with:
           dependency-graph: generate-and-submit
       - name: 'Configure Gradle Properties'
-        run: echo 'org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=2g -XX:+HeapDumpOnOutOfMemoryError' >> local.properties
+        run: echo 'org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=2g -XX:+HeapDumpOnOutOfMemoryError' >> gradle.properties
       - name: 'Assemble'
         run: ./gradlew assembleDebug
       - name: 'Detekt'
