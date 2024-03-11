@@ -142,6 +142,8 @@ style:
     ignoreAnnotated: [ 'Preview', 'Composable' ]
   SerialVersionUIDInSerializableClass:
     active: false
+  MaxLineLength:
+    excludeCommentStatements: true
 
 TwitterCompose:
   CompositionLocalAllowlist:

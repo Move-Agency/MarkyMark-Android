@@ -41,8 +41,8 @@ object MarkyMarkConverter {
     internal const val CONVERTER_TAG = "Converter"
 
     /**
-     * Convert [document] child [Node]s to [ComposableStableNode]s. This mapping happens as asynchronously as possible on the
-     * [Dispatchers.Default] dispatcher. See [mapAsync] & [mapAsyncIndexed] for more details.
+     * Convert [document] child [Node]s to [ComposableStableNode]s. This mapping happens as asynchronously as possible
+     * on the [Dispatchers.Default] dispatcher. See [mapAsync] & [mapAsyncIndexed] for more details.
      */
     suspend fun convertToStableNodes(document: Document): ImmutableList<ComposableStableNode> {
         return convertToStableNodes(nodes = document.children, metadata = NodeMetadata.Root)

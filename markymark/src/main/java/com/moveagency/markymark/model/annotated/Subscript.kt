@@ -23,7 +23,8 @@ import com.moveagency.markymark.model.NodeMetadata
 import kotlinx.collections.immutable.ImmutableList
 
 /**
- * Represents Markdown text with subscript formatting. Mapped from [Subscript][com.vladsch.flexmark.ext.gfm.strikethrough.Subscript].
+ * Represents Markdown text with subscript formatting. Mapped from
+ * [Subscript][com.vladsch.flexmark.ext.gfm.strikethrough.Subscript].
  *
  * __Syntax:__
  *
