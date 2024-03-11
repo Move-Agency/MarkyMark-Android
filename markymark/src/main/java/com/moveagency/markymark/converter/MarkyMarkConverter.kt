@@ -38,7 +38,7 @@ import kotlinx.coroutines.Dispatchers
 @Suppress("TooManyFunctions")
 object MarkyMarkConverter {
 
-    internal const val CONVERTER_TAG = "Converter"
+    internal const val ConverterTag = "Converter"
 
     /**
      * Convert [document] child [Node]s to [ComposableStableNode]s. This mapping happens as asynchronously as possible

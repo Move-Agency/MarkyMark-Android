@@ -95,7 +95,7 @@ open class DefaultMarkyMarkAnnotator : MarkyMarkAnnotator {
 
     protected open fun AnnotatedString.Builder.annotateEmailLink(link: EmailLink, styles: AnnotatedStyles) {
         pushStyle(styles.linkStyle)
-        pushStringAnnotation(tag = TAG_LINK, annotation = "$MAIL_TO_PREFIX${link.email}")
+        pushStringAnnotation(tag = TAG_LINK, annotation = "$MailToPrefix${link.email}")
         append(link.email)
         pop()
         pop()
@@ -115,6 +115,6 @@ open class DefaultMarkyMarkAnnotator : MarkyMarkAnnotator {
 
     companion object {
 
-        private const val MAIL_TO_PREFIX = "mailto:"
+        private const val MailToPrefix = "mailto:"
     }
 }
