@@ -1,12 +1,9 @@
 *.iml
 .gradle
 /local.properties
-.idea/codeStyles
-.idea/inspectionProfiles
-.idea/modules
-.idea/*.xml
-.idea/.name
-.idea/.gitignore
+!/.idea/copyright
+!/.idea/scopes
+.idea
 .DS_Store
 **/build
 /captures
