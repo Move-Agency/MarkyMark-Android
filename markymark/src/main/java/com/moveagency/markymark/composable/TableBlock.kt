@@ -345,9 +345,9 @@ private fun TableCell(
     nodes = cell.children,
     style = style.textStyle.copy(
         textAlign = when (cell.alignment) {
-            Start -> Start
-            Center -> Center
-            End -> End
+            TableCell.Alignment.Start -> Start
+            TableCell.Alignment.Center -> Center
+            TableCell.Alignment.End -> End
         },
     ),
 )
