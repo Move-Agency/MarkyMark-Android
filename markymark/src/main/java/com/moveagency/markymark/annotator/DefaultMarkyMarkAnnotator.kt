@@ -107,7 +107,7 @@ open class DefaultMarkyMarkAnnotator : MarkyMarkAnnotator {
 
     protected open fun AnnotatedString.Builder.annotateEmailLink(link: EmailLink, styles: AnnotatedStyles) {
         pushStyle(styles.link)
-        withLink(LinkAnnotation.Url("$MailToPrefix${link.email}")) { // TODO: convert?
+        withLink(emailLinkToAnnotation(link)) {
             append(link.email)
         }
         pop()
@@ -133,6 +133,16 @@ open class DefaultMarkyMarkAnnotator : MarkyMarkAnnotator {
                 linkInteractionListener = { link.clickListener.onClick(link.url) },
             )
         }
+    }
+
+    private fun emailLinkToAnnotation(link: EmailLink): LinkAnnotation {
+        val url = "$MailToPrefix${link.email}"
+        return link.linkInteractionListener?.let { listener ->
+            LinkAnnotation.Clickable(
+                tag = link.email,
+                linkInteractionListener = { listener.onClick(url) },
+            )
+        } ?: LinkAnnotation.Url(url)
     }
 
     companion object {

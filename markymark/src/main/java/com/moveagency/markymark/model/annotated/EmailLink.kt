@@ -19,6 +19,7 @@
 package com.moveagency.markymark.model.annotated
 
 import androidx.compose.runtime.Immutable
+import com.moveagency.markymark.model.LinkInteractionListener
 import com.moveagency.markymark.model.NodeMetadata
 
 /**
@@ -37,4 +38,5 @@ import com.moveagency.markymark.model.NodeMetadata
 data class EmailLink(
     override val metadata: NodeMetadata,
     val email: String,
+    val linkInteractionListener: LinkInteractionListener? = null,
 ) : AnnotatedStableNode()

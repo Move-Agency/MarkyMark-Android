@@ -69,7 +69,7 @@ object AnnotatedStableNodeConverter {
         is FlexLink -> convertLinkNode(metadata, node, linkInteractionListener)
         is AutoLink -> convertAutoLinkNode(metadata, node, linkInteractionListener)
         is LinkRef -> convertLinkRefNode(metadata, node)
-        is MailLink -> convertMailLinkNode(metadata, node)
+        is MailLink -> convertMailLinkNode(metadata, node, linkInteractionListener)
         is FlexSoftLineBreak -> SoftLineBreak(metadata)
         is FlexSubscript -> convertSubscriptNode(metadata, node)
         is FlexSuperscript -> convertSuperscriptNode(metadata, node)
@@ -195,8 +195,16 @@ object AnnotatedStableNodeConverter {
         return Text(metadata = metadata, content = linkRef.chars.unescapeHtml())
     }
 
-    private fun convertMailLinkNode(metadata: NodeMetadata, emailLink: MailLink): EmailLink {
-        return EmailLink(metadata = metadata, email = emailLink.text.unescapeHtml())
+    private fun convertMailLinkNode(
+        metadata: NodeMetadata,
+        emailLink: MailLink,
+        linkInteractionListener: LinkInteractionListener?,
+    ): EmailLink {
+        return EmailLink(
+            metadata = metadata,
+            email = emailLink.text.unescapeHtml(),
+            linkInteractionListener = linkInteractionListener,
+        )
     }
 
     private suspend fun convertSubscriptNode(metadata: NodeMetadata, subscript: FlexSubscript): Subscript {
