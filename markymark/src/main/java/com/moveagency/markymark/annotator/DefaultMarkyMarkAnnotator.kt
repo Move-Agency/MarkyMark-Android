@@ -107,7 +107,7 @@ open class DefaultMarkyMarkAnnotator : MarkyMarkAnnotator {
 
     protected open fun AnnotatedString.Builder.annotateEmailLink(link: EmailLink, styles: AnnotatedStyles) {
         pushStyle(styles.link)
-        withLink(LinkAnnotation.Url("$MailToPrefix${link.email}")) { // TODO: convert?
+        withLink(LinkAnnotation.Url("$MailToPrefix${link.email}")) {
             append(link.email)
         }
         pop()
