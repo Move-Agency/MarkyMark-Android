@@ -35,7 +35,7 @@ import com.moveagency.markymark.model.annotated.*
  * - [code] -> [Code] -> [annotateCode][DefaultMarkyMarkAnnotator.annotateCode]
  * - [italic] -> [Italic] -> [annotateItalic][DefaultMarkyMarkAnnotator.annotateItalic]
  * - [strikethrough] -> [Strikethrough] -> [annotateStrikethrough][DefaultMarkyMarkAnnotator.annotateStrikethrough]
- * - [link] -> [Link] -> [annotateLink][DefaultMarkyMarkAnnotator.annotateLink]
+ * - [link] -> [BrowserLink] -> [annotateLink][DefaultMarkyMarkAnnotator.annotateLink]
  * - [subscript] -> [Subscript] -> [annotateSubscript][DefaultMarkyMarkAnnotator.annotateSubscript]
  * - [superscript] -> [Superscript] -> [annotateSuperScript][DefaultMarkyMarkAnnotator.annotateSuperscript]
  *

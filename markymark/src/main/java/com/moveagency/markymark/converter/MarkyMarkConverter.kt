@@ -20,6 +20,7 @@ package com.moveagency.markymark.converter
 
 import com.moveagency.markymark.converter.AnnotatedStableNodeConverter.convertToAnnotatedNode
 import com.moveagency.markymark.converter.ComposableStableNodeConverter.convertToStableNode
+import com.moveagency.markymark.model.LinkInteractionListener
 import com.moveagency.markymark.model.NodeMetadata
 import com.moveagency.markymark.model.annotated.AnnotatedStableNode
 import com.moveagency.markymark.model.composable.ComposableStableNode
@@ -44,15 +45,26 @@ object MarkyMarkConverter {
      * Convert [document] child [Node]s to [ComposableStableNode]s. This mapping happens as asynchronously as possible
      * on the [Dispatchers.Default] dispatcher. See [mapAsync] & [mapAsyncIndexed] for more details.
      */
-    suspend fun convertToStableNodes(document: Document): ImmutableList<ComposableStableNode> {
-        return convertToStableNodes(nodes = document.children, metadata = NodeMetadata.Root)
+    suspend fun convertToStableNodes(
+        document: Document,
+        linkInteractionListener: LinkInteractionListener? = null,
+    ): ImmutableList<ComposableStableNode> {
+        return convertToStableNodes(
+            nodes = document.children,
+            metadata = NodeMetadata.Root,
+            linkInteractionListener = linkInteractionListener,
+        )
     }
 
     internal suspend fun convertToStableNodes(
         metadata: NodeMetadata,
         nodes: Iterable<Node>,
+        linkInteractionListener: LinkInteractionListener? = null,
     ): ImmutableList<ComposableStableNode> {
-        return nodes.mapAsync { convertToStableNode(metadata = metadata, node = it) }
+        return nodes
+            .mapAsync {
+                convertToStableNode(metadata = metadata, node = it, linkInteractionListener = linkInteractionListener)
+            }
             .flatten()
             .toImmutableList()
     }
@@ -60,8 +72,16 @@ object MarkyMarkConverter {
     internal suspend fun convertToAnnotatedNodes(
         metadata: NodeMetadata,
         nodes: Iterable<Node>,
+        linkInteractionListener: LinkInteractionListener? = null,
     ): ImmutableList<AnnotatedStableNode> {
-        return nodes.mapAsync { convertToAnnotatedNode(metadata = metadata, node = it) }
+        return nodes
+            .mapAsync {
+                convertToAnnotatedNode(
+                    metadata = metadata,
+                    node = it,
+                    linkInteractionListener = linkInteractionListener,
+                )
+            }
             .filterNotNull()
             .toImmutableList()
     }

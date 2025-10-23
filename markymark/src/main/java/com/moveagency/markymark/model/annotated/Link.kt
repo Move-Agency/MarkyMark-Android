@@ -19,6 +19,7 @@
 package com.moveagency.markymark.model.annotated
 
 import androidx.compose.runtime.Immutable
+import com.moveagency.markymark.model.LinkInteractionListener
 import com.moveagency.markymark.model.NodeMetadata
 import kotlinx.collections.immutable.ImmutableList
 
@@ -37,10 +38,28 @@ import kotlinx.collections.immutable.ImmutableList
  *
  * For more details see the [Markdown guide](https://www.markdownguide.org/basic-syntax#code).
  */
+
 @Immutable
-data class Link(
-    override val metadata: NodeMetadata,
-    val children: ImmutableList<AnnotatedStableNode>,
-    val url: String,
-    val title: String?,
-) : AnnotatedStableNode()
+sealed class Link : AnnotatedStableNode() {
+
+    abstract val children: ImmutableList<AnnotatedStableNode>
+    abstract val url: String
+    abstract val title: String?
+
+    @Immutable
+    data class BrowserLink(
+        override val metadata: NodeMetadata,
+        override val children: ImmutableList<AnnotatedStableNode>,
+        override val url: String,
+        override val title: String?,
+    ) : Link()
+
+    @Immutable
+    data class CustomLink(
+        override val metadata: NodeMetadata,
+        override val children: ImmutableList<AnnotatedStableNode>,
+        override val url: String,
+        override val title: String?,
+        val clickListener: LinkInteractionListener,
+    ) : Link()
+}

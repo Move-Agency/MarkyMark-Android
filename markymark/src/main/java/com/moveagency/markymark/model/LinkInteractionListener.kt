@@ -1,5 +1,5 @@
 /*
- * Copyright © 2024 Move
+ * Copyright © 2025 Framna
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the “Software”), to deal in the Software without restriction, including without limitation
@@ -16,12 +16,9 @@
  * IN THE SOFTWARE.
  */
 
-object BuildConstants {
+package com.moveagency.markymark.model
 
-    const val VersionName = "3.0.0-alpha11"
+fun interface LinkInteractionListener {
 
-    const val Namespace = "com.moveagency.markymark"
-
-    const val MinSdk = 24
-    const val TargetSdk = 35
+    fun onClick(url: String)
 }

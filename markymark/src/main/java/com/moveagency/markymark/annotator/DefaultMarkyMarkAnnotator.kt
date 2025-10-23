@@ -23,7 +23,18 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withLink
-import com.moveagency.markymark.model.annotated.*
+import com.moveagency.markymark.model.annotated.AnnotatedStableNode
+import com.moveagency.markymark.model.annotated.Bold
+import com.moveagency.markymark.model.annotated.Code
+import com.moveagency.markymark.model.annotated.EmailLink
+import com.moveagency.markymark.model.annotated.Italic
+import com.moveagency.markymark.model.annotated.Link
+import com.moveagency.markymark.model.annotated.ParagraphText
+import com.moveagency.markymark.model.annotated.SoftLineBreak
+import com.moveagency.markymark.model.annotated.Strikethrough
+import com.moveagency.markymark.model.annotated.Subscript
+import com.moveagency.markymark.model.annotated.Superscript
+import com.moveagency.markymark.model.annotated.Text
 import com.moveagency.markymark.theme.AnnotatedStyles
 import kotlinx.collections.immutable.ImmutableList
 
@@ -88,7 +99,7 @@ open class DefaultMarkyMarkAnnotator : MarkyMarkAnnotator {
 
     protected open fun AnnotatedString.Builder.annotateLink(link: Link, styles: AnnotatedStyles) {
         pushStyle(styles.link)
-        withLink(LinkAnnotation.Url(link.url)) {
+        withLink(linkToAnnotation(link)) {
             annotateChildren(nodes = link.children, styles = styles)
         }
         pop()
@@ -96,7 +107,7 @@ open class DefaultMarkyMarkAnnotator : MarkyMarkAnnotator {
 
     protected open fun AnnotatedString.Builder.annotateEmailLink(link: EmailLink, styles: AnnotatedStyles) {
         pushStyle(styles.link)
-        withLink(LinkAnnotation.Url("$MailToPrefix${link.email}")) {
+        withLink(LinkAnnotation.Url("$MailToPrefix${link.email}")) { // TODO: convert?
             append(link.email)
         }
         pop()
@@ -112,6 +123,16 @@ open class DefaultMarkyMarkAnnotator : MarkyMarkAnnotator {
         pushStyle(styles.superscript)
         annotateChildren(nodes = superscript.children, styles = styles)
         pop()
+    }
+
+    private fun linkToAnnotation(link: Link) = when (link) {
+        is Link.BrowserLink -> LinkAnnotation.Url(url = link.url)
+        is Link.CustomLink -> {
+            LinkAnnotation.Clickable(
+                tag = link.title.orEmpty(),
+                linkInteractionListener = { link.clickListener.onClick(link.url) },
+            )
+        }
     }
 
     companion object {

@@ -23,7 +23,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.moveagency.markymark.MarkyMark
 import com.moveagency.markymark.composer.paddingVertical
@@ -45,7 +51,10 @@ fun Markdown(
     val document = remember(parser, markdown) { parser.parse(markdown) }
 
     var nodes by remember { mutableStateOf<ImmutableList<ComposableStableNode>>(persistentListOf()) }
-    LaunchedEffect(parser, document) { nodes = convertToStableNodes(document) }
+
+    LaunchedEffect(parser, document) {
+        nodes = convertToStableNodes(document = document)
+    }
 
     val composer = MarkyMark.options.composer
 
