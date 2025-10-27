@@ -43,7 +43,7 @@ import kotlinx.collections.immutable.toImmutableList
  * @property indicatorThickness The thickness of the block quote indicator, defined in [Dp].
  * @property themes A list of themes used for rendering the block quote's content.
  * @property shape The shape of the block quote, such as a rectangle or other custom shape.
- * @property contentStyle The text style applied to the content inside the code block.
+ * @property contentStyle The composable style to be applied to the content inside the block quote.
  */
 @Immutable
 data class BlockQuoteStyle private constructor(
@@ -79,7 +79,7 @@ data class BlockQuoteStyle private constructor(
         /**
          * Builder for configuring the themes used for rendering the block quote's content.
          */
-        private var themes = BlockQuoteThemesBuilder()
+        private val themes = BlockQuoteThemesBuilder()
 
         /**
          * The shape of the block quote. Default is [RectangleShape].
@@ -87,7 +87,7 @@ data class BlockQuoteStyle private constructor(
         var shape: Shape = RectangleShape
 
         /**
-         * The text style applied to the content inside the code block. Default is an empty [ComposableStyles].
+         * The composable style applied to the content inside the code block. Default is an empty [ComposableStyles].
          */
         var contentStyle: ((ComposableStyles) -> ComposableStyles)? = null
 

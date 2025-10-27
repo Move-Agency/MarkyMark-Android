@@ -315,7 +315,7 @@ data class UnorderedListItemStyle private constructor(
         /**
          * Builder for constructing the list of indicators for the unordered list item.
          */
-        private var indicators = UnorderedListIndicatorsBuilder()
+        private val indicators = UnorderedListIndicatorsBuilder()
 
         /**
          * Includes another [Builder] instance's configuration into `this` builder.

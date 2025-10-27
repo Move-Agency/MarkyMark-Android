@@ -93,20 +93,22 @@ private fun rememberHighlights(language: SyntaxLanguage, code: String): Highligh
     }
 }
 
+private val previewMarkdownContent = """
+    val someText = "I am text"
+
+    fun something() {
+        println(someText.clean())   
+    }
+
+    fun String.clean() = trim()
+""".trimIndent()
+
 @Preview
 @Composable
 private fun PreviewCodeBlock() {
     val node = CodeBlock(
         metadata = Root,
-        content = """
-        val someText = "I am text"
-            
-        fun something() {
-            println(someText.clean())   
-        }
-        
-        fun String.clean() = trim()
-        """.trimIndent(),
+        content = previewMarkdownContent,
         language = "kotlin",
     )
 
@@ -123,15 +125,7 @@ private fun PreviewCodeBlock() {
 private fun PreviewCodeBlockNoLanguage() {
     val node = CodeBlock(
         metadata = Root,
-        content = """
-        val someText = "I am text"
-            
-        fun something() {
-            println(someText.clean())   
-        }
-        
-        fun String.clean() = trim()
-        """.trimIndent(),
+        content = previewMarkdownContent,
         language = null,
     )
 

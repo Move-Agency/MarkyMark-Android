@@ -97,7 +97,7 @@ data class Headline(
 
         /**
          * The top-level heading, typically used for document titles or major section headings.
-         * 
+         *
          * __Syntax:__
          *
          * ```markdown
@@ -118,7 +118,7 @@ data class Headline(
 
         /**
          * Second-level heading, used for major sections within the document.
-         * 
+         *
          * __Syntax:__
          *
          * ```markdown
@@ -139,7 +139,7 @@ data class Headline(
 
         /**
          * Third-level heading, used for subsections within major sections.
-         * 
+         *
          * __Syntax:__
          *
          * ```markdown
@@ -153,7 +153,7 @@ data class Headline(
 
         /**
          * Fourth-level heading, used for smaller divisions within subsections.
-         * 
+         *
          * __Syntax:__
          *
          * ```markdown
@@ -167,7 +167,7 @@ data class Headline(
 
         /**
          * Fifth-level heading, used for fine-grained content organization.
-         * 
+         *
          * __Syntax:__
          *
          * ```markdown
@@ -181,7 +181,7 @@ data class Headline(
 
         /**
          * Sixth-level heading, the lowest level available in Markdown.
-         * 
+         *
          * __Syntax:__
          *
          * ```markdown

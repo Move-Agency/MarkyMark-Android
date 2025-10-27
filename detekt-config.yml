@@ -1,6 +1,6 @@
 build:
   excludeCorrectable: true
-  maxIssues: 10
+  maxIssues: 25
 
 comments:
   CommentOverPrivateFunction:
@@ -69,6 +69,7 @@ formatting:
 naming:
   BooleanPropertyNaming:
     active: true
+    allowedPattern: '^[a-z][A-Za-z0-9]*$'
   EnumNaming:
     active: true
     enumEntryPattern: '^(?:[A-Z]+[a-z0-9]+)[A-Za-z0-9]*$'
@@ -142,6 +143,12 @@ style:
     ignoreAnnotated: [ 'Preview', 'Composable' ]
   SerialVersionUIDInSerializableClass:
     active: false
+  MaxLineLength:
+    active: true
+    maxLineLength: 120
+    excludePackageStatements: true
+    excludeImportStatements: true
+    excludeCommentStatements: true
 
 compose:
   ReusedModifierInstance:

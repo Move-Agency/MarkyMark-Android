@@ -239,7 +239,7 @@ object MarkyMarkThemeDefaults {
 
                                 indicator { shape = UnorderedListItemStyle.Indicator.Shape.Rectangle }
 
-                                indicator {  // Line
+                                indicator { // Line
                                     shape = UnorderedListItemStyle.Indicator.Shape.Rectangle
                                     size = DpSize(width = 6.dp, height = 2.dp)
                                 }
