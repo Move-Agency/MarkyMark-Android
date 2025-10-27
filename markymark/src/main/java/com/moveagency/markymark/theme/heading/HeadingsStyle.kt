@@ -98,6 +98,7 @@ data class HeadingsStyle(
             h3 = builder.h3
             h4 = builder.h4
             h5 = builder.h5
+            h6 = builder.h6
         }
 
         /**

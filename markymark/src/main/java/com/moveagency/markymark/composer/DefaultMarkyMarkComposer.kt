@@ -111,8 +111,8 @@ open class DefaultMarkyMarkComposer : MarkyMarkComposer {
 
     @Composable
     protected open fun Image(
-        modifier: Modifier,
         node: Image,
+        modifier: Modifier,
     ) = MarkyMarkImage(
         modifier = modifier.fillMaxWidth(),
         node = node,

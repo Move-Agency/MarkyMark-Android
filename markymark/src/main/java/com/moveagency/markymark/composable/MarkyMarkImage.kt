@@ -94,13 +94,15 @@ private fun CaptionedImage(
     }
 }
 
+private const val previewImageUrl = "https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?q=80&w=3269&auto=format" +
+    "&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+
 @Preview
 @Composable
 private fun PreviewImage() {
     val node = Image(
         metadata = Root,
-        url = "https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?q=80&w=3269&auto=format&fit=crop&ixlib" +
-            "=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        url = previewImageUrl,
         altText = "A cute koala",
         title = null,
     )
@@ -116,8 +118,7 @@ private fun PreviewImage() {
 private fun PreviewImageCaptioned() {
     val node = Image(
         metadata = Root,
-        url = "https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?q=80&w=3269&auto=format&fit=crop&ixlib" +
-            "=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        url = previewImageUrl,
         altText = "A cute koala",
         title = "A cute koala in a tree",
     )
