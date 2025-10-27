@@ -23,7 +23,6 @@ package com.moveagency.markymark.theme.quote
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.moveagency.markymark.composable.MarkyMarkQuote
@@ -88,7 +87,7 @@ data class BlockQuoteStyle private constructor(
         var shape: Shape = RectangleShape
 
         /**
-         * The text style applied to the content inside the code block. Default is an empty [TextStyle].
+         * The text style applied to the content inside the code block. Default is an empty [ComposableStyles].
          */
         var contentStyle: ((ComposableStyles) -> ComposableStyles)? = null
 
