@@ -23,10 +23,12 @@ package com.moveagency.markymark.theme.quote
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.moveagency.markymark.composable.MarkyMarkQuote
 import com.moveagency.markymark.model.composable.BlockQuote
+import com.moveagency.markymark.theme.ComposableStyles
 import com.moveagency.markymark.theme.MarkyMarkThemeBuilderMarker
 import com.moveagency.markymark.theme.Padding
 import kotlinx.collections.immutable.ImmutableList
@@ -40,9 +42,9 @@ import kotlinx.collections.immutable.toImmutableList
  * @property innerPadding The padding inside the block quote.
  * @property outerPadding The padding outside the block quote, around the entire block.
  * @property indicatorThickness The thickness of the block quote indicator, defined in [Dp].
- * @property indicatorTint The color tint applied to the block quote indicator.
  * @property themes A list of themes used for rendering the block quote's content.
  * @property shape The shape of the block quote, such as a rectangle or other custom shape.
+ * @property contentStyle The text style applied to the content inside the code block.
  */
 @Immutable
 data class BlockQuoteStyle private constructor(
@@ -51,6 +53,7 @@ data class BlockQuoteStyle private constructor(
     val indicatorThickness: Dp,
     val themes: ImmutableList<BlockQuoteTheme>,
     val shape: Shape,
+    val contentStyle: ((parent: ComposableStyles) -> ComposableStyles)? = null,
 ) {
 
     /**
@@ -85,6 +88,11 @@ data class BlockQuoteStyle private constructor(
         var shape: Shape = RectangleShape
 
         /**
+         * The text style applied to the content inside the code block. Default is an empty [TextStyle].
+         */
+        var contentStyle: ((ComposableStyles) -> ComposableStyles)? = null
+
+        /**
          * Includes another [Builder] instance's configuration into `this` builder.
          *
          * This will override all properties with the ones from the provided [builder].
@@ -97,6 +105,7 @@ data class BlockQuoteStyle private constructor(
             indicatorThickness = builder.indicatorThickness
             themes.include(builder.themes)
             shape = builder.shape
+            contentStyle = builder.contentStyle
         }
 
         /**
@@ -112,6 +121,7 @@ data class BlockQuoteStyle private constructor(
             indicatorThickness = style.indicatorThickness
             themes.include(style.themes)
             shape = style.shape
+            contentStyle = style.contentStyle
         }
 
         /**
@@ -136,16 +146,31 @@ data class BlockQuoteStyle private constructor(
         fun themes(block: BlockQuoteThemesBuilder.() -> Unit) = block(themes)
 
         /**
+         * Configures the content style for the block quote.
+         *
+         * @param overrides A lambda to override the [ComposableStyles.Builder] for the content.
+         */
+        fun contentStyle(overrides: ComposableStyles.Builder.() -> Unit) {
+            contentStyle = { parent ->
+                ComposableStyles.Builder().apply {
+                    include(parent)
+                    overrides()
+                }.build()
+            }
+        }
+
+        /**
          * Builds a new [BlockQuoteStyle] instance with the current configuration.
          *
          * @return A [BlockQuoteStyle] object with the set properties for the block quote.
          */
-        internal fun build() = BlockQuoteStyle(
+        internal fun build(): BlockQuoteStyle = BlockQuoteStyle(
             innerPadding = innerPadding.build(),
             outerPadding = outerPadding.build(),
             indicatorThickness = indicatorThickness,
             themes = themes.build(),
             shape = shape,
+            contentStyle = contentStyle
         )
     }
 

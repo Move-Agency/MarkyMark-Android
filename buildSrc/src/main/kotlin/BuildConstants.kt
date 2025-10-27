@@ -23,5 +23,5 @@ object BuildConstants {
     const val Namespace = "com.moveagency.markymark"
 
     const val MinSdk = 24
-    const val TargetSdk = 34
+    const val TargetSdk = 35
 }

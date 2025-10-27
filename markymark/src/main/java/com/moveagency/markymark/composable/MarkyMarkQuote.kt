@@ -79,12 +79,23 @@ fun MarkyMarkQuote(
             }
             .padding(style.innerPadding)
     ) {
-        if (theme?.colors != null) {
-            CompositionLocalProvider(LocalMarkyMarkColors provides theme.colors) {
+        val parent = LocalMarkyMarkTheme.current.styles.composable
+        val inner = style.contentStyle?.invoke(parent) ?: parent
+        
+        CompositionLocalProvider(
+            LocalMarkyMarkTheme provides LocalMarkyMarkTheme.current.copy(
+                styles = LocalMarkyMarkTheme.current.styles.copy(
+                    composable = inner
+                )
+            )
+        ) {
+            if (theme?.colors != null) {
+                CompositionLocalProvider(LocalMarkyMarkColors provides theme.colors) {
+                    children()
+                }
+            } else {
                 children()
             }
-        } else {
-            children()
         }
     }
 }
