@@ -243,7 +243,7 @@ private fun TaskIndicator(type: Task) {
 
 @Preview
 @Composable
-fun PreviewOrderedListItem() {
+private fun PreviewOrderedListItem() {
     MarkyMarkListItem(
         item = ListItem(
             type = Ordered(index = 1),
@@ -263,7 +263,7 @@ fun PreviewOrderedListItem() {
 
 @Preview
 @Composable
-fun PreviewUnorderedListItem() {
+private fun PreviewUnorderedListItem() {
     Column {
         MarkyMarkListItem(
             item = ListItem(
@@ -330,7 +330,7 @@ fun PreviewUnorderedListItem() {
 
 @Preview
 @Composable
-fun PreviewUnorderedListItemCustom() {
+private fun PreviewUnorderedListItemCustom() {
     val theme = LocalMarkyMarkTheme.current
     val previewTheme = remember(theme) {
         markyMarkTheme {
@@ -597,7 +597,7 @@ fun PreviewUnorderedListItemCustom() {
 
 @Preview
 @Composable
-fun PreviewTaskListItem() {
+private fun PreviewTaskListItem() {
     Column {
         MarkyMarkListItem(
             item = ListItem(
