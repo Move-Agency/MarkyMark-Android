@@ -1,3 +1,5 @@
+import com.m2mobi.m2ci.extension.model.BuildVariant
+import com.m2mobi.m2ci.task.distribute.model.DistributionDestination
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -10,11 +12,45 @@ buildscript {
 }
 
 plugins {
+    alias(libs.plugins.m2ci)
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.detekt)
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.jvm) apply false
+}
+
+ci {
+    jvmVersion = JavaVersion.toVersion(libs.versions.jvm.get())
+    projectName = BuildConstants.ProjectName
+    projectVersion = BuildConstants.VersionName
+
+    buildConfiguration {
+        all { mainVariant = BuildVariant(buildType = "release") }
+    }
+
+    assemble {
+        enable = true
+        versionMetadataBuilders = emptySet()
+    }
+
+    distribute {
+        enable = true
+        destination = DistributionDestination.Library
+    }
+
+    sonarqube {
+        enable = false
+    }
+    // sonarqube {
+    //     projectKey = BuildConstants.ProjectKey
+    //     coverageExclusions = SonarQubeTask.DEFAULT_COVERAGE_EXCLUSIONS + setOf(
+    //         "view/**",
+    //     )
+    //     exclusions = SonarQubeTask.DEFAULT_EXCLUSIONS + setOf(
+    //         "**/src/jvmTest/**",
+    //     )
+    // }
 }
 
 allprojects {

@@ -13,6 +13,7 @@ jvm = "17"
 kodeview = "0.9.0"
 kotlin = "2.2.0"
 coreKtxVersion = "1.16.0"
+m2ci = "64"
 
 [libraries]
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
@@ -43,5 +44,6 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+m2ci = { id = "com.m2mobi.m2ci", version.ref = "m2ci" }
 
 [bundles]

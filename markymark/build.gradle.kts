@@ -18,6 +18,9 @@
 
 @file:Suppress("UnstableApiUsage")
 
+import Publish.addPublishRepository
+import Publish.setup
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -99,4 +102,15 @@ dependencies {
     implementation(libs.coil.compose)
 
     api(libs.kodeview)
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("mavenRelease") {
+                setup(project)
+            }
+        }
+        addPublishRepository(project)
+    }
 }

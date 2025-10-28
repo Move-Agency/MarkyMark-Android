@@ -1,68 +1,32 @@
 name: 'Build'
 
 on:
-  pull_request:
   push:
     branches:
       - '**develop'
-      - 'master'
       - 'release/**'
+      - 'master'
+  pull_request:
 
 permissions:
   contents: write
 
 jobs:
-  build:
-    concurrency:
-      group: build-${{ github.ref }}
-      cancel-in-progress: true
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Checkout'
-        uses: actions/checkout@v4
-
-      - name: 'Setup JDK'
-        uses: actions/setup-java@v4
-        with:
-          java-version: 17
-          distribution: temurin
-
-      - name: 'Setup Android SDK'
-        uses: android-actions/setup-android@v3
-
-      - name: 'Setup Gradle'
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          dependency-graph: generate-and-submit
-
-      - name: 'Configure Gradle Properties'
-        run: echo 'org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=2g -XX:+HeapDumpOnOutOfMemoryError' >> gradle.properties
-
-      - name: 'Assemble'
-        run: ./gradlew assembleDebug
-
-      - name: 'Detekt'
-        run: ./gradlew detektDebug
-
-      - name: 'Upload Detekt Report Artifacts'
-        uses: actions/upload-artifact@v4
-        with:
-          name: 'Detekt Results'
-          path: |
-            **/build/reports/detekt/*.md
-
-      - name: 'Android Lint'
-        run: ./gradlew lintDebug
-
-      - name: 'Upload Lint Report Artifacts'
-        uses: actions/upload-artifact@v4
-        with:
-          name: 'Lint Results'
-          path: | 
-            **/build/reports/lint/*.html
-
-      - uses: yutailang0119/action-android-lint@v4
-        with:
-          report-path: |
-            **/build/reports/lint/*.xml
-        continue-on-error: false
+  pipeline:
+    uses: move-android/ams-actions/.github/workflows/build.yml@master
+    secrets:
+      artifactory-url: ${{ vars.ARTIFACTORY_URL }}
+      artifactory-username: ${{ secrets.ARTIFACTORY_USERNAME }}
+      artifactory-password: ${{ secrets.ARTIFACTORY_PASSWORD }}
+      debug-keystore: ${{ secrets.DEBUG_KEYSTORE }}
+      release-keystore: ${{ secrets.RELEASE_KEYSTORE }}
+      github-token: ${{ secrets.READ_GITHUB_PACKAGE_TOKEN }}
+      sonar-token: ${{ secrets.SONAR_TOKEN }}
+      sonar-url: ${{ vars.SONAR_HOST_URL }}
+      app-distribution-account: ${{ secrets.APP_DISTRIBUTION_ACCOUNT }}
+      slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
+      private-repo-ssh-key: ${{ secrets.PRIVATE_REPO_SSH_KEY }}
+    with:
+      java-version: 17
+      use-larger-runner: true
+      setup-init-file: true

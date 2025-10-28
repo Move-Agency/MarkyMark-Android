@@ -21,6 +21,7 @@ object BuildConstants {
     const val VersionName = "3.0.0-alpha12"
 
     const val Namespace = "com.moveagency.markymark"
+    const val ProjectName = "MarkyMark"
 
     const val MinSdk = 24
     const val TargetSdk = 35
